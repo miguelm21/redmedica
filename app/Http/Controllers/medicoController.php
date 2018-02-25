@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\medico;
 use App\user;
-use App\medicalcenter;
+use App\medicalCenter;
 use App\specialty;
 use Mail;
 use Illuminate\Http\Request;
@@ -103,7 +103,7 @@ class medicoController extends Controller
 
         Mail::send('mails.confirmMedico',['user'=>$userlast,'code'=>$code], function($msj) use($user){
            $msj->subject('Médicos Si');
-           $msj->to('eavc53189@gmail.com');
+           $msj->to($userlast->email);
 
       });
 

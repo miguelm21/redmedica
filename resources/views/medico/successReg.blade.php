@@ -29,7 +29,7 @@
             <div class="col-12">
 
 
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalresendMailConfirm">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="">
              Reenviar Correo de Confirmación
               </button>
             </div>

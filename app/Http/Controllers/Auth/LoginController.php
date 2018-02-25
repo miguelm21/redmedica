@@ -14,9 +14,9 @@ class LoginController extends Controller
       ]);
 
      if(Auth::attempt($credentials)){
-       return redirect()->route('home');
+       return response()->json('true');
      }
-     return back();
+     return response()->json('false');
 
     }
 

@@ -101,8 +101,6 @@
                       <div class="form-group">
                           <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
                             <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">Recordar contraseña</span>
                           </label>
                       </div>
                     </div>
@@ -197,7 +195,16 @@
 <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+
+      <div class="alert alert-warning" role="alert" id="alert" style="display:none;margin:10px; ">
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         <div id="text-alert">
+
+         </div>
+      </div>
+
       <div class="modal-header">
+
         <h5 class="modal-title" id="exampleModalLongTitle">Ingresar</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -214,16 +221,16 @@
         		<a href="#" class="btn btn-config-blue btn-block" style="background-color: #4267b2;">Conectarse con facebook</a>
         	</div>
         </div>
-        {!!Form::open(['route'=>'login2','method'=>'POST'])!!}
+
 		<div class="row mt-3">
 			<div class="col-12">
 				<div class="form-group">
-				    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email" name="email">
+				    <input type="email" class="form-control" id="emailLogin" aria-describedby="emailHelp" placeholder="email" name="email">
 				</div>
 			</div>
 				<div class="col-12">
 					<div class="form-group">
-					    <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="password" name="password">
+					    <input type="password" class="form-control" id="passwordLogin" aria-describedby="emailHelp" placeholder="password" name="password">
 					 </div>
 				</div>
 				<div class="col-12">
@@ -238,7 +245,7 @@
 		</div>
 	     <div class="row">
       		<div class="col-12">
-      			<button class="btn btn-config-blue btn-block">Iniciar sesión</button>
+      			<button class="btn btn-config-blue btn-block" onclick="login()">Iniciar sesión</button>
       		</div>
       		<div class="col-12">
       			<a href="#" class=" btn btn-config-green btn-block mt-2">Olvido su contraseña</a>
@@ -246,7 +253,7 @@
 	      </div>
     	</div>
       </div>
-      {!!Form::close()!!}
+
 
   </div>
 </div>
@@ -313,33 +320,10 @@
 </div>
 
 
-   <!-- <div class="col-lg-6 col-12 box-mesage text-center">
-      <div class="row">
-         <div class="col-lg-7 col-12">
-            <h5 style="margin-top: .5em;">¿Ya eres un profesional registrado?</h5>
-         </div>
-         <div class="col-lg-12 col-12">
-            <a href="" class="btn btn-primary mx-1">Iniciar sesión</a>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalregister">
-              Registrarse
-            </button>
 
-         </div>
-      </div>
-      <div class="row">
-         <div class="col-12">
-            <div class="search">
-
-            </div>
-         </div>
-      </div>
-   </div>
-
-   <input type="text" name="" value="" id="searchVar">
-   <button onclick="search()" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" >Buscar</button> -->
 
    <input type="hidden" name="" value="{{$nada = ''}}">
- @include('home.modals')
+   @include('home.modals')
 @endsection
 
 @section('scriptJS')
@@ -349,24 +333,61 @@
    // });
 
 
-   function search(){
-
-      route = "{{route('tolist')}}";
-      search = $('#searchVar').val();
-
-
-
+   function login(){
+      route = "{{route('login2')}}";
+      email = $('#emailLogin').val();
+      password = $('#passwordLogin').val();
          $.ajax({
            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             type:'post',
             url: route,
-            data:{search:search},
+            data:{email:email,password:password},
             success:function(result){
-               $('#listSearchAjax').empty().html(result);
-               console.log(result);
+               if(result == 'true'){
+                  location.reload();
+               }else{
+                 $('#text-alert').html('Email o Contraseña Invalida');
+                 $('#alert').fadeIn();
+               }
+
+            },
+            error:function(result){
+              errores ='';
+              $.each(result.responseJSON.errors, function( index, value ) {
+                errores += '<li>'+value+'</li>';
+
+              });
+
+              console.log(errores);
+
+              $('#text-alert').html(errores);
+              $('#alert').fadeIn();
+              // $error += '<li>result.message</li>';
+              //  console.log(result.message);
+
             }
          });
       }
+
+
+   // function search(){
+   //
+   //    route = "{{route('tolist')}}";
+   //    search = $('#searchVar').val();
+   //
+   //
+   //
+   //       $.ajax({
+   //         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+   //          type:'post',
+   //          url: route,
+   //          data:{search:search},
+   //          success:function(result){
+   //             $('#listSearchAjax').empty().html(result);
+   //             console.log(result);
+   //          }
+   //       });
+   //    }
    </script>
 
 @endsection

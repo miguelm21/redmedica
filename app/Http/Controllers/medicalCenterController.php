@@ -81,7 +81,7 @@ class medicalCenterController extends Controller
 
         Mail::send('mails.confirmMedicalCenter',['medicalCenter'=>$medicalCenterLast,'code'=>$code], function($msj){
            $msj->subject('Médicos Si');
-           $msj->to('testprogramas531@gmail.com');
+           $msj->to($medicalCenter->emailAdmin);
 
       });
 
