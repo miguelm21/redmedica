@@ -30,4 +30,8 @@ class HomeController extends Controller
 
       return view('home.listSearch')->with('medicos',$medicos)->with('medicalCenters',$medicalCenters);
     }
+
+    public function prueba(){
+      
+    }
 }
