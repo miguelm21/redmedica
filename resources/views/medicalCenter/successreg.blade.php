@@ -23,9 +23,9 @@
               <h3>¡Muchas Felicidades!</h3>
             </div>
             <div class="col-12">
-              
+
               <p><b>Ya eres un miembre de la mejor red de médicos y profesionales de la salud</b>.</p>
-              <p>Solo falta que ingreses a tu cuenta de correo para que actives tu cuenta.</p><a href="#">Ir a cuenta de correo</a>
+              <p>Solo falta que ingreses a tu cuenta de correo para que actives tu cuenta.</p><a href="{{route('home')}}">Ir a Inicio</a>
             </div>
 
             <div class="col-12">

@@ -63,7 +63,7 @@ class medicalCenterController extends Controller
           'activePlan'=>'nullable',//ARREGLAAAAAAAAAAAAAAAAAAARRRRRRRRRRRRRRRRRr
           'emailAdmin'=>'required|unique:medical_centers',
           'nameAdmin'=>'required',
-          'phone'=>'required',
+          'phone'=>'required|numeric',
           'city'=>'required',
           'billingData'=>'required',
           'meansOfRecords'=>'required',
@@ -77,15 +77,13 @@ class medicalCenterController extends Controller
         $medicalCenter->confirmation_code = $code;
         $medicalCenter->save();
 
-        $medicalCenterLast = medicalCenter::all()->last();
-
-        Mail::send('mails.confirmMedicalCenter',['medicalCenter'=>$medicalCenterLast,'code'=>$code], function($msj){
+        Mail::send('mails.confirmMedicalCenter',['medicalCenter'=>$medicalCenter,'code'=>$code], function($msj) use ($medicalCenter){
            $msj->subject('Médicos Si');
            $msj->to($medicalCenter->emailAdmin);
 
       });
 
-        return redirect()->route('successRegMedicalCenter',$medicalCenterLast->id);
+        return redirect()->route('successRegMedicalCenter',$medicalCenter->id);
     }
 
     public function successRegMedicalCenter($id){

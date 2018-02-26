@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\medico;
-use App\user;
+use App\User;
 use App\medicalCenter;
 use App\specialty;
 use Mail;
@@ -47,7 +47,7 @@ class medicoController extends Controller
 
 
      public function confirmMedico($id,$code){
-      $user = user::find($id);
+      $user = User::find($id);
 
       if($user->confirmation_code == $code){
           $user->confirmation_code = null;
@@ -90,7 +90,7 @@ class medicoController extends Controller
         $medico = medico::all()->last();
 
         $code = str_random(25);
-        $user = new user;
+        $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
@@ -99,15 +99,15 @@ class medicoController extends Controller
         $user->role = 'medico';
         $user->save();
 
-        $userlast = user::all()->last();
 
-        Mail::send('mails.confirmMedico',['user'=>$userlast,'code'=>$code], function($msj) use($user){
+
+        Mail::send('mails.confirmMedico',['data'=>'hola'],function($msj){
            $msj->subject('Médicos Si');
-           $msj->to($userlast->email);
+           $msj->to('testprogramas531@gmail.com');
 
       });
 
-           return redirect()->route('successRegMedico',$userlast->id)->with('success', 'Se ha enviado un mensaje de confirmación a tu Correo Electronico.')->with('user', $userlast);
+           return redirect()->route('successRegMedico',$user->id)->with('success', 'Se ha enviado un mensaje de confirmación a tu Correo Electronico.')->with('user', $user);
 
     }
 
@@ -120,7 +120,7 @@ class medicoController extends Controller
     public function resendMailMedicoConfirm(Request $request){
 
          $code = str_random(25);
-         $user = user::find($request->user_id);
+         $user = User::find($request->user_id);
          $user->confirmation_code = $code;
          $user->save();
 
