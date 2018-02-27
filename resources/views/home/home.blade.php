@@ -55,7 +55,13 @@
           </div>
           <div class="row p-1">
             <div class="col-12 nopadding">
-              <a href="#" class="btn btn-block btn-config-dashboard"><i class="fas fa-table"></i><span>Epeciealidad</span></a>
+              <a href="#" class="btn btn-block btn-config-dashboard"><i class="fas fa-table"></i><span>Especialidades</span></a>
+            </div>
+            <div class="col-12 nopadding">
+              <a href="{{route('specialty_categories.index')}}" class="btn btn-block btn-config-dashboard"><i class="fas fa-table"></i><span>Categorias</span></a>
+            </div>
+            <div class="col-12 nopadding">
+              <a href="{{route('specialty.index')}}" class="btn btn-block btn-config-dashboard"><i class="fas fa-table"></i><span>Epeciealidad</span></a>
             </div>
             <div class="col-12 nopadding">
               <a href="#" class="btn btn-block btn-config-dashboard"><i class="fas fa-th-list"></i><span>Sub-Especialidad</span></a>
@@ -266,10 +272,12 @@
         <div class="card-body">
 	          <h5 class="btn btn-success mt-1 registro-text" style="white-space: normal; color: #fff; text-transform: none;">¿Es usted un profesional de la salud o nucleo de diagnóstico?</h5>
 	          <div class="d-flex justify-content-between">
-	            <a href="{{route('medico.create')}}" class="btn-block btn btn-primary mt-3 registro-text" style="width:47%; white-space: normal; color: #fff;"><i class="fa fa-user-md"></i> Médico
+	             <a href="{{route('medico.create')}}" class="btn-block btn btn-primary mt-3 registro-text" style="width:47%; white-space: normal; color: #fff;"><i class="fa fa-user-md"></i> Médico
 	            </a>
 	            <a href="{{route('medicalCenter.create')}}" class="btn-block btn btn-primary mt-3 registro-text" style="width:47%; white-space: normal; color: #fff;"><i class="fa fa-user"></i> Centro medico
 	            </a>
+              <a href="{{route('assistant.create')}}" class="btn-block btn btn-primary mt-3 registro-text" style="width:47%; white-space: normal; color: #fff;"><i class="fa fa-user"></i> Asistente
+              </a>
 	          </div>
 	          <p align="center" class="mt-3" style="font-weight: 600;">Ahora sus pacientes podrán encontrarte mas fácil</p>
 	          <p align="center" style="font-weight: 500;">Con nuestra plataforma web:</p>
@@ -319,9 +327,6 @@
   </div>
 </div>
 
-
-
-
    <input type="hidden" name="" value="{{$nada = ''}}">
    @include('home.modals')
 @endsection
@@ -331,8 +336,6 @@
    // $(document).ready(function(){
    //    tolist();
    // });
-
-
    function login(){
       route = "{{route('login2')}}";
       email = $('#emailLogin').val();
@@ -349,27 +352,20 @@
                  $('#text-alert').html('Email o Contraseña Invalida');
                  $('#alert').fadeIn();
                }
-
             },
             error:function(result){
               errores ='';
               $.each(result.responseJSON.errors, function( index, value ) {
                 errores += '<li>'+value+'</li>';
-
               });
-
               console.log(errores);
-
               $('#text-alert').html(errores);
               $('#alert').fadeIn();
               // $error += '<li>result.message</li>';
               //  console.log(result.message);
-
             }
          });
       }
-
-
    // function search(){
    //
    //    route = "{{route('tolist')}}";

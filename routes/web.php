@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+route::get('/', function () {
     return redirect()->route('home');
 });
 
@@ -28,7 +28,7 @@ route::get('confirm/MedicalCenter/{id}','medicalCenterController@successRegMedic
 
 route::post('resend/mail/confirmation','medicoController@resendMailMedicoConfirm')->name('resendMailMedicoConfirm');
 
-route::post('list/resutl','homeController@tolist')->name('tolist');
+route::post('list/result','homeController@tolist')->name('tolist');
 
 route::post('login2','Auth\LoginController@login2')->name('login2');
 
@@ -36,3 +36,11 @@ route::post('logout','Auth\LoginController@logout')->name('logout');
 
 route::get('medical/centers/list','medicalCenterController@MedicalCenterList')->name('MedicalCenterList');
 route::get('medicos/list','medicoController@medicosList')->name('medicosList');
+
+route::resource('specialty_categories','specialtyCategoriesController');
+route::resource('specialty','specialtyController');
+route::resource('assistant','assistantController');
+
+route::get('confirm/assistant/{id}/{code}','assistantController@confirmAssistant')->name('confirmAssistant');
+
+route::get('success/registro/assistant','assistantController@assistantReg')->name('assistantReg');

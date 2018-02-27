@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('role')->nullable();
             $table->integer('medico_id')->nullable();
             $table->integer('patient_id')->nullable();
+            $table->integer('assistants_id')->nullable();
             $table->string('password');
             $table->string('confirmation_code')->nullable();
             $table->string('confirmed')->default('false');

@@ -19,5 +19,4 @@ class medicalCenter extends Model
     'numberPromoter',
    ];
 
-
 }

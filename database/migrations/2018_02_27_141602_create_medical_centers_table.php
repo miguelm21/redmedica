@@ -21,16 +21,14 @@ class CreateMedicalCentersTable extends Migration
             $table->string('activePlan')->nullable();///ARREGLAAAAAAAAAAAAAAAAAAARRRRRR
             $table->string('emailAdmin',60);
             $table->string('nameAdmin');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('city');
             $table->string('billingData');
             $table->string('meansOfRecords');
             $table->string('numberPromoter');
             $table->string('confirmation_code')->nullable();
             $table->string('confirmed')->default('false');
-
-
-              $table->timestamps();
+            $table->timestamps();
 
         });
     }

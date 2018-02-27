@@ -20,27 +20,6 @@ class DatabaseSeeder extends Seeder
        'role'=>'Administrador',
        ]);
 
-       DB::table('specialties')->insert([
-      'name'=>'Odontologia',
-      ]);
-
-        DB::table('specialties')->insert([
-       'name'=>'Psiquiatria',
-       ]);
-
-       DB::table('specialties')->insert([
-      'name'=>'Enfermeria',
-      ]);
-
-      DB::table('specialties')->insert([
-     'name'=>'Cirugia',
-     ]);
-
-     DB::table('specialties')->insert([
-    'name'=>'Laboratorio',
-    ]);
-
-  
-
+       
     }
 }

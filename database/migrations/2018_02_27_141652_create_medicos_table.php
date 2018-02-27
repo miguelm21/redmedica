@@ -22,10 +22,6 @@ class CreateMedicosTable extends Migration
             $table->string('email',60);
             $table->string('password');
             $table->string('state');
-            $table->integer('specialty_id')->unsigned();
-            $table->foreign('specialty_id')->references('id')->on('specialties');
-            $table->integer('sub-specialty_id')->unsigned();
-            $table->foreign('sub-specialty_id')->references('id')->on('specialties');
             $table->integer('medicalCenter_id')->unsigned();
             $table->foreign('medicalCenter_id')->references('id')->on('medical_centers');
             $table->string('phone')->nullable();

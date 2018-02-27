@@ -75,8 +75,6 @@ class medicoController extends Controller
            'email'=>'required|unique:medicos|unique:users',
            'password'=>'required',
            'state'=>'required',
-           //'specialty-id'=>'required',
-           //'sub-specialty-id'=>'nullable',
            'medicalCenter_id'=>'required',
            'phone'=>'required',
            'facebook'=>'required',
@@ -99,15 +97,13 @@ class medicoController extends Controller
         $user->role = 'medico';
         $user->save();
 
-
-
         Mail::send('mails.confirmMedico',['data'=>'hola'],function($msj){
            $msj->subject('Médicos Si');
            $msj->to('testprogramas531@gmail.com');
 
       });
 
-           return redirect()->route('successRegMedico',$user->id)->with('success', 'Se ha enviado un mensaje de confirmación a tu Correo Electronico.')->with('user', $user);
+         return redirect()->route('successRegMedico',$user->id)->with('success', 'Se ha enviado un mensaje de confirmación a tu Correo Electronico.')->with('user', $user);
 
     }
 

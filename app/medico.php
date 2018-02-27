@@ -14,8 +14,6 @@ class medico extends Model
       'email',
       'password',
       'state',
-      'specialty_id',
-      'sub-specialty_id',
       'medicalCenter_id',
       'phone',
       'facebook',
