@@ -11,14 +11,17 @@
 				</div>
 				<a class="btn btn-primary" href="{{route('administrators.create')}}">Crear Nuevo Administrador</a>
 
+
 				<div class="row">
 						<table class="table table-responsive">
 						  <thead class="thead-color">
 						    <tr>
 						      <th class="text-center">#</th>
 						      <th class="text-center">Nombre</th>
-						      <th class="text-center">Descripción</th>
-
+						      <th class="text-center">Apellido</th>
+									<th class="text-center">Email</th>
+									<th class="text-center">Permisos Otorgados</th>
+									<th class="text-center">Ciudades Atendidas</th>
 									<th class="text-center">Acciones</th>
 						    </tr>
 						  </thead>
@@ -28,12 +31,28 @@
 								<tr>
 									<th scope="row">{{$admin->id}}</th>
 									<td class="text-center">{{$admin->name}}</th>
-									<td class="text-center">{{$admin->description}}</td>
-
+									<td class="text-center">{{$admin->lastName}}</td>
+									<td class="text-center">{{$admin->email}}</td>
+									<td class="text-center">
+										<ul>
+											<li>permiso 1</li>
+											<li>permiso 2</li>
+										</ul>
+									</td>
+									<td class="text-center">
+										<ul>
+											<li>ciudad 1</li>
+											<li>ciudad 2</li>
+										</ul>
+									</td>
 									<td><div class="btn-group" role="group" aria-label="...">
 										<div class="row">
 											<div class="col-12">
-												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Editar" role="button" href="{{route('specialty_categories.edit',$specialty->id)}}">Editar
+												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Editar" role="button" href="{{route('specialty_categories.edit',$admin->id)}}">Editar
+												</a>
+												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Administrar Persmisos" role="button" href="{{route('listPermissionSet',$admin->id)}}">Administrar Persmisos
+												</a>
+												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Administrar Ciudades" role="button" href="">Administrar Ciudades
 												</a>
 											</div>
 										</div>

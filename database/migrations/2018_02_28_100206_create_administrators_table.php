@@ -19,10 +19,7 @@ class CreateAdministratorsTable extends Migration
             $table->string('name');
             $table->string('lastName');
             $table->string('email');
-            $table->integer('permission_id')->unsigned()->nullable();
-            $table->foreign('permission_id')->references('id')->on('permissions');
-            $table->integer('city_id')->unsigned()->nullable();
-            $table->foreign('city_id')->references('id')->on('cities');
+            
             $table->timestamps();
         });
     }

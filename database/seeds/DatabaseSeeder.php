@@ -20,7 +20,19 @@ class DatabaseSeeder extends Seeder
        'role'=>'Administrador',
        ]);
 
-       DB::table('cities')->insert([
+       DB::table('roles')->insert([
+      'name'=>'admin',
+      'display_name'=>'Administrator',
+      'description'=>'User is allowed to manage and edit other users'
+      ]);
+
+      DB::table('permissions')->insert([
+     'name'=>'edit',
+     'display_name'=>'Edit Users',
+     'description'=>'edit existing users'
+     ]);
+
+        DB::table('cities')->insert([
       'name'=>'Guanare',
       ]);
         DB::table('cities')->insert([

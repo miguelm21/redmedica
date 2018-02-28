@@ -46,3 +46,9 @@ route::get('confirm/assistant/{id}/{code}','assistantController@confirmAssistant
 
 route::get('confirm/assistant/{id}/{code}','assistantController@confirmAssistant')->name('confirmAssistant');
 route::get('register/assistant/{id}/step4','assistantController@AvisoConfirmAccountAssistant')->name('AvisoConfirmAccountAssistant');
+
+route::resource('permissionSet','permissionSetController');
+route::get('permission/admin/{id}','permissionSetController@listPermissionSet')->name('listPermissionSet');
+route::get('permission/{id}/set/admin/','permissionSetController@PermissionSet')->name('PermissionSet');
+
+route::get('permissions/{id}/store/{id2}/','PermissionSetController@PermissionSetStore')->name('PermissionSetStore');

@@ -15,6 +15,5 @@ class administrator extends Model
 
     ];
 
-
-
+  
 }
