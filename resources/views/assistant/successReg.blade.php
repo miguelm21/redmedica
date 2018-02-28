@@ -23,8 +23,9 @@
             <div class="col-12">
 
               <p><b>Ya eres un miembre de la mejor red de médicos y profesionales de la salud</b>.</p>
-              <p>Solo falta que el Profesional Médico: {{$assistant->medico->name}} confirme tu Cuenta a travez de su panel de Control.</p><a href="{{route('home')}}">Ir a Inicio</a>
+              <p>Solo falta que ingreses a tu cuenta de correo electronico para confirmar tu cuenta, y de este modo se estara solicitando Autorizacion al medico Profesional: {{$assistant->medico->name}} {{$assistant->medico->lastName}},para que puedas acceder a sus archivos.</p><a href="{{route('home')}}">Ir a Inicio</a>
             </div>
+
 
             <div class="col-12">
 

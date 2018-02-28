@@ -20,6 +20,26 @@ class DatabaseSeeder extends Seeder
        'role'=>'Administrador',
        ]);
 
-       
+       DB::table('cities')->insert([
+      'name'=>'Guanare',
+      ]);
+        DB::table('cities')->insert([
+       'name'=>'Acarigua',
+       ]);
+
+       DB::table('cities')->insert([
+      'name'=>'Barquisimeto',
+      ]);
+
+      DB::table('permissions')->insert([
+     'name'=>'Editar',
+     'description'=>'Editar usuarios y planes',
+     ]);
+
+     DB::table('permissions')->insert([
+    'name'=>'Eliminar',
+    'description'=>'Eliminar usuarios y planes',
+  ]);
+
     }
 }

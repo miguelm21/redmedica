@@ -22,16 +22,12 @@
             </div>
             <div class="col-12">
 
-              <p><b>Ya eres un miembre de la mejor red de médicos y profesionales de la salud</b>.</p>
-              <p>Solo falta que ingreses a tu cuenta de correo para que actives tu cuenta.</p><a href="{{route('home')}}">Ir a Inicio</a>
+              <p><b>Tu Cuenta a sido Confirmada, solo falta esperar la  Autorización del medico Profesional: {{$assistant->medico->name}} {{$assistant->medico->lastName}},para que puedas acceder a sus archivos. Una vez se halla dado la autorizacion  podras usar tu cuenta.</b>.
             </div>
+            <a href="{{route('home')}}">Ir a Inicio</a>
 
             <div class="col-12">
 
-
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="">
-             Reenviar Correo de Confirmación
-              </button>
             </div>
           </div>
         </div>
@@ -55,5 +51,5 @@
   </div>
 </footer>
 
-@include('medico.modalresendMailConfirm')
+
 @endsection

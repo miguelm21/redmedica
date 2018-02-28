@@ -3,6 +3,11 @@
 @section('content')
   <a href="{{route('confirmMedicalCenter',['id'=>1,'code'=>1])}}">{{route('confirmMedicalCenter',['id'=>1,'code'=>2])}}</a>
 
+  <div class="btn-group " role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-config-blue">1</button>
+    <button type="button" class="btn btn-secondary">2 </button>
+    <button type="button" class="btn btn-secondary">3</button>
+  </div>
   <h1>registro asistente</h1>
 
 

@@ -12,7 +12,7 @@
 
       <h2>"Verificación por correo electrónico de Red Medica"</h2>
 
-      <p>Un Cordial saludo: {{$assistant->nameAdmin}} , Para Confirmar su registro debe Ingresar a la Ruta: </p><a href="{{route('confirmMedicalCenter',['id'=>$medicalCenter->id,'code'=>$code])}}">{{route('confirmMedicalCenter',['id'=>$medicalCenter->id,'code'=>$code])}}</a>
+      <p>Un Cordial saludo: {{$assistant->name}} {{$assistant->lastName}}, Para Confirmar su registro en MedicosSi debe Ingresar a la Ruta: </p><a href="{{route('confirmAssistant',['id'=>$user->id,'code'=>$code])}}">{{route('confirmAssistant',['id'=>$user->id,'code'=>$code])}}</a>
 
       <p>Si usted no Solicito una cuenta en MédicosSi, Simplemente omita el mensaje; de este modo la cuenta no sera verificada.</p>
 

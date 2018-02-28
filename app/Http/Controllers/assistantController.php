@@ -17,10 +17,18 @@ class assistantController extends Controller
 
 
 
-   public function assistantReg()
+   public function successRegAssistant($id)
    {
+     $user = user::find($id);
+     $assistant = assistant::find($user->assistant_id);
+     return view('assistant.successReg')->with('assistant', $assistant);
+   }
 
-     return view('assistant.successReg');
+   public function AvisoConfirmAccountAssistant($id)
+   {
+     $user = user::find($id);
+     $assistant = assistant::find($user->assistant_id);
+     return view('assistant.AvisoConfirmAccountAssistant')->with('assistant', $assistant)->with('user', $user);
    }
 
   public function index()
@@ -41,6 +49,23 @@ class assistantController extends Controller
       return view('assistant.create')->with('medico', $medico);
   }
 
+  public function confirmAssistant($id,$code){
+   $user = User::find($id);
+
+   if($user->confirmation_code == $code){
+
+       $user->confirmation_code = null;
+       $user->confirmed = 'medium';
+       $user->save();
+       $assistant = assistant::where('user_id',$user->id);
+
+       return redirect()->route('AvisoConfirmAccountAssistant',$user->id);
+     }else{
+       return redirect()->route('successRegAssistant',$user->id)->with('warning', 'No se pudo verificar la autenticacion del usuario,por favor presione el boton "Reenviar Correo de Confirmación" para intentarlo Nuevamente.');
+
+     }
+
+  }
   /**
    * Store a newly created resource in storage.
    *
@@ -49,6 +74,7 @@ class assistantController extends Controller
    */
   public function store(Request $request)
   {
+
 
         $request->validate([
           'email'=>'required|unique:users|unique:assistants',
@@ -65,17 +91,25 @@ class assistantController extends Controller
         $assistant->fill($request->all());
         $assistant->save();
 
+        $code = str_random(25);
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->assistant_id = $assistant->id;
-
+        $user->confirmation_code = $code;
         $user->role = 'Asistente';
         $user->save();
 
+        Mail::send('mails.ActivationAssistent',['assistant'=>$assistant,'user'=>$user,'code'=>$code],function($msj){
+           $msj->subject('Médicos Si');
+           $msj->to('testprogramas531@gmail.com');
 
-        return view('assistant.successReg')->with('assistant', $assistant);
+      });
+
+      return redirect()->route('successRegAssistant',$user->id)->with('success', 'Se ha enviado un mensaje de confirmación a tu Correo Electronico.')->with('user', $user);
+
+
 
   }
 

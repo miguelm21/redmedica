@@ -23,6 +23,7 @@ route::get('confirm/MedicalCenter/{id}/{code}','medicalCenterController@confirmM
 route::get('confirm/medico/{id}/{code}','medicoController@confirmMedico')->name('confirmMedico');
 
 route::get('confirm/medico/{id}','medicoController@successRegMedico')->name('successRegMedico');
+route::get('confirm/assistant/{id}','assistantController@successRegAssistant')->name('successRegAssistant');
 
 route::get('confirm/MedicalCenter/{id}','medicalCenterController@successRegMedicalCenter')->name('successRegMedicalCenter');
 
@@ -40,7 +41,8 @@ route::get('medicos/list','medicoController@medicosList')->name('medicosList');
 route::resource('specialty_categories','specialtyCategoriesController');
 route::resource('specialty','specialtyController');
 route::resource('assistant','assistantController');
-
+route::resource('administrators','administratorsController');
 route::get('confirm/assistant/{id}/{code}','assistantController@confirmAssistant')->name('confirmAssistant');
 
-route::get('success/registro/assistant','assistantController@assistantReg')->name('assistantReg');
+route::get('confirm/assistant/{id}/{code}','assistantController@confirmAssistant')->name('confirmAssistant');
+route::get('register/assistant/{id}/step4','assistantController@AvisoConfirmAccountAssistant')->name('AvisoConfirmAccountAssistant');
