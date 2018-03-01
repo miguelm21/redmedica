@@ -2,6 +2,7 @@
 
 @section('content')
 <section class="box-register">
+	
 		<div class="container">
 			<div class="register">
 				<div class="row">
@@ -20,8 +21,6 @@
 						      <th class="text-center">Nombre</th>
 						      <th class="text-center">Apellido</th>
 									<th class="text-center">Email</th>
-									<th class="text-center">Permisos Otorgados</th>
-									<th class="text-center">Ciudades Atendidas</th>
 									<th class="text-center">Acciones</th>
 						    </tr>
 						  </thead>
@@ -33,18 +32,6 @@
 									<td class="text-center">{{$admin->name}}</th>
 									<td class="text-center">{{$admin->lastName}}</td>
 									<td class="text-center">{{$admin->email}}</td>
-									<td class="text-center">
-										<ul>
-											<li>permiso 1</li>
-											<li>permiso 2</li>
-										</ul>
-									</td>
-									<td class="text-center">
-										<ul>
-											<li>ciudad 1</li>
-											<li>ciudad 2</li>
-										</ul>
-									</td>
 									<td><div class="btn-group" role="group" aria-label="...">
 										<div class="row">
 											<div class="col-12">
@@ -52,7 +39,7 @@
 												</a>
 												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Administrar Persmisos" role="button" href="{{route('listPermissionSet',$admin->id)}}">Administrar Persmisos
 												</a>
-												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Administrar Ciudades" role="button" href="">Administrar Ciudades
+												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Administrar Ciudades" role="button" href="{{route('citiesAdmin',$admin->id)}}">Administrar Ciudades
 												</a>
 											</div>
 										</div>

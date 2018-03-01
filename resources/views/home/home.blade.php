@@ -28,16 +28,13 @@
           </div>
           <div class="row px-1">
             <div class="col-12 nopadding">
-              <a href="#" class="btn btn-block btn-config-dashboard"><i class="fas fa-users fa-2"></i><span>Administrar</a>
-            </div>
-            <div class="col-12 nopadding">
               <a href="{{route('administrators.index')}}" class="btn btn-block btn-config-dashboard"><i class="fas fa-users fa-2"></i><span>Administradores</a>
             </div>
             <div class="col-12 nopadding">
-              <a href="#" class="btn btn-block btn-config-dashboard"><i class="fas fa-users"></i><span>Promotores</span></a>
+              <a href="" class="btn btn-block btn-config-dashboard"><i class="fas fa-users"></i><span>Promotores</span></a>
             </div>
             <div class="col-12 nopadding">
-              <a href="#" class="btn btn-block btn-config-dashboard"><i class="fas fa-briefcase"></i><span>Planes</span></a>
+              <a href="{{route('plans.index')}}" class="btn btn-block btn-config-dashboard"><i class="fas fa-briefcase"></i><span>Planes</span></a>
             </div>
           </div>
           <div class="row p-1">

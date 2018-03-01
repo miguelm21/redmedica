@@ -23,13 +23,14 @@ class permissionSetController extends Controller
          return view('administrators.permission')->with('permissions', $permissions)->with('admin', $admin);
      }
 
-     public function PermissionSetStore($id,$permission)
+     public function PermissionSetStore($permission,$admin_id)
      {
        $user = user::where('administrator_id',$admin_id)->first();
 
        $permission = permission::where('display_name', 'Administrador');
-
+       dd($permission);
        $role = role::where('name', 'admin');
+
        $role->attachPermissions($permission);
 
        return back()->with('success', 'Se a Habilitado el permiso');

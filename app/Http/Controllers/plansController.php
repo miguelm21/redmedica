@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\city;
-class cityEntrustController extends Controller
+use App\plan;
+class plansController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,11 +13,15 @@ class cityEntrustController extends Controller
      */
     public function index()
     {
-        $city = city::orderBy('name','asc')->pluck('name','id');
-        return view('administrator.cityEntrust')->with('city', $city);
-    }
+        $plans1 = plan::where('applicable','Medicos y Especialistas')->get();
 
-  
+        $plans2 = plan::where('applicable','Medicina Alternativa, Psicologos y Terapeutas')->get();
+
+        $plans3 = plan::where('applicable','Nucleos Medicos')->get();
+
+        return view('plans.index')->with('plans1', $plans1)->with('plans2', $plans2)->with('plans3', $plans3);
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -59,7 +63,7 @@ class cityEntrustController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

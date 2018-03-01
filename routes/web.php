@@ -42,6 +42,13 @@ route::resource('specialty_categories','specialtyCategoriesController');
 route::resource('specialty','specialtyController');
 route::resource('assistant','assistantController');
 route::resource('administrators','administratorsController');
+route::resource('plans','plansController');
+
+route::get('cities/{id}/administrator','administratorsController@citiesAdmin')->name('citiesAdmin');
+route::post('cities/administrator/store','administratorsController@citiesAdminStore')->name('citiesAdminStore');
+route::get('delete/city/{id}/administrator','administratorsController@deleteCityAdmin')->name('deleteCityAdmin');
+
+
 route::get('confirm/assistant/{id}/{code}','assistantController@confirmAssistant')->name('confirmAssistant');
 
 route::get('confirm/assistant/{id}/{code}','assistantController@confirmAssistant')->name('confirmAssistant');
@@ -52,3 +59,5 @@ route::get('permission/admin/{id}','permissionSetController@listPermissionSet')-
 route::get('permission/{id}/set/admin/','permissionSetController@PermissionSet')->name('PermissionSet');
 
 route::get('permissions/{id}/store/{id2}/','PermissionSetController@PermissionSetStore')->name('PermissionSetStore');
+
+route::get('edit/price/{id}/plan','permissionSetController@PermissionSet')->name('editPrice');

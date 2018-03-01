@@ -11,7 +11,81 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
         // $this->call(UsersTableSeeder::class);
+
+        DB::table('plans')->insert([
+       'name'=>'Plan Basico',
+       'applicable'=>'Medicos y Especialistas',
+       'price'=>0,
+       ]);
+
+        DB::table('plans')->insert([
+       'name'=>'Plan Mi Agenda',
+       'applicable'=>'Medicos y Especialistas',
+       'price'=>0,
+       ]);
+
+
+        DB::table('plans')->insert([
+       'name'=>'Plan Profesional',
+       'applicable'=>'Medicos y Especialistas',
+       'price'=>0,
+       ]);
+       DB::table('plans')->insert([
+         'name'=>'Plan Platino',
+         'applicable'=>'Medicos y Especialistas',
+         'price'=>0,
+       ]);
+
+       DB::table('plans')->insert([
+      'name'=>'Plan Basico',
+      'applicable'=>'Medicina Alternativa, Psicologos y Terapeutas',
+      'price'=>0,
+      ]);
+
+       DB::table('plans')->insert([
+         'name'=>'Plan Mi Agenda',
+         'applicable'=>'Medicina Alternativa, Psicologos y Terapeutas',
+         'price'=>0,
+       ]);
+       DB::table('plans')->insert([
+      'name'=>'Plan Profesional',
+      'applicable'=>'Medicina Alternativa, Psicologos y Terapeutas',
+      'price'=>0,
+      ]);
+
+
+     DB::table('plans')->insert([
+    'name'=>'Plan Platino',
+    'applicable'=>'Medicina Alternativa, Psicologos y Terapeutas',
+    'price'=>0,
+    ]);
+
+
+      DB::table('plans')->insert([
+     'name'=>'Plan Basico',
+     'applicable'=>'Nucleos Medicos',
+     'price'=>0,
+     ]);
+
+      DB::table('plans')->insert([
+     'name'=>'Plan Control',
+     'applicable'=>'Nucleos Medicos',
+     'price'=>0,
+     ]);
+
+         DB::table('plans')->insert([
+        'name'=>'Plan Profesional-Plus',
+        'applicable'=>'Nucleos Medicos',
+        'price'=>0,
+        ]);
+
+        DB::table('plans')->insert([
+       'name'=>'Plan Platino-Plus',
+       'applicable'=>'Centros Medicos',
+       'price'=>0,
+       ]);
 
         DB::table('users')->insert([
        'name'=>'admin',
@@ -26,11 +100,11 @@ class DatabaseSeeder extends Seeder
       'description'=>'User is allowed to manage and edit other users'
       ]);
 
-      DB::table('permissions')->insert([
-     'name'=>'edit',
-     'display_name'=>'Edit Users',
-     'description'=>'edit existing users'
-     ]);
+        DB::table('permissions')->insert([
+       'name'=>'edit',
+       'display_name'=>'Edit Users',
+       'description'=>'edit existing users'
+       ]);
 
         DB::table('cities')->insert([
       'name'=>'Guanare',
