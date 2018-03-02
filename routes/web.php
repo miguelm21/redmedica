@@ -65,4 +65,6 @@ route::get('permission/{id}/set/admin/','permissionSetController@PermissionSet')
 
 route::get('permissions/{id}/store/{id2}/','PermissionSetController@PermissionSetStore')->name('PermissionSetStore');
 
+
+route::get('clients/promoter/{id}','promotersController@clientsPromoter')->name('clientsPromoter');
 //sroute::get('edit/price/{id}/plan','plansController@PermissionSet')->name('editPrice');

@@ -25,9 +25,9 @@ class CreateMedicalCentersTable extends Migration
             $table->string('city');
             $table->string('billingData');
             $table->string('meansOfRecords');
-            $table->string('numberPromoter');
             $table->string('confirmation_code')->nullable();
             $table->string('confirmed')->default('false');
+            $table->integer('id_promoter');
             $table->timestamps();
 
         });

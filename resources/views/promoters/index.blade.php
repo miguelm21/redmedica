@@ -37,7 +37,7 @@
 									<td><div class="btn-group" role="group" aria-label="...">
 										<div class="row">
 											<div class="col-12">
-												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Administrar Persmisos" role="button" href="{{route('listPermissionSet',$promoter->id)}}">Clientes
+												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Clientes" role="button" href="{{route('clientsPromoter',$promoter->id)}}">Clientes
 												</a>
 												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Administrar Persmisos" role="button" href="{{route('listPermissionSet',$promoter->id)}}">Comisiones Pagadas
 												</a>

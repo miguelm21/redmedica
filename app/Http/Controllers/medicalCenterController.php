@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\medicalCenter;
 use Mail;
+use App\promoter;
 class medicalCenterController extends Controller
 {
     public function confirmMedicalCenter($id,$code){
@@ -44,8 +45,8 @@ class medicalCenterController extends Controller
      */
     public function create()
     {
-
-        return view('medicalCenter.create');
+      $id_promoter = promoter::orderBy('id_promoter','desc')->pluck('id_promoter','id_promoter');
+        return view('medicalCenter.create')->with('id_promoter', $id_promoter);
     }
 
     /**
@@ -67,7 +68,7 @@ class medicalCenterController extends Controller
           'city'=>'required',
           'billingData'=>'required',
           'meansOfRecords'=>'required',
-          'numberPromoter'=>'required',
+          'id_promoter'=>'required',
 
         ]);
 

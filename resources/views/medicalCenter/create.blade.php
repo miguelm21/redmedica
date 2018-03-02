@@ -48,7 +48,7 @@
                     {{Form::text('meansOfRecords',null,['class'=>'form-control','placeholder'=>'Medios de Registro'])}}
                 </div>
                 <div class="form-group">
-                  {{Form::number('numberPromoter',null,['class'=>'form-control','placeholder'=>'Numero de promotor'])}}
+                  {{Form::select('id_promoter',$id_promoter,null,['class'=>'form-control','placeholder'=>'Numero de promotor'])}}
                 </div>
             </div>
           </div>

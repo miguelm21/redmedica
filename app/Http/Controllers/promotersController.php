@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\promoter;
 use App\User;
 use App\Role;
+use App\medicalCenter;
+use App\medico;
 
 class promotersController extends Controller
 {
@@ -14,6 +16,16 @@ class promotersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+     public function clientsPromoter($id)
+     {
+       $promoter = promoter::find($id);
+       $medicalCenter = medicalCenter::where('id_promoter',$id)->orderBy('id','desc')->paginate(10);
+       $medico = medico::where('id_promoter',$id)->orderBy('id','desc')->paginate(10);
+         return view('promoters.clientsPromoter')->with('medicalCenter', $medicalCenter)->with('medico', $medico)->with('promoter', $promoter);
+     }
+
     public function index()
     {
 
