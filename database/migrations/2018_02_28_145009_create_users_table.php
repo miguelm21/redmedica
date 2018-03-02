@@ -30,7 +30,8 @@ class CreateUsersTable extends Migration
              $table->integer('administrator_id')->unsigned()->nullable();
              $table->foreign('administrator_id')->references('id')->on('administrators');
 
-             
+             $table->integer('promoter_id')->unsigned()->nullable();
+             $table->foreign('promoter_id')->references('id')->on('promoters');
 
              $table->string('password');
              $table->string('confirmation_code')->nullable();
@@ -40,6 +41,7 @@ class CreateUsersTable extends Migration
              $table->timestamps();
          });
        }
+
     /**
      * Reverse the migrations.
      *

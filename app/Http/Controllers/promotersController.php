@@ -1,16 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\administrator;
-use App\permission;
-use App\city;
-use App\cities_admin;
-use App\user;
-use App\Role;
-use App\role_user;
-use Illuminate\Http\Request;
 
-class administratorsController extends Controller
+use Illuminate\Http\Request;
+use App\promoter;
+use App\User;
+use App\Role;
+
+class promotersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +17,8 @@ class administratorsController extends Controller
     public function index()
     {
 
-      $administrators = administrator::orderBy('id','desc')->paginate(10);
-        return view('administrators.index')->with('administrators', $administrators);
+      $promoters = promoter::orderBy('id','desc')->paginate(10);
+        return view('promoters.index')->with('promoters', $promoters);
     }
 
     public function citiesAdmin($id)
@@ -49,7 +46,7 @@ class administratorsController extends Controller
     {
       $request->validate([
         'name'=>'required|unique:cities_admins',
-        
+
       ]);
 
         $cities_admin = new cities_admin;
@@ -67,7 +64,7 @@ class administratorsController extends Controller
      */
     public function create()
     {
-        return view('administrators.create');
+        return view('promoters.create');
     }
 
     /**
@@ -84,26 +81,27 @@ class administratorsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+           'id_promoter'=>'required|unique:promoters',
            'name'=>'required',
            'lastName'=>'required',
-           'email'=>'required|unique:medicos|unique:users',
+           'email'=>'required|unique:promoters|unique:users',
            'password'=>'required',
         ]);
 
-        $administrator = new administrator;
-        $administrator->fill($request->all());
-        $administrator->save();
+        $promoter = new promoter;
+        $promoter->fill($request->all());
+        $promoter->save();
 
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->administrator_id = $administrator->id;
+        $user->promoter_id = $promoter->id;
         $user->save();
         $role = Role::where('name','Admin')->first();
 
         $user->attachRole($role);
-         return redirect()->route('administrators.index')->with('success', 'Se ha creado un nuevo Administrador de Forma Satisfactoria');
+         return redirect()->route('promoters.index')->with('success', 'Se ha agregado un nuevo promotor de forma Satisfactoria');
 
     }
     /**

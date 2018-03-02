@@ -25,8 +25,6 @@
 						      <th class="text-center">Nombre</th>
 						      <th class="text-center">Aplicable a</th>
 									<th class="text-center">Precio</th>
-									<th class="text-center">Modules</th>
-                  <th class="text-center">Ciudades</th>
                   <th class="text-center">Acciones</th>
 						    </tr>
 						  </thead>
@@ -36,20 +34,15 @@
 								<tr>
 									<td>{{$plan->name}}</th>
 									<td class="text-center">{{$plan->applicable}}</td>
-									<td class="text-center">{{$plan->price}}</td>
-                  <td class="text-center"></td>
-                  <td class="text-center"></td>
-									<td><div class="btn-group" role="group" aria-label="...">
-										<div class="row">
-											<div class="col-12">
-                        <!-- Button trigger modal -->
-                      <button onclick="edit($plan->price)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                        Editar Precio
-                      </button>
-											</div>
-										</div>
-									</div>
-								</td>
+									<td class="text-center">
+                    {!!Form::open(['route'=>'plans.store','method'=>'POST'])!!}
+                        <input onFocus="mostrar('{{$plan->id}}')" type="text" name="price" value="{{$plan->price}}">
+                        <input type="hidden" name="plan_id" value="{{$plan->id}}">
+                         {!!Form::submit('Guardar',['class'=>'btn btn-primary','id'=>$plan->id])!!}
+                    {!!Form::close()!!}
+									<td><a href="" class="btn btn-success">Modulos</a>
+                    <a href="{{route('citiesPlans',$plan->id)}}" class="btn btn-info">Ciudades</a>
+                  </td>
 								@endforeach
 
 						  </tbody>
@@ -65,43 +58,38 @@
             </div>
 
             <table class="table table-responsive">
-              <thead class="thead-color">
-                <tr>
-                  <th class="text-center">Nombre</th>
-                  <th class="text-center">Aplicable a</th>
-                  <th class="text-center">Precio</th>
-                  <th class="text-center">Modules</th>
-                  <th class="text-center">Ciudades</th>
+						  <thead class="thead-color">
+						    <tr>
+						      <th class="text-center">Nombre</th>
+						      <th class="text-center">Aplicable a</th>
+									<th class="text-center">Precio</th>
                   <th class="text-center">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
+						    </tr>
+						  </thead>
+						  <tbody>
 
-                @foreach ($plans2 as $plan)
-                <tr>
-                  <td>{{$plan->name}}</th>
-                  <td class="text-center">{{$plan->applicable}}</td>
-                  <td class="text-center">{{$plan->price}}</td>
-                  <td class="text-center"></td>
-                  <td class="text-center"></td>
-                  <td><div class="btn-group" role="group" aria-label="...">
-                    <div class="row">
-                      <div class="col-12">
-                        <a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Editar" role="button" href="{{route('specialty_categories.edit',$plan->id)}}">Editar
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                @endforeach
+								@foreach ($plans3 as $plan)
+								<tr>
+									<td>{{$plan->name}}</th>
+									<td class="text-center">{{$plan->applicable}}</td>
+									<td class="text-center">
+                    {!!Form::open(['route'=>'plans.store','method'=>'POST'])!!}
+                        <input type="text" name="price" value="{{$plan->price}}" id="{{$plan->id}}">
+                        <input type="hidden" name="plan_id" value="{{$plan->id}}">
+                         {!!Form::submit('Cambiar',['class'=>'btn btn-primary'])!!}
+                    {!!Form::close()!!}
+									<td><a href="" class="btn btn-success">Modulos</a>
+                    <a href="{{route('citiesPlans',$plan->id)}}" class="btn btn-info">Ciudades</a>
+                  </td>
+								@endforeach
 
-              </tbody>
+						  </tbody>
               <tfoot>
                 <tr>
 
                 </tr>
               </tfoot>
-            </table>
+						</table>
 
 
 
@@ -110,43 +98,38 @@
             </div>
 
             <table class="table table-responsive">
-              <thead class="thead-color">
-                <tr>
-                  <th class="text-center">Nombre</th>
-                  <th class="text-center">Aplicable a</th>
-                  <th class="text-center">Precio</th>
-                  <th class="text-center">Modules</th>
-                  <th class="text-center">Ciudades</th>
+						  <thead class="thead-color">
+						    <tr>
+						      <th class="text-center">Nombre</th>
+						      <th class="text-center">Aplicable a</th>
+									<th class="text-center">Precio</th>
                   <th class="text-center">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
+						    </tr>
+						  </thead>
+						  <tbody>
 
-                @foreach ($plans3 as $plan)
-                <tr>
-                  <td>{{$plan->name}}</th>
-                  <td class="text-center">{{$plan->applicable}}</td>
-                  <td class="text-center">{{$plan->price}}</td>
-                  <td class="text-center"></td>
-                  <td class="text-center"></td>
-                  <td><div class="btn-group" role="group" aria-label="...">
-                    <div class="row">
-                      <div class="col-12">
-                        <a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Editar" role="button" href="{{route('specialty_categories.edit',$plan->id)}}">Editar
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                @endforeach
+								@foreach ($plans2 as $plan)
+								<tr>
+									<td>{{$plan->name}}</th>
+									<td class="text-center">{{$plan->applicable}}</td>
+									<td class="text-center">
+                    {!!Form::open(['route'=>'plans.store','method'=>'POST'])!!}
+                        <input type="text" name="price" value="{{$plan->price}}" id="{{$plan->id}}">
+                        <input type="hidden" name="plan_id" value="{{$plan->id}}">
+                         {!!Form::submit('Cambiar',['class'=>'btn btn-primary'])!!}
+                    {!!Form::close()!!}
+									<td><a href="" class="btn btn-success">Modulos</a>
+                    <a href="{{route('citiesPlans',$plan->id)}}" class="btn btn-info">Ciudades</a>
+                  </td>
+								@endforeach
 
-              </tbody>
+						  </tbody>
               <tfoot>
                 <tr>
 
                 </tr>
               </tfoot>
-            </table>
+						</table>
 				</div>
 
 			</div>
@@ -200,10 +183,4 @@
 		</div>
 	</div>
 </footer>
-@endsection
-
-@section('scriptJS')
-  <script type="text/javascript">
-    alert(sdsd)
-  </script>
 @endsection

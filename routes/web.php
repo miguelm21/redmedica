@@ -43,10 +43,15 @@ route::resource('specialty','specialtyController');
 route::resource('assistant','assistantController');
 route::resource('administrators','administratorsController');
 route::resource('plans','plansController');
+route::resource('promoters','promotersController');
 
+route::get('cities/{id}/plan','plansController@citiesPlans')->name('citiesPlans');
+route::post('cities/plan/store','plansController@citiesPlansStore')->name('citiesPlansStore');
 route::get('cities/{id}/administrator','administratorsController@citiesAdmin')->name('citiesAdmin');
 route::post('cities/administrator/store','administratorsController@citiesAdminStore')->name('citiesAdminStore');
+
 route::get('delete/city/{id}/administrator','administratorsController@deleteCityAdmin')->name('deleteCityAdmin');
+route::get('delete/city/{id}/plan','plansController@deleteCityPlan')->name('deleteCityPlan');
 
 
 route::get('confirm/assistant/{id}/{code}','assistantController@confirmAssistant')->name('confirmAssistant');
@@ -60,4 +65,4 @@ route::get('permission/{id}/set/admin/','permissionSetController@PermissionSet')
 
 route::get('permissions/{id}/store/{id2}/','PermissionSetController@PermissionSetStore')->name('PermissionSetStore');
 
-route::get('edit/price/{id}/plan','permissionSetController@PermissionSet')->name('editPrice');
+//sroute::get('edit/price/{id}/plan','plansController@PermissionSet')->name('editPrice');

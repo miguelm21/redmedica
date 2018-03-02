@@ -31,7 +31,7 @@
               <a href="{{route('administrators.index')}}" class="btn btn-block btn-config-dashboard"><i class="fas fa-users fa-2"></i><span>Administradores</a>
             </div>
             <div class="col-12 nopadding">
-              <a href="" class="btn btn-block btn-config-dashboard"><i class="fas fa-users"></i><span>Promotores</span></a>
+              <a href="{{route('promoters.index')}}" class="btn btn-block btn-config-dashboard"><i class="fas fa-users"></i><span>Promotores</span></a>
             </div>
             <div class="col-12 nopadding">
               <a href="{{route('plans.index')}}" class="btn btn-block btn-config-dashboard"><i class="fas fa-briefcase"></i><span>Planes</span></a>

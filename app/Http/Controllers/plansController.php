@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\plan;
+use App\city;
+use App\cities_plan;
 class plansController extends Controller
 {
     /**
@@ -23,6 +25,42 @@ class plansController extends Controller
 
     }
 
+    public function deleteCityplan($id)
+    {
+
+        $cities_plan = cities_plan::find($id);
+
+        $city1 = $cities_plan->name;
+        cities_plan::destroy($id);
+
+        return back()->with('danger', 'Se ha desabilitado la ciudad '.$city1.' para este Plan');
+    }
+
+    public function citiesPlansStore(Request $request)
+    {
+      $request->validate([
+        'name'=>'required|unique:cities_plans',
+      ]);
+
+        $city = new cities_plan;
+        $city->name = $request->name;
+        $city->plan_id = $request->plan_id;
+        $city->save();
+
+        $plan = plan::find($request->plan_id);
+        return back()->with('success', 'Se a asigando una nueva ciudad al Plan: '.$plan->name);
+    }
+
+      public function citiesPlans($id)
+      {
+          $citiesAll = city::orderBy('name','asc')->pluck('name','name');
+          $citiesPlans = cities_plan::where('plan_id',$id)->paginate(10);
+
+          $plan = plan::find($id);
+
+          return view('plans.citiesPlans')->with('citiesPlans', $citiesPlans)->with('citiesAll', $citiesAll)->with('plan', $plan);
+      }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -41,7 +79,15 @@ class plansController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+          'price'=>'required|numeric'
+        ]);
+
+        $plan = plan::find($request->plan_id);
+        $plan->price = $request->price;
+        $plan->save();
+
+        return back()->with('success', 'El precio del plan: '.$plan->name.' ha sido Cambiado con Exito');
     }
 
     /**
