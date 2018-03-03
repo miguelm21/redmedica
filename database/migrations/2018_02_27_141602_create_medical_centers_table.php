@@ -15,19 +15,22 @@ class CreateMedicalCentersTable extends Migration
     {
         Schema::create('medical_centers', function (Blueprint $table) {
             $table->increments('id');
-
             $table->integer('idMedicalCenter')->nullable();
+            $table->string('id_medicalCenter');
             $table->string('tradename');
             $table->string('activePlan')->nullable();///ARREGLAAAAAAAAAAAAAAAAAAARRRRRR
             $table->string('emailAdmin',60);
             $table->string('nameAdmin');
             $table->string('phone');
+            $table->string('phone2')->nullable();
             $table->string('city');
-            $table->string('billingData');
-            $table->string('meansOfRecords');
+            $table->string('billingData')->nullable();
+            $table->string('meansOfRecords')->nullable() ;
             $table->string('confirmation_code')->nullable();
             $table->string('confirmed')->default('false');
             $table->integer('id_promoter');
+            $table->string('plan')->nullable();
+            $table->DateTime('activationPlan')->nullable();
             $table->timestamps();
 
         });

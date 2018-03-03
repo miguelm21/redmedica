@@ -25,7 +25,9 @@ class CreateUsersTable extends Migration
 
              $table->integer('medico_id')->nullable();
              $table->integer('patient_id')->nullable();
-             $table->integer('assistants_id')->nullable();
+
+             $table->integer('assistant_id')->unsigned()->nullable();
+             $table->foreign('assistant_id')->references('id')->on('assistants');
 
              $table->integer('administrator_id')->unsigned()->nullable();
              $table->foreign('administrator_id')->references('id')->on('administrators');

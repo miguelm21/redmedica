@@ -1,25 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="box-register">
-	
+<section class="">
+
 		<div class="container">
 			<div class="register">
 				<div class="row">
-					<div class="col-12 mb-5">
+					<div class="col-12 mb-3">
 						<h2 class="text-center font-title">Administradores</h2>
 					</div>
+
 				</div>
-				<a class="btn btn-primary" href="{{route('administrators.create')}}">Crear Nuevo Administrador</a>
-
-
+					<div class="row mb-3">
+						<div class="col-6 text-left">
+							<a class="btn btn-config-green" href="{{route('administrators.create')}}">Agregar Administrador</a>
+						</div>
+						<div class="col-6 text-right">
+							<a class="btn btn-secondary" href="{{route('home')}}">Atras</a>
+						</div>
+					</div>
 				<div class="row">
-						<table class="table table-responsive">
+						<table class="table table-responsive table-config">
 						  <thead class="thead-color">
 						    <tr>
 						      <th class="text-center">#</th>
 						      <th class="text-center">Nombre</th>
-						      <th class="text-center">Apellido</th>
+						      <th class="text-center">Apelliasdasdasdsadasdo</th>
 									<th class="text-center">Email</th>
 									<th class="text-center">Acciones</th>
 						    </tr>
@@ -35,12 +41,23 @@
 									<td><div class="btn-group" role="group" aria-label="...">
 										<div class="row">
 											<div class="col-12">
-												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Editar" role="button" href="{{route('specialty_categories.edit',$admin->id)}}">Editar
-												</a>
-												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Administrar Persmisos" role="button" href="{{route('listPermissionSet',$admin->id)}}">Administrar Persmisos
-												</a>
-												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Administrar Ciudades" role="button" href="{{route('citiesAdmin',$admin->id)}}">Administrar Ciudades
-												</a>
+
+												<div class="btn-group" role="group" aria-label="...">
+													<div class="row">
+														<div class="col-4">
+															<a  class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Editar" role="button" href="{{route('administrators.edit',$admin->id)}}"><i class="fas fa-edit"></i>
+															</a>
+														</div>
+														<div class="col-4">
+															<a  class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Permisos" role="button" href="{{route('listPermissionSet',$admin->id)}}"><i class="fas fa-key"></i>
+															</a>
+														</div>
+														<div class="col-4">
+															<a  class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Ciudades que puede editar" role="button" href="{{route('citiesAdmin',$admin->id)}}"><i class="fas fa-bars"></i>
+															</a>
+														</div>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -60,19 +77,5 @@
 		</div>
 	</section>
 
-<footer>
-	<div class="section-footer">
-		<div class="row align-items-center nomargin p-1">
-			<div class="col-lg-6 col-sm-6 col-12 text-center nopadding">
-				<a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-13.png" alt=""></a>
-				<a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-14.png" alt=""></a>
-				<a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-15.png" alt=""></a>
-				<a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-16.png" alt=""></a>
-			</div>
-			<div class="col-lg-6 col-sm-6 col-12 text-center nopadding">
-				<span class="font-footer"><b>MedicosSi</b> siempre encontrarás tu mejor opción.</span>
-			</div>
-		</div>
-	</div>
-</footer>
+
 @endsection

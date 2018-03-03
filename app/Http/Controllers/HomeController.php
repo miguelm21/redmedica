@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\user;
+use App\User;
 use App\medico;
 use App\medicalCenter;
 use DB;
@@ -32,6 +32,6 @@ class HomeController extends Controller
     }
 
     public function prueba(){
-      
+
     }
 }

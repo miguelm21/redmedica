@@ -55,21 +55,7 @@
 									 </div>
 								</div>
 						</div>
-						<div class="row">
-							<div class="col-12">
-								  	<div class="form-group">
-								    		{!!Form::select('specialty_id',$specialties,null,['class'=>'form-control','placeholder'=>'Especialidad'])!!}
-								  </div>
-							</div>
-						</div>
-						<div class="row">
-								<div class="col-12">
-									  	<div class="form-group">
-											{!!Form::select('sub-specialty_id',$specialties,null,['class'=>'form-control','placeholder'=>'Sub-Especialidad'])!!}
-									  </div>
-								</div>
-							</div>
-						</div>
+
 						<div class="row">
 								<div class="col-lg-12 col-12">
 									<div class="form-group">
@@ -93,7 +79,7 @@
 
 						<div class="row">
 						 <div class="col-lg-6 col-12 mt-2">
-							 <button type="submit" class="btn-config-blue btn btn-block">Limpiar</button>
+							 <a href="" class="btn-config-blue btn btn-block">Limpiar</a>
 						 </div>
 						 <div class="col-lg-6 col-12 mt-2">
 							 <button type="submit" class="btn-config-green btn btn-block">Registrar</button>

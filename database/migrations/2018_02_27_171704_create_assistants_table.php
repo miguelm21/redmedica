@@ -15,16 +15,15 @@ class CreateAssistantsTable extends Migration
     {
         Schema::create('assistants', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('medico_id');
+            $table->string('identification');
             $table->string('name');
-            $table->integer('medico_id')->unsigned();
-            $table->foreign('medico_id')->references('id')->on('medicos');
-            $table->string('status')->default('disabled');
-            // $table->integer('modules_id')->unsigned();
-            // $table->foreign('modules_id')->references('id')->on('modules');
+            $table->string('lastName');
             $table->string('phone1');
             $table->string('phone2')->nullable();
             $table->string('email');
             $table->string('dateActivation')->nullable();
+            $table->string('status')->default('disabled');
             $table->timestamps();
         });
     }

@@ -49,7 +49,7 @@ class administratorsController extends Controller
     {
       $request->validate([
         'name'=>'required|unique:cities_admins',
-        
+
       ]);
 
         $cities_admin = new cities_admin;
@@ -125,8 +125,8 @@ class administratorsController extends Controller
      */
     public function edit($id)
     {
-      $medico = medico::find($id);
-        return view('medico.edit')->with('medico', $medico);
+      $administrator = administrator::find($id);
+        return view('administrators.edit')->with('administrator', $administrator);
     }
 
     /**

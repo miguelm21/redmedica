@@ -50,7 +50,7 @@ class medicoController extends Controller
       $user = User::find($id);
 
       if($user->confirmation_code == $code){
-          $user->confirmation_code = null;
+          $user->confirmation_code = $code;
           $user->confirmed = 'medium';
           $user->save();
           $medico = medico::where('user_id',$user->id);
@@ -85,8 +85,6 @@ class medicoController extends Controller
         $medico->password = bcrypt($request->password);
         $medico->save();
 
-        $medico = medico::all()->last();
-
         $code = str_random(25);
         $user = new User;
         $user->name = $request->name;
@@ -97,13 +95,13 @@ class medicoController extends Controller
         $user->role = 'medico';
         $user->save();
 
-        Mail::send('mails.confirmMedico',['data'=>'hola'],function($msj){
+        Mail::send('mails.confirmMedico',['medico'=>$medico,'user'=>$user,'code'=>$code],function($msj){
            $msj->subject('Médicos Si');
-           $msj->to('testprogramas531@gmail.com');
+           $msj->to('eavc53189@gmail.com');
 
       });
 
-         return redirect()->route('successRegMedico',$user->id)->with('success', 'Se ha enviado un mensaje de confirmación a tu Correo Electronico.')->with('user', $user);
+         return redirect()->route('successRegMedico',$user->id)->with('user', $user);
 
     }
 

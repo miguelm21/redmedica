@@ -13,10 +13,18 @@
 
         {!!Form::open(['route'=>'medicalCenter.store','method'=>'POST'])!!}
           <div class="row mt-2">
-            <div class="col-lg-12 col-12">
+
+            <div class="col-lg-6 col-12">
               <div class="form-group">
-                  {{Form::text('tradename',null,['class'=>'form-control','placeholder'=>'Nombre Comercial'])}}
+                {{Form::text('id_medicalCenter',null,['class'=>'form-control','placeholder'=>'id del centro Medico'])}}
               </div>
+
+            </div>
+            <div class="col-lg-6 col-12">
+              <div class="form-group">
+                {{Form::text('tradename',null,['class'=>'form-control','placeholder'=>'Nombre del centro Medico'])}}
+              </div>
+
             </div>
             <!-- //////////////////////////////////AGREGAR ID DE CENTRO MEDICO -->
           </div>
@@ -35,18 +43,12 @@
                   {{Form::text('phone',null,['class'=>'form-control','placeholder'=>'Telefono'])}}
                  </div>
                 <div class="form-group">
-                  {{Form::text('city',null,['class'=>'form-control','placeholder'=>'Ciudad'])}}
+                  {{Form::select('city',$cities,null,['class'=>'form-control','placeholder'=>'Ciudad'])}}
                 </div>
             </div>
           </div>
           <div class="row">
             <div class="col-lg-12 col-12">
-              <div class="form-group">
-                    {{Form::text('billingData',null,['class'=>'form-control','placeholder'=>'Datos de facturación'])}}
-                </div>
-                <div class="form-group">
-                    {{Form::text('meansOfRecords',null,['class'=>'form-control','placeholder'=>'Medios de Registro'])}}
-                </div>
                 <div class="form-group">
                   {{Form::select('id_promoter',$id_promoter,null,['class'=>'form-control','placeholder'=>'Numero de promotor'])}}
                 </div>

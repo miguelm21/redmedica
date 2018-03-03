@@ -10,8 +10,9 @@
 
   <h2>"Verificación por correo electrónico de Red Medica"</h2>
 
-  
-  <p>Si recibiste un correo electrónico de verificación de cuenta por error, es posible que otro usuario haya ingresado tu dirección de correo electrónico mientras intentaba crear una cuenta para otra dirección. Si no solicitaste la cuenta, no es necesario que realices ninguna acción. Simplemente, omite el mensaje; la cuenta no se verificará.</p>
+    <p>Un Cordial saludo: {{$medico->name}} {{$medico->lastName}}, Para Confirmar su registro en MedicosSi debe Ingresar a la Ruta: </p><a href="{{route('confirmMedico',['id'=>$user->id,'code'=>$code])}}">{{route('confirmMedico',['id'=>$user->id,'code'=>$code])}}</a>
+
+    <p>Si usted no Solicito una cuenta en MédicosSi, Simplemente omita el mensaje; de este modo la cuenta no sera verificada.</p>
 
 </body>
 </html>

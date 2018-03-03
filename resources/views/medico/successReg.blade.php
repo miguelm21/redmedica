@@ -39,21 +39,6 @@
     </div>
   </div>
 </section>
-<footer>
-  <div class="section-footer">
-    <div class="row align-items-center nomargin p-1">
-      <div class="col-lg-6 col-12 text-center nopadding">
-        <a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-13.png" alt=""></a>
-        <a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-14.png" alt=""></a>
-        <a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-15.png" alt=""></a>
-        <a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-16.png" alt=""></a>
-      </div>
-      <div class="col-lg-6 col-12 text-center nopadding">
-        <span class="font-footer"><b>MedicosSi</b> siempre encontrarás tu mejor opción.</span>
-      </div>
-    </div>
-  </div>
-</footer>
 
 @include('medico.modalresendMailConfirm')
 @endsection

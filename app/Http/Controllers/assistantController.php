@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\assistant;
 use App\medico;
-use App\user;
+use App\User;
 use Mail;
 use Illuminate\Http\Request;
 
@@ -19,14 +19,14 @@ class assistantController extends Controller
 
    public function successRegAssistant($id)
    {
-     $user = user::find($id);
+     $user = User::find($id);
      $assistant = assistant::find($user->assistant_id);
      return view('assistant.successReg')->with('assistant', $assistant);
    }
 
    public function AvisoConfirmAccountAssistant($id)
    {
-     $user = user::find($id);
+     $user = User::find($id);
      $assistant = assistant::find($user->assistant_id);
      return view('assistant.AvisoConfirmAccountAssistant')->with('assistant', $assistant)->with('user', $user);
    }
@@ -77,13 +77,13 @@ class assistantController extends Controller
 
 
         $request->validate([
-          'email'=>'required|unique:users|unique:assistants',
+          'identification'=>'required',
           'name'=>'required',
           'lastName'=>'required',
           'medico_id'=>'required',
-          'modules_id'=>'nullable',////AREGLARRRRRRRRRRRRRRRRRRRRRRRRRRRR
           'phone1'=>'required',
           'phone2'=>'nullable',
+          'email'=>'required|unique:users|unique:assistants',
           'password'=>'required',
         ]);
 
@@ -103,7 +103,7 @@ class assistantController extends Controller
 
         Mail::send('mails.ActivationAssistent',['assistant'=>$assistant,'user'=>$user,'code'=>$code],function($msj){
            $msj->subject('Médicos Si');
-           $msj->to('testprogramas531@gmail.com');
+           $msj->to('eavc53189@gmail.com');
 
       });
 

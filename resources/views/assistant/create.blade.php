@@ -1,29 +1,84 @@
 @extends('layouts.app')
 
 @section('content')
-  <a href="{{route('confirmMedicalCenter',['id'=>1,'code'=>1])}}">{{route('confirmMedicalCenter',['id'=>1,'code'=>2])}}</a>
+  <section class="box-register">
+		<div class="container">
+			<div class="register">
+				<div class="row">
+					<div class="col-12 mb-3">
+						<h2 class="text-center font-title">Registro de Asistente</h2>
+					</div>
+				</div>
+          {!!Form::open(['route'=>'assistant.store','method'=>'POST'])!!}
+        <div class="row">
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+               {!!Form::text('identification',null,['class'=>'form-control','placeholder'=>'Identificación'])!!}
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+               {!!Form::select('medico_id',$medico,null,['class'=>'form-control','placeholder'=>'Médico al que Asistira'])!!}
+            </div>
+          </div>
+        </div>
+						<div class="row">
+              <div class="col-lg-6 col-12">
+								<div class="form-group">
+								   {!!Form::text('name',null,['class'=>'form-control','placeholder'=>'nombre'])!!}
+								</div>
+							</div>
+							<div class="col-lg-6 col-12">
+								<div class="form-group">
+								   {!!Form::text('lastName',null,['class'=>'form-control','placeholder'=>'Apellido'])!!}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-6">
+								  <div class="form-group">
+								    	{!!Form::number('phone1',null,['class'=>'form-control','placeholder'=>'Telefono 1'])!!}
+								  </div>
+							</div>
+							<div class="col-6">
+								  	<div class="form-group">
+                    {!!Form::number('phone2',null,['class'=>'form-control','placeholder'=>'Telefono 2'])!!}
+								  </div>
+								  </div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 col-12">
+								<div class="form-group">
+								    {!!Form::email('email',null,['class'=>'form-control','placeholder'=>'Email'])!!}
+								</div>
+							</div>
+								<div class="col-lg-6 col-12">
+									<div class="form-group">
+									   {!!Form::password('password',['class'=>'form-control','placeholder'=>'Contraseña'])!!}
+									 </div>
+								</div>
+						</div>
 
-  <div class="btn-group " role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-config-blue">1</button>
-    <button type="button" class="btn btn-secondary">2 </button>
-    <button type="button" class="btn btn-secondary">3</button>
-  </div>
-  <h1>registro asistente</h1>
+						<div class="row">
+								<div class="col-lg-12 col-12">
+									<div class="form-group">
+                      {!!Form::open(['route'=>'assistant.store','method'=>'POST'])!!}
+								  </div>
+								</div>
+							</div>
 
+						<div class="row">
+						 <div class="col-lg-6 col-12 mt-2">
+							 <a href="" class="btn-config-blue btn btn-block">Limpiar</a>
+						 </div>
+						 <div class="col-lg-6 col-12 mt-2">
+							 <button type="submit" class="btn-config-green btn btn-block">Registrar</button>
 
-						{!!Form::open(['route'=>'assistant.store','method'=>'POST'])!!}
+						 </div>
+					 </div>
+					  <div class="row">
 
-						    {!!Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])!!}
-                 {!!Form::password('password',['class'=>'form-control','placeholder'=>'Contraseña'])!!}
-                {!!Form::text('lastName',null,['class'=>'form-control','placeholder'=>'Apellido'])!!}
-                 {!!Form::email('email',null,['class'=>'form-control','placeholder'=>'Email'])!!}
-
-                {!!Form::select('medico_id',$medico,null,['class'=>'form-control','placeholder'=>'Medico Asociado'])!!}
-
-                {!!Form::text('phone1',null,['class'=>'form-control','placeholder'=>'Teléfono 1'])!!}
-
-                {!!Form::text('phone2',null,['class'=>'form-control','placeholder'=>'Teléfono 2'])!!}
-                 {!!Form::submit('Enviar')!!}
 					{!!Form::close()!!}
 			</div>
 		</div>

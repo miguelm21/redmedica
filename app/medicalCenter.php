@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class medicalCenter extends Model
 {
    protected $fillable = [
-    'idMedicalCenter',
+
+    'id_medicalCenter',
     'tradename',
     'activePlan',
     'emailAdmin',

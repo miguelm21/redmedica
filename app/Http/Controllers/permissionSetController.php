@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\permission;
 use App\administrator;
-use App\user;
+use App\User;
 use App\Role;
 
 
@@ -25,7 +25,7 @@ class permissionSetController extends Controller
 
      public function PermissionSetStore($permission,$admin_id)
      {
-       $user = user::where('administrator_id',$admin_id)->first();
+       $user = User::where('administrator_id',$admin_id)->first();
 
        $permission = permission::where('display_name', 'Administrador');
        dd($permission);

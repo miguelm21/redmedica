@@ -43,11 +43,11 @@ class specialtyController extends Controller
       'name'=>'required|unique:specialty_categories',
       'description'=>'nullable',
     ]);
-      $categories = new specialtyCategories;
-      $categories->fill($request->all());
-      $categories->save();
+      $specialty = new specialty;
+      $specialty->fill($request->all());
+      $specialty->save();
 
-      return redirect()->route('specialty_categories.index')->with('success', 'Categoria creada de forma Satisfactoria');
+      return redirect()->route('specialty.index')->with('success', 'Categoria creada de forma Satisfactoria');
 
   }
 

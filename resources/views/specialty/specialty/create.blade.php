@@ -10,7 +10,7 @@
 
 								    {!!Form::text('description',null,['class'=>'form-control','placeholder'=>'descripción'])!!}
 
-                    {!!Form::select('description',$categories,null,['class'=>'form-control','placeholder'=>'Categoria'])!!}
+                    {!!Form::select('specialtyCategories_id',$categories,null,['class'=>'form-control','placeholder'=>'Categoria'])!!}
                      {!!Form::submit('Enviar')!!}
 					{!!Form::close()!!}
 			</div>

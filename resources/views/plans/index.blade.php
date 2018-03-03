@@ -7,19 +7,16 @@
 			<div class="register">
 				<div class="row">
 					<div class="col-12 mb-5">
-						<h2 class="text-center font-title">Planes</h2>
+						<h2 class="text-center font-title">Planes para Medicos y Especialistas</h2>
 					</div>
 				</div>
-
-
-				<div class="row">
-
-          <div class="col-12 mb-5">
-            <h3>Planes para Medicos y Especialistas</h3>
+        <div class="row mb-3">
+          <div class="col-12 text-right">
+            <a class="btn btn-secondary" href="{{route('home')}}">Atras</a>
           </div>
-
-
-						<table class="table table-responsive">
+        </div>
+				<div class="row">
+						<table class="table table-responsive table-config">
 						  <thead class="thead-color">
 						    <tr>
 						      <th class="text-center">Nombre</th>
@@ -30,20 +27,32 @@
 						  </thead>
 						  <tbody>
 
-								@foreach ($plans1 as $plan)
-								<tr>
-									<td>{{$plan->name}}</th>
-									<td class="text-center">{{$plan->applicable}}</td>
-									<td class="text-center">
+                @foreach ($plans1 as $plan)
+                <tr>
+                  <td>{{$plan->name}}</th>
+                  <td class="text-center">{{$plan->applicable}}</td>
+                  <td class="text-center">
                     {!!Form::open(['route'=>'plans.store','method'=>'POST'])!!}
-                        <input onFocus="mostrar('{{$plan->id}}')" type="text" name="price" value="{{$plan->price}}">
+                      
                         <input type="hidden" name="plan_id" value="{{$plan->id}}">
-                         {!!Form::submit('Guardar',['class'=>'btn btn-primary','id'=>$plan->id])!!}
+                        <div class="input-group">
+                              <input onFocus="mostrar('{{$plan->id}}')" type="text" class="form-control" name="price" value="{{$plan->price}}">
+                            <div class="input-group-append">
+                               <button class="btn btn-config-blue" data-toggle="tooltip" data-placement="top" title="Guardar precio" type="submit"><i class="fas fa-save"></i></button>
+                            </div>
+                          </div>
+                       
                     {!!Form::close()!!}
-									<td><a href="" class="btn btn-success">Modulos</a>
-                    <a href="{{route('citiesPlans',$plan->id)}}" class="btn btn-info">Ciudades</a>
-                  </td>
-								@endforeach
+                  <td>
+                    <div class="row">
+                        <div class="col-6 px-1">
+                          <a  class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Modulos" role="button" href=""><i class="fas fa-bars"></i></a>
+                        </div>
+                        <div class="col-6 px-1">                            <a  class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Ciudades" role="button" href="{{route('citiesPlans',$plan->id)}}"><i class="fas fa-filter"></i>
+                          </a></div>
+                      </div>
+                    </td>
+                @endforeach
 
 						  </tbody>
               <tfoot>
@@ -57,7 +66,7 @@
               <h3>Planes para Medicina Alternativa, Psicologos y Terapeutas</h3>
             </div>
 
-            <table class="table table-responsive">
+            <table class="table table-responsive table-config">
 						  <thead class="thead-color">
 						    <tr>
 						      <th class="text-center">Nombre</th>
@@ -68,20 +77,34 @@
 						  </thead>
 						  <tbody>
 
-								@foreach ($plans3 as $plan)
-								<tr>
-									<td>{{$plan->name}}</th>
-									<td class="text-center">{{$plan->applicable}}</td>
-									<td class="text-center">
+
+
+                @foreach ($plans2 as $plan)
+                <tr>
+                  <td>{{$plan->name}}</th>
+                  <td class="text-center">{{$plan->applicable}}</td>
+                  <td class="text-center">
                     {!!Form::open(['route'=>'plans.store','method'=>'POST'])!!}
-                        <input type="text" name="price" value="{{$plan->price}}" id="{{$plan->id}}">
+                      
                         <input type="hidden" name="plan_id" value="{{$plan->id}}">
-                         {!!Form::submit('Cambiar',['class'=>'btn btn-primary'])!!}
+                        <div class="input-group">
+                              <input onFocus="mostrar('{{$plan->id}}')" type="text" class="form-control" name="price" value="{{$plan->price}}">
+                            <div class="input-group-append">
+                               <button class="btn btn-config-blue" data-toggle="tooltip" data-placement="top" title="Guardar precio" type="submit"><i class="fas fa-save"></i></button>
+                            </div>
+                          </div>
+                       
                     {!!Form::close()!!}
-									<td><a href="" class="btn btn-success">Modulos</a>
-                    <a href="{{route('citiesPlans',$plan->id)}}" class="btn btn-info">Ciudades</a>
-                  </td>
-								@endforeach
+                  <td>
+                    <div class="row">
+                        <div class="col-6 px-1">
+                          <a  class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Modulos" role="button" href=""><i class="fas fa-bars"></i></a>
+                        </div>
+                        <div class="col-6 px-1">                            <a  class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Ciudades" role="button" href="{{route('citiesPlans',$plan->id)}}"><i class="fas fa-filter"></i>
+                          </a></div>
+                      </div>
+                    </td>
+                @endforeach
 
 						  </tbody>
               <tfoot>
@@ -97,7 +120,7 @@
               <h3>Planes para Centros Medicos</h3>
             </div>
 
-            <table class="table table-responsive">
+            <table class="table table-responsive table-config">
 						  <thead class="thead-color">
 						    <tr>
 						      <th class="text-center">Nombre</th>
@@ -108,20 +131,35 @@
 						  </thead>
 						  <tbody>
 
-								@foreach ($plans2 as $plan)
-								<tr>
-									<td>{{$plan->name}}</th>
-									<td class="text-center">{{$plan->applicable}}</td>
-									<td class="text-center">
+
+
+
+                @foreach ($plans3 as $plan)
+                <tr>
+                  <td>{{$plan->name}}</th>
+                  <td class="text-center">{{$plan->applicable}}</td>
+                  <td class="text-center">
                     {!!Form::open(['route'=>'plans.store','method'=>'POST'])!!}
-                        <input type="text" name="price" value="{{$plan->price}}" id="{{$plan->id}}">
+                      
                         <input type="hidden" name="plan_id" value="{{$plan->id}}">
-                         {!!Form::submit('Cambiar',['class'=>'btn btn-primary'])!!}
+                        <div class="input-group">
+                              <input onFocus="mostrar('{{$plan->id}}')" type="text" class="form-control" name="price" value="{{$plan->price}}">
+                            <div class="input-group-append">
+                               <button class="btn btn-config-blue" data-toggle="tooltip" data-placement="top" title="Guardar precio" type="submit"><i class="fas fa-save"></i></button>
+                            </div>
+                          </div>
+                       
                     {!!Form::close()!!}
-									<td><a href="" class="btn btn-success">Modulos</a>
-                    <a href="{{route('citiesPlans',$plan->id)}}" class="btn btn-info">Ciudades</a>
-                  </td>
-								@endforeach
+                  <td>
+                    <div class="row">
+                        <div class="col-6 px-1">
+                          <a  class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Modulos" role="button" href=""><i class="fas fa-bars"></i></a>
+                        </div>
+                        <div class="col-6 px-1">                            <a  class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Ciudades" role="button" href="{{route('citiesPlans',$plan->id)}}"><i class="fas fa-filter"></i>
+                          </a></div>
+                      </div>
+                    </td>
+                @endforeach
 
 						  </tbody>
               <tfoot>
@@ -168,19 +206,5 @@
     </div>
   </div>
 </div>
-<footer>
-	<div class="section-footer">
-		<div class="row align-items-center nomargin p-1">
-			<div class="col-lg-6 col-sm-6 col-12 text-center nopadding">
-				<a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-13.png" alt=""></a>
-				<a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-14.png" alt=""></a>
-				<a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-15.png" alt=""></a>
-				<a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-16.png" alt=""></a>
-			</div>
-			<div class="col-lg-6 col-sm-6 col-12 text-center nopadding">
-				<span class="font-footer"><b>MedicosSi</b> siempre encontrarás tu mejor opción.</span>
-			</div>
-		</div>
-	</div>
-</footer>
+
 @endsection

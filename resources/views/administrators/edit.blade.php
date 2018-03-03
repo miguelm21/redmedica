@@ -1,32 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
+
   <section class="box-register">
     <div class="container">
       <div class="register">
         <div class="row">
           <div class="col-12 mb-3">
-            <h2 class="text-center font-title">Registrar Promotor</h2>
+            <h2 class="text-center font-title">Editar Administrador: {{$administrator->name}} {{$administrator->lastName}}</h2>
             <hr>
           </div>
         </div>
-        {!!Form::open(['route'=>'promoters.store','method'=>'POST'])!!}
-
+      {!!Form::model($administrator,['route'=>['administrators.update',$administrator],'method'=>'PUT'])!!}
           <div class="row">
             <div class="col-lg-6 col-12">
               <div class="form-group">
-                    {!!Form::text('id_promoter',null,['class'=>'form-control','placeholder'=>'id Promotor'])!!}
+                  {!!Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])!!}
               </div>
             </div>
             <div class="col-lg-6 col-12">
               <div class="form-group">
-                   {!!Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])!!}
+                  {!!Form::text('lastName',null,['class'=>'form-control','placeholder'=>'Apellido'])!!}
                </div>
-            </div>
-            <div class="col-lg-6 col-12">
-              <div class="form-group">
-                {!!Form::text('lastName',null,['class'=>'form-control','placeholder'=>'Apellido'])!!}
-              </div>
             </div>
             <div class="col-lg-6 col-12">
               <div class="form-group">
@@ -35,24 +30,21 @@
             </div>
             <div class="col-lg-6 col-12">
               <div class="form-group">
-                    {!!Form::password('password',['class'=>'form-control','placeholder'=>'password'])!!}
+                  {!!Form::password('password',['class'=>'form-control','placeholder'=>'password'])!!}
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-lg-6 col-12 mt-2">
-              <a href="{{route('promoters.index')}}" class="btn-config-blue btn btn-block">Cancelar</a>
-
+              <a href="{{route('administrators.index')}}" class="btn-config-blue btn btn-block">Cancelar</a>
             </div>
             <div class="col-lg-6 col-12 mt-2">
-              {!!Form::submit('Registrar',['class'=>'btn-config-green btn btn-block'])!!}
+              {!!Form::submit('Guardar',['class'=>'btn-config-green btn btn-block'])!!}
             </div>
           </div>
         {!!Form::close()!!}
       </div>
     </div>
   </section>
-
-
 
 @endsection

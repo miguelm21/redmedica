@@ -17,8 +17,8 @@
 						    <tr>
 						      <th class="text-center">#</th>
 						      <th class="text-center">Nombre</th>
-						      <th class="text-center">Descripción</th>
-
+						      <th class="text-center">Descripción</th>s
+									 <th class="text-center">Categoria</th>
 									<th class="text-center">Acciones</th>
 						    </tr>
 						  </thead>
@@ -29,7 +29,7 @@
 									<th scope="row">{{$specialty->id}}</th>
 									<td class="text-center">{{$specialty->name}}</th>
 									<td class="text-center">{{$specialty->description}}</td>
-
+									<td class="text-center">{{$specialty->category->name}}</td>
 									<td><div class="btn-group" role="group" aria-label="...">
 										<div class="row">
 											<div class="col-12">
@@ -54,19 +54,4 @@
 		</div>
 	</section>
 
-<footer>
-	<div class="section-footer">
-		<div class="row align-items-center nomargin p-1">
-			<div class="col-lg-6 col-sm-6 col-12 text-center nopadding">
-				<a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-13.png" alt=""></a>
-				<a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-14.png" alt=""></a>
-				<a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-15.png" alt=""></a>
-				<a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-16.png" alt=""></a>
-			</div>
-			<div class="col-lg-6 col-sm-6 col-12 text-center nopadding">
-				<span class="font-footer"><b>MedicosSi</b> siempre encontrarás tu mejor opción.</span>
-			</div>
-		</div>
-	</div>
-</footer>
 @endsection

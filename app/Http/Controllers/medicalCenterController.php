@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\medicalCenter;
 use Mail;
 use App\promoter;
+use App\city;
 class medicalCenterController extends Controller
 {
     public function confirmMedicalCenter($id,$code){
@@ -16,7 +17,7 @@ class medicalCenterController extends Controller
           $medicalCenter->confirmed = 'true';
           $medicalCenter->save();
 
-          return redirect()->route('home')->with('success','Se ha Registrado el Centro Medico: '.$medicalCenter->tradename.' de Forma Satisfactoria');
+          return redirect()->route('home')->with('success','Bienvenido: '. $medicalCenter->nameAdmin.', El Centro Medico: '.$medicalCenter->tradename.' a sido aprobado con exito, ya es posible iniciar sesión con su cuenta.');
       }
 
          return redirect()->route('successRegMedicalCenter',$medicalCenter->id)->with('warning', 'No se pudo verificar la autenticacion del usuario,por favor presione el boton "Reenviar Correo de Confirmación" para intentarlo Nuevamente.');
@@ -45,8 +46,9 @@ class medicalCenterController extends Controller
      */
     public function create()
     {
+      $cities = city::orderBy('name','asc')->pluck('name','name');
       $id_promoter = promoter::orderBy('id_promoter','desc')->pluck('id_promoter','id_promoter');
-        return view('medicalCenter.create')->with('id_promoter', $id_promoter);
+        return view('medicalCenter.create')->with('id_promoter', $id_promoter)->with('cities', $cities);
     }
 
     /**
@@ -66,8 +68,8 @@ class medicalCenterController extends Controller
           'nameAdmin'=>'required',
           'phone'=>'required|numeric',
           'city'=>'required',
-          'billingData'=>'required',
-          'meansOfRecords'=>'required',
+          'billingData'=>'nullable',
+          'meansOfRecords'=>'nullable',
           'id_promoter'=>'required',
 
         ]);
@@ -80,7 +82,8 @@ class medicalCenterController extends Controller
 
         Mail::send('mails.confirmMedicalCenter',['medicalCenter'=>$medicalCenter,'code'=>$code], function($msj) use ($medicalCenter){
            $msj->subject('Médicos Si');
-           $msj->to($medicalCenter->emailAdmin);
+           $msj->to('eavc53189@gmail.com');
+           // $msj->to($medicalCenter->emailAdmin);
 
       });
 

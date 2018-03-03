@@ -22,34 +22,19 @@
             </div>
             <div class="col-12">
 
-              <p><b>Tu Cuenta a sido Confirmada, solo falta esperar la  Autorización del medico Profesional: {{$assistant->medico->name}} {{$assistant->medico->lastName}},para que puedas acceder a sus archivos. Una vez se halla dado la autorizacion  podras usar tu cuenta.</b>.
+              <p><b>Tu Cuenta a sido Confirmada, solo falta esperar la  Autorización del medico Profesional: {{$assistant->medico->name}} {{$assistant->medico->lastName}},para que puedas acceder a sus archivos. Una vez ocurra esto podras usar tu cuenta.</b>.</p>
+              <a href="{{route('home')}}">Ir a Inicio</a>
             </div>
-            <a href="{{route('home')}}">Ir a Inicio</a>
 
-            <div class="col-12">
 
-            </div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<footer>
-  <div class="section-footer">
-    <div class="row align-items-center nomargin p-1">
-      <div class="col-lg-6 col-12 text-center nopadding">
-        <a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-13.png" alt=""></a>
-        <a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-14.png" alt=""></a>
-        <a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-15.png" alt=""></a>
-        <a href="" class="p-2"><img class="buttons-footer" src="img/botones-medicossi-16.png" alt=""></a>
-      </div>
-      <div class="col-lg-6 col-12 text-center nopadding">
-        <span class="font-footer"><b>MedicosSi</b> siempre encontrarás tu mejor opción.</span>
-      </div>
-    </div>
-  </div>
-</footer>
+
 
 
 @endsection
