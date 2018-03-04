@@ -33,9 +33,9 @@ class assistantController extends Controller
 
   public function index()
   {
-    $specialties = specialty::orderBy('id','desc')->paginate(10);
+    $assistants = assistant::orderBy('id','desc')->paginate(10);
 
-    return view('specialty.specialty.index')->with('specialties', $specialties);
+    return view('assistant.assistantList')->with('assistants', $assistants);
   }
 
   /**

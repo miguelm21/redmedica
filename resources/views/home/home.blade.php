@@ -186,12 +186,10 @@
         <div class="card-body">
 	          <h5 class="btn btn-success mt-1 registro-text" style="white-space: normal; color: #fff; text-transform: none;">¿Es usted un profesional de la salud o nucleo de diagnóstico?</h5>
 	          <div class="d-flex justify-content-between">
-	             <a href="{{route('medico.create')}}" class="btn-block btn btn-primary mt-3 registro-text m-1" style="width:47%; white-space: normal; color: #fff;"><i class="fa fa-user-md"></i> Médico
+	             <a href="{{route('medico.create')}}" class="btn-block btn btn-primary mt-3 registro-text" style="width:47%; white-space: normal; color: #fff;"><i class="fa fa-user-md"></i> Médico
 	            </a>
-	            <a href="{{route('medicalCenter.create')}}" class="btn-block btn btn-primary mt-3 registro-text" style="width:47%; white-space: normal; color: #fff;"><i class="fa fa-user m-1"></i> Centro medico
+	            <a href="{{route('medicalCenter.create')}}" class="btn-block btn btn-primary mt-3 registro-text" style="width:47%; white-space: normal; color: #fff;"><i class="fa fa-user"></i> Centro medico
 	            </a>
-              <a href="{{route('assistant.create')}}" class="btn-block btn btn-primary mt-3 registro-text m-1" style="width:47%; white-space: normal; color: #fff;"><i class="fa fa-user"></i> Asistente
-              </a>
 	          </div>
 	          <p align="center" class="mt-3" style="font-weight: 600;">Ahora sus pacientes podrán encontrarte mas fácil</p>
 	          <p align="center" style="font-weight: 500;">Con nuestra plataforma web:</p>

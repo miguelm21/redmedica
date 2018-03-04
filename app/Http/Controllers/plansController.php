@@ -38,9 +38,9 @@ class plansController extends Controller
 
     public function citiesPlansStore(Request $request)
     {
-      $request->validate([
-        'name'=>'required|unique:cities_plans',
-      ]);
+      // $request->validate([
+      //   'name'=>'required|unique:cities_plans',
+      // ]);
 
         $city = new cities_plan;
         $city->name = $request->name;

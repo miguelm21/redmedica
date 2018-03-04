@@ -38,7 +38,7 @@
               <a href="{{route('medicosList')}}" class="btn btn-block btn-config-dashboard"><i class="fas fa-user-md"></i><span style="margin-left: 2%;">Profesionales  <br> de la salud</span></a>
             </div>
             <div class="col-12 nopadding">
-              <a href="#" class="btn btn-block btn-config-dashboard"><i class="fas fa-user"></i><span>Asistentes</span></a>
+              <a href="{{route('assistant.index')}}" class="btn btn-block btn-config-dashboard"><i class="fas fa-user"></i><span>Asistentes</span></a>
             </div>
           </div>
           <div class="row px-1">
