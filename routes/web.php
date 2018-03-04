@@ -15,7 +15,7 @@ route::get('/', function () {
     return redirect()->route('home');
 });
 
-route::get('home','homeController@home')->name('home');
+route::get('home','HomeController@home')->name('home');
 route::resource('user','userController');
 route::resource('medico','medicoController');
 route::resource('medicalCenter','medicalCenterController');
@@ -29,7 +29,7 @@ route::get('confirm/MedicalCenter/{id}','medicalCenterController@successRegMedic
 
 route::post('resend/mail/confirmation','medicoController@resendMailMedicoConfirm')->name('resendMailMedicoConfirm');
 
-route::post('list/result','homeController@tolist')->name('tolist');
+route::post('list/result','HomeController@tolist')->name('tolist');
 
 route::post('login2','Auth\LoginController@login2')->name('login2');
 

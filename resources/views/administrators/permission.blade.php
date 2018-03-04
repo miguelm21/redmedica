@@ -12,7 +12,7 @@
 
 				<div class="row mb-3">
 					<div class="col-12 text-right">
-						<a class="btn btn-secondary" href="{{route('home')}}">Atras</a>
+						<a class="btn btn-secondary" href="{{route('administrators.index')}}">Atras</a>
 					</div>
 				</div>
 

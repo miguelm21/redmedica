@@ -20,10 +20,14 @@ class promotersController extends Controller
 
      public function clientsPromoter($id)
      {
+
        $promoter = promoter::find($id);
-       $medicalCenter = medicalCenter::where('id_promoter',$id)->orderBy('id','desc')->paginate(10);
-       $medico = medico::where('id_promoter',$id)->orderBy('id','desc')->paginate(10);
-         return view('promoters.clientsPromoter')->with('medicalCenter', $medicalCenter)->with('medico', $medico)->with('promoter', $promoter);
+
+       $medicalCenters = medicalCenter::where('id',$promoter->id)->orderBy('tradename','asc')->paginate(10);
+
+       $medicos = medico::where('id',$promoter->id)->orderBy('id','desc')->paginate(10);
+
+         return view('promoters.clientsPromoter')->with('medicalCenters', $medicalCenters)->with('medicos', $medicos)->with('promoter', $promoter);
      }
 
     public function index()

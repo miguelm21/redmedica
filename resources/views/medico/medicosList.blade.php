@@ -19,7 +19,7 @@
 							<th class="text-center">Apellido</th>
 							<th class="text-center">email</th>
 							<th class="text-center">teléfono</th>
-							<th class="text-center">Ciudad</th>
+							{{-- <th class="text-center">Ciudad</th> --}}
 							<th class="text-center">Opciones</th>
 
 						</tr>
@@ -33,7 +33,7 @@
 							<td class="text-center">{{$medico->lastName}}</td>
 							<td class="text-center">{{$medico->email}}</td>
 							<td class="text-center">{{$medico->phone}}</td>
-							<td class="text-center">{{$medico->medicalCenter}}</td>
+							{{-- <td class="text-center">{{$medico->medicalCenter->id}}</td> --}}
 							<td><div class="btn-group" role="group" aria-label="...">
 								<div class="row">
 									<div class="col-12">

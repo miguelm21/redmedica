@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\medico;
+use App\city;
+use App\promoter;
 use App\User;
 use App\medicalCenter;
 use App\specialty;
@@ -31,10 +33,12 @@ class medicoController extends Controller
      */
     public function create()
     {
+      $cities = city::orderBy('name','asc')->pluck('name','name');
+      $promoters = promoter::orderBy('id_promoter','asc')->pluck('id_promoter','id_promoter');
       $medicalCenter = medicalCenter::orderBy('tradename','asc')->pluck('tradename','id');
       $specialties = specialty::orderBy('name','asc')->pluck('name','id');
 
-        return view('medico.create')->with('medicalCenter',$medicalCenter)->with('specialties',$specialties);
+        return view('medico.create')->with('medicalCenter',$medicalCenter)->with('cities',$cities)->with('promoters', $promoters);
     }
 
     /**
@@ -74,10 +78,12 @@ class medicoController extends Controller
            'gender'=>'required',
            'email'=>'required|unique:medicos|unique:users',
            'password'=>'required',
-           'state'=>'required',
+           'city'=>'required',
            'medicalCenter_id'=>'required',
+            'id_promoter'=>'required',
            'phone'=>'required',
            'facebook'=>'required',
+
         ]);
 
         $medico = new medico;

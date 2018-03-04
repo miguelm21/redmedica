@@ -39,7 +39,7 @@
 							</div>
 							<div class="col-6">
 								  	<div class="form-group">
-								    	{!!Form::select('state',['vargas','Portuguesa'],null,['class'=>'form-control','placeholder'=>'Estado'])!!}
+								    	{!!Form::select('city',$cities,null,['class'=>'form-control','placeholder'=>'Ciudad'])!!}
 								  </div>
 							</div>
 						</div>
@@ -57,11 +57,15 @@
 						</div>
 
 						<div class="row">
-								<div class="col-lg-12 col-12">
+							<div class="col-lg-6 col-12">
+								<div class="form-group">
+								   {!!Form::select('medicalCenter_id',$medicalCenter,null,['class'=>'form-control','placeholder'=>'Centro Medico'])!!}
+								</div>
+							</div>
+								<div class="col-lg-6 col-12">
 									<div class="form-group">
-										{!!Form::select('medicalCenter_id',$medicalCenter,null,['class'=>'form-control','placeholder'=>'Centro Medico'])!!}
-
-								  </div>
+									   {!!Form::select('id_promoter',$promoters,null,['class'=>'form-control','placeholder'=>'id_promoter'])!!}
+									 </div>
 								</div>
 							</div>
 						<div class="row">

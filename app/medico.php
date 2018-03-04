@@ -13,10 +13,12 @@ class medico extends Model
       'gender',
       'email',
       'password',
-      'state',
+      'city',
       'medicalCenter_id',
       'phone',
       'facebook',
+      'id_promoter',
+      'state',
 
     ];
 
@@ -24,9 +26,9 @@ class medico extends Model
        return $this->belongsTo('App\specialty');
     }
 
-    public function medicalCenter(){
-       return $this->hasOne('App\medicalCenter');
-    }
+    // public function medical_center(){
+    //    return $this->hasOne('App\medicalCenter');
+    // }
 
 
 

@@ -21,12 +21,13 @@ class CreateMedicosTable extends Migration
             $table->string('gender');
             $table->string('email',60);
             $table->string('password');
-            $table->string('state');
+            $table->string('city');
+            $table->string('state')->nullable();
             $table->integer('medicalCenter_id')->unsigned();
             $table->foreign('medicalCenter_id')->references('id')->on('medical_centers');
             $table->string('phone')->nullable();
             $table->string('facebook')->nullable();
-
+            $table->string('id_promoter');
             $table->timestamps();
         });
     }

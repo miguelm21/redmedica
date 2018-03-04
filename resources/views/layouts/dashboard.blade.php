@@ -4,20 +4,20 @@
             <img  class="img-dashboard" src="{{asset('img/Medicossi-Marca original-05.png')}}" alt="">
           </div>
           <div class="row">
-            <div class="col-12 px-1">
+            {{-- <div class="col-12 px-1">
               <a href="#" class="btn btn-block btn-config-dashboard"><i class="far fa-thumbs-up"></i><span>Me gusta</span></a>
             </div>
             <div class="col-12 px-1">
               <a href="#" class="btn btn-block btn-config-dashboard"><i class="fas fa-gift"></i><span>Compartir</a>
-            </div>
+            </div> --}}
           </div>
           <div class="row p-1">
             <div class="col-12 nopadding">
-              <a href="#" class="btn btn-block btn-config-dashboard"><i class="fas fa-home fa-2"></i><span>Inicio</a>
+              <a href="{{route('home')}}" class="btn btn-block btn-config-dashboard"><i class="fas fa-home fa-2"></i><span>Inicio</a>
             </div>
-            <div class="col-12 nopadding">
+            {{-- <div class="col-12 nopadding">
               <a href="#" class="btn btn-block btn-config-dashboard"><i class="fas fa-chart-bar fa-2"></i><span>Dashboard</a>
-            </div>
+            </div> --}}
           </div>
           <div class="row px-1">
             <div class="col-12 nopadding">

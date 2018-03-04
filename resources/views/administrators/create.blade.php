@@ -35,7 +35,8 @@
 					</div>
 				  <div class="row">
 				  	<div class="col-lg-6 col-12 mt-2">
-				  		<button type="submit" class="btn-config-blue btn btn-block">Cancelar</button>
+              <a href="{{route('administrators.index')}}" class="btn-config-blue btn btn-block">Cancelar</a>
+				  		
 				  	</div>
 				  	<div class="col-lg-6 col-12 mt-2">
 				  		{!!Form::submit('Registrar',['class'=>'btn-config-green btn btn-block'])!!}

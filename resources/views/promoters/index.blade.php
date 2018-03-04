@@ -51,7 +51,7 @@
 
 												</div>
 												<div class="col-12">
-													<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Clientes del promotor" role="button" href="{{route('listPermissionSet',$promoter->id)}}"><i class="fas fa-users"></i>
+													<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Clientes del promotor" role="button" href="{{route('clientsPromoter',$promoter->id)}}"><i class="fas fa-users"></i>
 													</a>
 													<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Ciudades Atendidas" role="button" href="{{route('listPermissionSet',$promoter->id)}}"><i class="fas fa-filter"></i>
 													</a>
@@ -60,7 +60,7 @@
 													<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Planes Que Puede Ofrecer" role="button" href="{{route('listPermissionSet',$promoter->id)}}"><i class="fas fa-ban"></i>
 														</a>
 												</div>
-											</div>	
+											</div>
 										</div>
 									</div>
 								</td>

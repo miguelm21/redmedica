@@ -10,8 +10,6 @@
 					</div>
 				</div>
 
-
-
 				<div class="">
 					{!!Form::open(['route'=>'citiesPlansStore','method'=>'POST'])!!}
 					<label for="">Asignar Ciudad a: {{$plan->name}}</label>
@@ -24,7 +22,7 @@
 								{!!Form::hidden('plan_id',$plan->id)!!}
 								{!!Form::close()!!}
 						</div>
-					</div>	
+					</div>
 
 				</div >
 
@@ -42,7 +40,7 @@
 									<td class="text-center">{{$city->name}}</td>
 									<td class="text-center">
 										</a>
-											<a  class="btn btn-danger  text-center" data-toggle="tooltip" data-placement="top" title="Eliminar" role="button" onclick="return confirm('Esta Seguro de Deshabilitar esta Ciudad.')" href="{{route('deleteCityAdmin',$city->id)}}"><i class="fas fa-ban"></i>
+											<a  class="btn btn-danger  text-center" data-toggle="tooltip" data-placement="top" title="Eliminar" role="button" onclick="return confirm('Esta Seguro de Deshabilitar esta Ciudad.')" href="{{route('deleteCityPlan',$city->id)}}"><i class="fas fa-ban"></i>
 										</a>
 									</td>
 								</tr>

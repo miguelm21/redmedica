@@ -86,7 +86,7 @@ class administratorsController extends Controller
         $request->validate([
            'name'=>'required',
            'lastName'=>'required',
-           'email'=>'required|unique:medicos|unique:users',
+           'email'=>'required|unique:users',
            'password'=>'required',
         ]);
 
@@ -138,7 +138,37 @@ class administratorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+      $administrator = administrator::find($id);
+      if($request->email != $administrator->email){
+        $request->validate([
+          'email'=>'required|unique:users|unique:administrators'
+        ]);
+        $administrator->email = $request->email;
+        $user->email = $request->email;
+      }
+
+      $name = $administrator->name;
+        $request->validate([
+          'name'=>'required',
+          'lastName'=>'required',
+          'email'=>'required'
+        ]);
+
+        $administrator->name = $request->name;
+        $administrator->lastName = $request->lastName;
+        $administrator->save();
+
+
+        $user->name = $request->name;
+
+        if($request->password != Null){
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->administrator_id = $administrator->id;
+        $user->save();
+        return redirect()->route('administrators.index')->with('success', 'Los datos del Administrador: '.$name.' han sido Actualizados.');
     }
 
     /**

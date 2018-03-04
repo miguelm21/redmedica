@@ -25,7 +25,7 @@
 						    <tr>
 						      <th class="text-center">#</th>
 						      <th class="text-center">Nombre</th>
-						      <th class="text-center">Apelliasdasdasdsadasdo</th>
+						      <th class="text-center">Apellido</th>
 									<th class="text-center">Email</th>
 									<th class="text-center">Acciones</th>
 						    </tr>
@@ -49,11 +49,12 @@
 															</a>
 														</div>
 														<div class="col-4">
-															<a  class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Permisos" role="button" href="{{route('listPermissionSet',$admin->id)}}"><i class="fas fa-key"></i>
+															<a  class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Ciudades que puede editar" role="button" href="{{route('citiesAdmin',$admin->id)}}"><i class="fas fa-bars"></i>
 															</a>
+
 														</div>
 														<div class="col-4">
-															<a  class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Ciudades que puede editar" role="button" href="{{route('citiesAdmin',$admin->id)}}"><i class="fas fa-bars"></i>
+															<a  class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Permisos" role="button" href="{{route('listPermissionSet',$admin->id)}}"><i class="fas fa-key"></i>
 															</a>
 														</div>
 													</div>

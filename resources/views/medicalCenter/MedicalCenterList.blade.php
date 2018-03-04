@@ -29,7 +29,7 @@
 									<td class="text-center">{{$medicalCenter->tradename}}</td>
 									<td class="text-center">{{$medicalCenter->nameAdmin}}</td>
 									<td class="text-center">{{$medicalCenter->emailAdmin}}</td>
-									<td class="text-center">{{$medicalCenter->city}}</td>
+									<td class="text-center"></td>
 									<td><div class="btn-group" role="group" aria-label="...">
 										<div class="row">
 											<div class="col-12">
