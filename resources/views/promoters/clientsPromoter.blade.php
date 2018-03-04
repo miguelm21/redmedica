@@ -31,7 +31,7 @@
 
 								@foreach ($medicalCenters as $mC)
 								<tr>
-									<td class="text-center">{{$mC->created_at->format('d-m-Y')}}</td>
+									<td class="text-center"></td>
 									<td class="text-center">{{$mC->tradename}}</td>
 									<td class="text-center">{{$mC->nameAdmin}}</td>
 									<td class="text-center">{{$mC->emailAdmin}}</td>

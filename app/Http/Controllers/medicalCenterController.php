@@ -61,7 +61,7 @@ class medicalCenterController extends Controller
     {
       $code = str_random(25);
         $request->validate([
-          'idMedicalCenter'=>'nullable',
+          'id_medicalCenter'=>'numeric',
           'tradename'=>'required|unique:medical_centers',
           'activePlan'=>'nullable',//ARREGLAAAAAAAAAAAAAAAAAAARRRRRRRRRRRRRRRRRr
           'emailAdmin'=>'required|unique:medical_centers',
@@ -70,7 +70,7 @@ class medicalCenterController extends Controller
           'city'=>'required',
           'billingData'=>'nullable',
           'meansOfRecords'=>'nullable',
-          'id_promoter'=>'required',
+          'id_promoter'=>'nullable|numeric',
 
         ]);
 

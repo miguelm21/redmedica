@@ -15,7 +15,7 @@ class CreateAssistantsTable extends Migration
     {
         Schema::create('assistants', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('medico_id');
+            $table->integer('medico_id')->nullable();
             $table->string('identification');
             $table->string('name');
             $table->string('lastName');

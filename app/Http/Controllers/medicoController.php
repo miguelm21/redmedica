@@ -80,8 +80,8 @@ class medicoController extends Controller
            'password'=>'required',
            'city'=>'required',
            'medicalCenter_id'=>'required',
-            'id_promoter'=>'required',
-           'phone'=>'required',
+            'id_promoter'=>'nullable',
+           'phone'=>'required|numeric',
            'facebook'=>'required',
 
         ]);

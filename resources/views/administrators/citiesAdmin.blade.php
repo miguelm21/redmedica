@@ -16,14 +16,14 @@
 					<label for="">Asignar Ciudad a: {{$administrator->name}} {{$administrator->lastName}}</label>
 					<div class="row mt-2">
 						<div class="col-lg-8 col-12">
-							{!!Form::select('name',$citiesAll,null,['class'=>'form-control','placeholder'=>'Seleccioanr Ciudad'])!!}
+							{!!Form::select('name',$citiesAll,null,['class'=>'form-control','placeholder'=>'Seleccionar Ciudad'])!!}
 						</div>
 						<div class="col-lg-4 col-12">
 							<div class="form-group">{!!Form::submit('Asignar Ciudad', ['class' => 'btn btn-config-blue'])!!}</div>
 								{!!Form::hidden('administrator_id',$administrator->id)!!}
 								{!!Form::close()!!}
 						</div>
-					</div>	
+					</div>
 
 				</div >
 				<div class="row" style="margin-top:30px">

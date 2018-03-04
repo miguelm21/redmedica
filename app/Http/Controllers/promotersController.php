@@ -23,9 +23,9 @@ class promotersController extends Controller
 
        $promoter = promoter::find($id);
 
-       $medicalCenters = medicalCenter::where('id',$promoter->id)->orderBy('tradename','asc')->paginate(10);
+       $medicalCenters = medicalCenter::where('id_promoter',$promoter->id_promoter)->orderBy('tradename','asc')->paginate(10);
 
-       $medicos = medico::where('id',$promoter->id)->orderBy('id','desc')->paginate(10);
+       $medicos = medico::where('id_promoter',$promoter->id_promoter)->orderBy('id','desc')->paginate(10);
 
          return view('promoters.clientsPromoter')->with('medicalCenters', $medicalCenters)->with('medicos', $medicos)->with('promoter', $promoter);
      }

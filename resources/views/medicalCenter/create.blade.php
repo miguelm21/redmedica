@@ -50,7 +50,7 @@
           <div class="row">
             <div class="col-lg-12 col-12">
                 <div class="form-group">
-                  {{Form::select('id_promoter',$id_promoter,null,['class'=>'form-control','placeholder'=>'Numero de promotor'])}}
+                  {{Form::text('id_promoter',null,['class'=>'form-control','placeholder'=>'id del promotor (Opcional)'])}}
                 </div>
             </div>
           </div>

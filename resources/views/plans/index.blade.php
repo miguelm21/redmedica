@@ -7,7 +7,7 @@
 			<div class="register">
 				<div class="row">
 					<div class="col-12 mb-5">
-						<h2 class="text-center font-title">Planes para Medicos y Especialistas</h2>
+						<h2 class="text-center font-title">Planes</h2>
 					</div>
 				</div>
         <div class="row mb-3">
@@ -16,6 +16,10 @@
           </div>
         </div>
 				<div class="row">
+					<div class="col-12 mb-5">
+						<h3>Planes para Medicos y Especialistas</h3>
+					</div>
+
 						<table class="table table-responsive table-config">
 						  <thead class="thead-color">
 						    <tr>
@@ -33,7 +37,7 @@
                   <td class="text-center">{{$plan->applicable}}</td>
                   <td class="text-center">
                     {!!Form::open(['route'=>'plans.store','method'=>'POST'])!!}
-                      
+
                         <input type="hidden" name="plan_id" value="{{$plan->id}}">
                         <div class="input-group">
                               <input onFocus="mostrar('{{$plan->id}}')" type="text" class="form-control" name="price" value="{{$plan->price}}">
@@ -41,7 +45,7 @@
                                <button class="btn btn-config-blue" data-toggle="tooltip" data-placement="top" title="Guardar precio" type="submit"><i class="fas fa-save"></i></button>
                             </div>
                           </div>
-                       
+
                     {!!Form::close()!!}
                   <td>
                     <div class="row">
@@ -85,7 +89,7 @@
                   <td class="text-center">{{$plan->applicable}}</td>
                   <td class="text-center">
                     {!!Form::open(['route'=>'plans.store','method'=>'POST'])!!}
-                      
+
                         <input type="hidden" name="plan_id" value="{{$plan->id}}">
                         <div class="input-group">
                               <input onFocus="mostrar('{{$plan->id}}')" type="text" class="form-control" name="price" value="{{$plan->price}}">
@@ -93,7 +97,7 @@
                                <button class="btn btn-config-blue" data-toggle="tooltip" data-placement="top" title="Guardar precio" type="submit"><i class="fas fa-save"></i></button>
                             </div>
                           </div>
-                       
+
                     {!!Form::close()!!}
                   <td>
                     <div class="row">
@@ -140,7 +144,7 @@
                   <td class="text-center">{{$plan->applicable}}</td>
                   <td class="text-center">
                     {!!Form::open(['route'=>'plans.store','method'=>'POST'])!!}
-                      
+
                         <input type="hidden" name="plan_id" value="{{$plan->id}}">
                         <div class="input-group">
                               <input onFocus="mostrar('{{$plan->id}}')" type="text" class="form-control" name="price" value="{{$plan->price}}">
@@ -148,7 +152,7 @@
                                <button class="btn btn-config-blue" data-toggle="tooltip" data-placement="top" title="Guardar precio" type="submit"><i class="fas fa-save"></i></button>
                             </div>
                           </div>
-                       
+
                     {!!Form::close()!!}
                   <td>
                     <div class="row">

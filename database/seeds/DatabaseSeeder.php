@@ -14,6 +14,17 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(UsersTableSeeder::class);
 
+
+        DB::table('medical_centers')->insert([
+       'tradename'=>'Otro',
+       'emailAdmin'=>'No aplica',
+        'nameAdmin'=>'No aplica',
+         'phone'=>'No aplica',
+         'city'=>'No aplica',
+       ]);
+
+
+
         DB::table('plans')->insert([
        'name'=>'Plan Basico',
        'applicable'=>'Medicos y Especialistas',

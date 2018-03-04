@@ -18,7 +18,7 @@ class CreatePlansTable extends Migration
             $table->string('name',100);
             $table->string('applicable');
             $table->string('modules',100)->nullable();
-            $table->biginteger('price');
+            $table->biginteger('price')->nullable();
             $table->timestamps();
         });
     }

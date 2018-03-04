@@ -64,7 +64,7 @@
 							</div>
 								<div class="col-lg-6 col-12">
 									<div class="form-group">
-									   {!!Form::select('id_promoter',$promoters,null,['class'=>'form-control','placeholder'=>'id_promoter'])!!}
+									   {!!Form::text('id_promoter',null,['class'=>'form-control','placeholder'=>'id del Promotor (Opcional)'])!!}
 									 </div>
 								</div>
 							</div>
