@@ -16,7 +16,7 @@
 					<label for="">Asignar Ciudad a: {{$administrator->name}} {{$administrator->lastName}}</label>
 					<div class="row mt-2">
 						<div class="col-lg-8 col-12">
-							{!!Form::select('name',$citiesAll,null,['class'=>'form-control','placeholder'=>'Seleccionar Ciudad'])!!}
+							{!!Form::select('name',$citiesAll,null,['class'=>'form-control','placeholder'=>'seleccionar Ciudad'])!!}
 						</div>
 						<div class="col-lg-4 col-12">
 							<div class="form-group">{!!Form::submit('Asignar Ciudad', ['class' => 'btn btn-config-blue'])!!}</div>
@@ -31,7 +31,7 @@
 						  <thead class="thead-color">
 						    <tr>
 						      <th class="text-center">Nombre</th>
-								<th class="text-center">dehabilitar</th>
+								<th class="text-center">Acciones</th>
 						    </tr>
 						  </thead>
 						  <tbody>

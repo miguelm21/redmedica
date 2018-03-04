@@ -8,6 +8,7 @@ use App\cities_admin;
 use App\user;
 use App\Role;
 use App\role_user;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class administratorsController extends Controller
@@ -47,9 +48,9 @@ class administratorsController extends Controller
 
     public function citiesAdminStore(Request $request)
     {
-      $request->validate([
-        'name'=>'required|unique:cities_admins',
 
+      $request->validate([
+        'name'=> 'required|'.Rule::unique('cities_admins')->where('administrator_id',$request->administrator_id),
       ]);
 
         $cities_admin = new cities_admin;

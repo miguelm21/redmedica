@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\plan;
 use App\city;
@@ -36,11 +36,12 @@ class plansController extends Controller
         return back()->with('danger', 'Se ha desabilitado la ciudad '.$city1.' para este Plan');
     }
 
+
     public function citiesPlansStore(Request $request)
     {
-      // $request->validate([
-      //   'name'=>'required|unique:cities_plans',
-      // ]);
+      $request->validate([
+        'name'=> 'required|'.Rule::unique('cities_plans')->where('plan_id',$request->plan_id),
+      ]);
 
         $city = new cities_plan;
         $city->name = $request->name;
