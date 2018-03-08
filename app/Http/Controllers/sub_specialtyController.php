@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\specialty;
-use App\specialtyCategories;
-class specialtyController extends Controller
+use App\sub_specialty;
+use App\specialty_category;
+
+class sub_specialtyController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -14,9 +15,9 @@ class specialtyController extends Controller
    */
   public function index()
   {
-    $specialties = specialty::orderBy('id','desc')->paginate(10);
+    $specialties = sub_specialty::orderBy('id','desc')->paginate(10);
 
-    return view('specialty.specialty.index')->with('specialties', $specialties);
+    return view('specialty.sub_specialty.index')->with('specialties', $specialties);
   }
 
   /**
@@ -26,9 +27,9 @@ class specialtyController extends Controller
    */
   public function create()
   {
-    $categories = specialtyCategories::orderBy('name','asc')->pluck('name','id');
+    $categories = specialty_category::orderBy('name','asc')->pluck('name','id');
 
-    return view('specialty.specialty.create')->with('categories', $categories);
+    return view('specialty.sub_specialty.create')->with('categories', $categories);
   }
 
   /**
@@ -44,11 +45,11 @@ class specialtyController extends Controller
       'description'=>'nullable',
       'specialty_category_id'=>'required',
     ]);
-      $specialty = new specialty;
+      $specialty = new sub_specialty;
       $specialty->fill($request->all());
       $specialty->save();
 
-      return redirect()->route('specialty.index')->with('success', 'Categoria creada de forma Satisfactoria');
+      return redirect()->route('sub_specialty.index')->with('success', 'Categoria creada de forma Satisfactoria');
 
   }
 
@@ -71,9 +72,9 @@ class specialtyController extends Controller
    */
   public function edit($id)
   {
-      $categories = specialtyCategories::orderBy('name','asc')->pluck('name','id');
-      $category = specialty::find($id);
-      return view('specialty.specialty.edit')->with('category', $category)->with('categories', $categories);
+      $categories = specialty_category::orderBy('name','asc')->pluck('name','id');
+      $category = sub_specialty::find($id);
+      return view('specialty.sub_specialty.edit')->with('category', $category)->with('categories', $categories);
   }
 
   /**
@@ -85,7 +86,7 @@ class specialtyController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $specialty = specialty::find($id);
+    $specialty = sub_specialty::find($id);
 
     if($request->name != $specialty->name){
       $request->validate([
@@ -99,7 +100,7 @@ class specialtyController extends Controller
       $specialty->save();
 
 
-      return redirect()->route('specialty.index')->with('success','La Categoria: '.$request->name. ' ha sido actualizada.' );
+      return redirect()->route('sub_specialty.index')->with('success','La Categoria: '.$request->name. ' ha sido actualizada.' );
 
 
   }
@@ -114,13 +115,4 @@ class specialtyController extends Controller
   {
       //
   }
-
-  // public function specialtyDelete($id)
-  // {
-  //     $specialty = specialty::find($id);
-  //     $name = $specialty->name;
-  //     $specialty->delete();
-  //
-  //     return back()
-  // }
 }

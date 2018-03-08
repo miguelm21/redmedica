@@ -7,6 +7,8 @@ use App\promoter;
 use App\User;
 use App\medicalCenter;
 use App\specialty;
+use App\photo;
+use App\consulting_room;
 use Mail;
 use Illuminate\Http\Request;
 class medicoController extends Controller
@@ -57,13 +59,13 @@ class medicoController extends Controller
           $user->confirmation_code = $code;
           $user->confirmed = 'medium';
           $user->save();
-          $medico = medico::where('user_id',$user->id);
+          $medico = medico::find($user->medico_id);
 
-          return redirect()->route('medico.edit',$user->id);
+          return redirect()->route('medico.edit',$medico->id);
 
       }
 
-           $user->save();
+          $user->save();
 
          return redirect()->route('successRegMedico',$user->id)->with('warning', 'No se pudo verificar la autenticacion del usuario,por favor presione el boton "Reenviar Correo de Confirmación" para intentarlo Nuevamente.');
 
@@ -80,7 +82,7 @@ class medicoController extends Controller
            'password'=>'required',
            'city'=>'required',
            'medicalCenter_id'=>'required',
-            'id_promoter'=>'nullable',
+           'id_promoter'=>'nullable',
            'phone'=>'required|numeric',
            'facebook'=>'required',
 
@@ -151,7 +153,11 @@ class medicoController extends Controller
     public function edit($id)
     {
       $medico = medico::find($id);
-        return view('medico.edit')->with('medico', $medico);
+        $consulting_room = consulting_room::where('medico_id',$medico->id)->get();
+        $consultingIsset = consulting_room::where('medico_id',$medico->id)->count();
+        $photo = photo::where('medico_id', $medico->id)->where('description', 'perfil')->first();
+
+        return view('medico.edit')->with('medico', $medico)->with('photo', $photo)->with('consulting_room', $consulting_room)->with('consultingIsset', $consultingIsset);
     }
 
     /**

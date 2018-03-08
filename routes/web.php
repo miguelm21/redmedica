@@ -18,7 +18,9 @@ route::get('/', function () {
 route::get('home','HomeController@home')->name('home');
 route::resource('user','userController');
 route::resource('medico','medicoController');
+route::resource('patient','patientController');
 route::resource('medicalCenter','medicalCenterController');
+route::resource('photo','photoController');
 route::get('confirm/MedicalCenter/{id}/{code}','medicalCenterController@confirmMedicalCenter')->name('confirmMedicalCenter');
 route::get('confirm/medico/{id}/{code}','medicoController@confirmMedico')->name('confirmMedico');
 
@@ -38,12 +40,17 @@ route::post('logout','Auth\LoginController@logout')->name('logout');
 route::get('medical/centers/list','medicalCenterController@MedicalCenterList')->name('MedicalCenterList');
 route::get('medicos/list','medicoController@medicosList')->name('medicosList');
 
-route::resource('specialty_categories','specialtyCategoriesController');
+
+route::get('category/{id}/specialty/delete','specialty_categoryController@specialtyC_delete')->name('specialtyC_delete');
+
 route::resource('specialty','specialtyController');
+route::resource('sub_specialty','sub_specialtyController');
+
 route::resource('assistant','assistantController');
 route::resource('administrators','administratorsController');
 route::resource('plans','plansController');
 route::resource('promoters','promotersController');
+route::resource('specialty_category','specialty_categoryController');
 
 route::get('cities/{id}/plan','plansController@citiesPlans')->name('citiesPlans');
 route::post('cities/plan/store','plansController@citiesPlansStore')->name('citiesPlansStore');

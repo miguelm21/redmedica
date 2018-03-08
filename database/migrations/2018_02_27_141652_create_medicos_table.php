@@ -27,6 +27,7 @@ class CreateMedicosTable extends Migration
             $table->string('phone')->nullable();
             $table->string('facebook')->nullable();
             $table->string('id_promoter')->nullable();
+            $table->string('showNumber')->nullable();
             $table->string('state')->nullable();
             $table->timestamps();
         });

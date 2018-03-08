@@ -11,9 +11,9 @@
 <body>
 
 	<nav class="navbar navbar-toggleable-md navbar-config">
-		@if(Auth::check() and Auth::user()->role == 'Administrador')
+		{{-- @if(Auth::check() and Auth::user()->role == 'Administrador') --}}
 		<a class="navbar-brand pl-3" id="show" href="#"><i class="fas fa-bars"></i></a>
-		@endif
+		{{-- @endif --}}
 			<ul class="navbar-nav nav">
 				<div class="dropdown text-center">
 					@if(Auth::check())
@@ -33,7 +33,7 @@
 		<a href="{{route('home')}}" class="position-img-navbar"><img src="{{asset('img/Medicossi-Marca original-01.png')}}" alt="" class="img-navbar"></a>
 	</nav>
 
-		
+
  <section class="section-dashboard mb-3">
 	<div class="container-fluid">
 		<div class="row">

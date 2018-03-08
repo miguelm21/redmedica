@@ -14,6 +14,12 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(UsersTableSeeder::class);
 
+        DB::table('roles')->insert([
+       'name'=>'patient',
+       'display_name'=>'Paciente',
+       'description'=>'User is allowed to manage and edit other users'
+       ]);
+
 
         DB::table('medical_centers')->insert([
        'tradename'=>'Otro',
@@ -105,11 +111,7 @@ class DatabaseSeeder extends Seeder
        'role'=>'Administrador',
        ]);
 
-       DB::table('roles')->insert([
-      'name'=>'admin',
-      'display_name'=>'Administrator',
-      'description'=>'User is allowed to manage and edit other users'
-      ]);
+
 
         DB::table('permissions')->insert([
        'name'=>'edit',

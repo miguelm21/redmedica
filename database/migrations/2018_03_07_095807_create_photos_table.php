@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSpecialtyCategoriesTable extends Migration
+class CreatePhotosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,18 @@ class CreateSpecialtyCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('specialty_categories', function (Blueprint $table) {
+        Schema::create('photos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('path');
             $table->string('description')->nullable();
+
+            $table->integer('medico_id')->unsigned()->nullable();
+            $table->foreign('medico_id')->references('id')->on('medicos');
+
+            $table->integer('assistant_id')->unsigned()->nullable();
+            $table->foreign('assistant_id')->references('id')->on('assistants');
+
             $table->timestamps();
         });
     }
@@ -28,6 +36,6 @@ class CreateSpecialtyCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('specialty_categories');
+        Schema::dropIfExists('photos');
     }
 }

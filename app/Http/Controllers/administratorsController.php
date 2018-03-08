@@ -139,7 +139,7 @@ class administratorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
+      $user = User::find($id);
       $administrator = administrator::find($id);
       if($request->email != $administrator->email){
         $request->validate([

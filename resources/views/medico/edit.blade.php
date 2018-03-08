@@ -1,12 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-
-
   <section class="box-register">
     <div class="container">
       <div class="register">
-         <form action="" method="">
+
         <div class="row">
           <div class="col-12 text-right">
             <div class="btn-group " role="group" aria-label="Basic example">
@@ -18,13 +16,23 @@
         </div>
         <div class="row mt-4">
           <div class="col-12 mb-3">
-            <h2>VENTANA EN DESARROLLO</h2>
             <h5 class="text-center font-title">Ya eres miembro de la mejor red de médicos y profesionales de la salud</h5>
           </div>
         </div>
             <div class="row mt-3">
               <div class="col-6">
-                <img src="img/foto_de_perfil.jpg" width="120px" height="80px" alt=""><a href="" class="link-photo"><input id="file-3" type="file" multiple=true value="..."></a>
+                @isset($photo)
+                  <img src="{{asset($photo->path)}}" width="120px" height="80px" alt="">
+                @endisset
+
+
+
+                {!!Form::open(['route'=>'photo.store','method'=>'POST','files'=>true])!!}
+                {!!Form::hidden('email',$medico->email)!!}
+                {!!Form::hidden('medico_id',$medico->id)!!}
+                {!!Form::file('image')!!}
+                {!!Form::submit('Subir')!!}
+                {!!Form::close()!!}
               </div>
               <div class="col-6 text-center">
                 <label for="">Barra de progreso</label>
@@ -34,67 +42,84 @@
               </div>
             </div>
             <hr>
-            <div class="row mt-2">
-              <div class="col-lg-12 col-12">
-                <div class="form-group">
-                    <input type="id-cedula" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre(s)">
-                </div>
-              </div>
-            </div>
+            <button name="button" onclick="enabled1()">Editar</button>
+            {!!Form::model($medico,['route'=>['medico.update',$medico],'method'=>'POST','id'=>'person'])!!}
             <div class="row">
               <div class="col-lg-6 col-12">
                 <div class="form-group">
-                    <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Apellido paterno">
+                  {!!Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombres'])!!}
                 </div>
               </div>
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
-                      <input type="last-name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Materno">
+                    {!!Form::text('lastName',null,['class'=>'form-control','placeholder'=>'Apellidos'])!!}
                    </div>
                 </div>
             </div>
             <div class="row">
               <div class="col-lg-6 col-12">
                 <div class="form-group">
-                    <input type="last-name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Cédula Profesional">
+                     {!!Form::text('identification',null,['class'=>'form-control','placeholder'=>'Cedula'])!!}
+                 </div>
+              </div>
+              <div class="col-lg-6 col-12">
+                <div class="form-group">
+                     {!!Form::text('phoneOffice1',null,['class'=>'form-control','placeholder'=>'Teléfono Oficina 1'])!!}
                  </div>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-6 col-12">
                 <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Telefono Oficina">
+                      {!!Form::text('phoneOffice1',null,['class'=>'form-control','placeholder'=>'Teléfono Oficina 2'])!!}
                 </div>
               </div>
-                <div class="col-lg-5 col-12">
+                <div class="col-lg-6 col-12">
                   <div class="form-group">
-                      <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Teléfono Celular">
-                   </div>
-                </div>
-                <div class="col-lg-1 col-12">
-                  <div class="form-group">
-                      <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Teléfono Celular">
+                      {!!Form::text('phone',null,['class'=>'form-control','placeholder'=>'Teléfono Personal'])!!}
                    </div>
                 </div>
             </div>
             <div class="row">
-              <div class="col-lg-6 col-12">
-                <div class="form-group">
-                    <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Teléfono Oficina">
-                 </div>
-              </div>
               <div class="col-lg-6 col-12">
                 <div class="form-group">
                     <p for="">¿Desea que su numero celular aparezca visible en formatos e información a pacientes?</p>
+                    <label for="">si</label>
+                    {{ Form::radio('showNumber', 'female') }}
+                    <label for="">no</label>
+                    {{ Form::radio('showNumber', 'female') }}
                  </div>
+
+                   {!!Form::close()!!}
+              </div>
+              <div class="col-lg-6 col-12">
+                <div class="form-group">
+                  <button type="button" name="button">Guardar Cambios</button>
+                  <button type="button" name="button" onclick="disabled1()">Cancelar</button>
+                 </div>
+
+                   {!!Form::close()!!}
               </div>
             </div>
+
+
+
+                
+
             <div class="row">
               <div class="col-12">
-                <span>Dirección del consultorio</span>
+                <span>Consultorio(s)</span>
               <hr>
+
               </div>
             </div>
+            @if($consultingIsset == 0)
+              No existen consultorios registrados
+            @endif
+            <a href="#" class="btn ">Agregar Consultorio</a>
+            @foreach ($consulting_room as $c)
+
+
             <div class="box-form">
               <div class="row">
                 <div class="col-lg-4 col-12">
@@ -166,6 +191,9 @@
                 </div>
               </div>
             </div>
+
+            @endforeach
+
             <div class="row mt-3">
             <div class="col-4">
               <label for="" class="text-center height-register3">Clave unica de estalecimiento de la salud</label>
@@ -523,4 +551,19 @@
     </div>
    </div>
   </div>
+@endsection
+
+@section('scriptJS')
+  <script type="text/javascript">
+    $('#person').find('input, textarea, button, select,radio').prop('disabled', true);
+
+  function enabled1(){
+    $('#person').find('input, textarea, button, select,radio').prop('disabled', false);
+  }
+  function disabled1(){
+    $('#person').find('input, textarea, button, select,radio').prop('disabled', true);
+  }
+
+  </script>
+
 @endsection

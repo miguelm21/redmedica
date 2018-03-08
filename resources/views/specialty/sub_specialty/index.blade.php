@@ -9,17 +9,10 @@
 						<h2 class="text-center font-title">Especialidades Medicas</h2>
 					</div>
 				</div>
+				<a class="btn btn-primary" href="{{route('sub_specialty.create')}}">Crear Nueva Especialidad</a>
 
-				<div class="row mb-3">
-					<div class="col-6 text-left">
-						<a class="btn btn-config-green" href="{{route('specialty.create')}}">Crear Nueva Especialidad</a>
-					</div>
-					<div class="col-6 text-right">
-						<a class="btn btn-secondary" href="{{route('home')}}">Atras</a>
-					</div>
-				</div>
 				<div class="row">
-						<table class="table table-config">
+						<table class="table table-responsive">
 						  <thead class="thead-color">
 						    <tr>
 						      <th class="text-center">#</th>
@@ -36,7 +29,7 @@
 								<tr>
 									<th scope="row">{{$specialty->id}}</th>
 									<td class="text-center">{{$specialty->name}}</th>
-									<td class="text-center">
+									<td >
 										<ul style="list-style:none">
 											@isset($specialty->synonymous1)
 												<li>{{$specialty->synonymous1}}</li>
@@ -55,9 +48,7 @@
 									<td><div class="btn-group" role="group" aria-label="...">
 										<div class="row">
 											<div class="col-12">
-												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Editar" role="button" href="{{route('specialty.edit',$specialty->id)}}">Editar
-												</a>
-												<a class="btn btn-danger text-center" data-toggle="tooltip" data-placement="top" title="Editar" role="button" href="{{route('specialty.edit',$specialty->id)}}">Eliminar
+												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Editar" role="button" href="{{route('sub_specialty.edit',$specialty->id)}}">Editar
 												</a>
 											</div>
 										</div>

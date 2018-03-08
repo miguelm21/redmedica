@@ -6,33 +6,39 @@
 			<div class="register">
 				<div class="row">
 					<div class="col-12 mb-5">
-						<h2 class="text-center font-title">Categorias de Especialidades Medicas</h2>
+						<h2 class="text-center font-title">Categorias</h2>
 					</div>
 				</div>
-				<a class="btn btn-primary" href="{{route('specialty_categories.create')}}">Crear Nueva Categoria</a>
 
+				<div class="row mb-3">
+					<div class="col-6 text-left">
+						<a class="btn btn-config-green" href="{{route('specialty_category.create')}}">Crear Categoria</a>
+					</div>
+					<div class="col-6 text-right">
+						<a class="btn btn-secondary" href="{{route('home')}}">Atras</a>
+					</div>
+				</div>
 				<div class="row">
-						<table class="table table-responsive">
+						<table class="table table-config">
 						  <thead class="thead-color">
 						    <tr>
-
 						      <th class="text-center">Nombre</th>
 						      <th class="text-center">Descripción</th>
-									<th class="text-center">Acciones</th>
+									  <th class="text-center">Acciones</th>
 						    </tr>
 						  </thead>
 						  <tbody>
 
 								@foreach ($categories as $category)
 								<tr>
-
 									<td class="text-center">{{$category->name}}</th>
 									<td class="text-center">{{$category->description}}</td>
-
 									<td><div class="btn-group" role="group" aria-label="...">
 										<div class="row">
 											<div class="col-12">
-												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Editar" role="button" href="{{route('specialty_categories.edit',$category->id)}}">Editar
+												<a class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Editar" role="button" href="{{route('specialty_category.edit',$category->id)}}">Editar
+												</a>
+												<a onclick="return confirm('¿Esta segur@ de Eliminar Esta Categoria?')" class="btn btn-secondary  text-center" data-toggle="tooltip" data-placement="top" title="Editar" role="button" href="{{route('specialtyC_delete',$category->id)}}">Eliminar
 												</a>
 											</div>
 										</div>
@@ -43,7 +49,7 @@
 						  </tbody>
               <tfoot>
                 <tr>
-                  <td colspan="2">{{ $categories->links() }}</td>
+                  <td colspan="4">{{ $categories->links() }}</td>
                 </tr>
               </tfoot>
 						</table>
@@ -52,4 +58,5 @@
 			</div>
 		</div>
 	</section>
+
 @endsection

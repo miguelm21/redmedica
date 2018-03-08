@@ -6,11 +6,11 @@
       <div class="register">
         <div class="row">
           <div class="col-12 mb-3">
-            <h2 class="text-center font-title">Crear Categoria</h2>
+            <h2 class="text-center font-title">Editar Sub-Especialidad</h2>
             <hr>
           </div>
         </div>
-      {!!Form::model($category,['route'=>['specialty.update',$category],'method'=>'PUT'])!!}
+      {!!Form::model($category,['route'=>['sub_specialty.update',$category],'method'=>'PUT'])!!}
 
           <div class="row">
             <div class="col-lg-6 col-12">
@@ -47,7 +47,7 @@
           </div>
           <div class="row">
             <div class="col-lg-6 col-12 mt-2">
-              <a href="{{route('promoters.index')}}" class="btn-config-blue btn btn-block">Cancelar</a>
+              <a href="{{route('sub_specialty.index')}}" class="btn-config-blue btn btn-block">Cancelar</a>
 
             </div>
             <div class="col-lg-6 col-12 mt-2">

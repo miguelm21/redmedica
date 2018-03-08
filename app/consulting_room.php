@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class subSpecialty extends Model
+class consulting_room extends Model
 {
     //
 }

@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\photo;
 use Illuminate\Http\Request;
 
-class subSpecialtyController extends Controller
+class photoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,26 @@ class subSpecialtyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+          'image'=>'image|required'
+        ]);
+        $extension = $request->file('image')->getClientOriginalExtension();
+        $photos = photo::where('medico_id',$request->medico_id)->count();
+
+        $nameP = $photos + 1;
+        $namePhoto = $nameP.'.'.$extension;
+        $pathSave = 'users/'.$request->email.'/photos';
+
+        $photo = new photo;
+        $photo->name = $nameP;
+        $photo->path = $pathSave.'/'.$namePhoto;
+        $photo->description = 'perfil';
+        $photo->medico_id = $request->medico_id;
+        $photo->save();
+
+        $request->file('image')->move($pathSave,$namePhoto);
+
+        return back()->with('success', 'Imagen Guardada Con Exito');
     }
 
     /**
