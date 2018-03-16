@@ -7,7 +7,7 @@
 			<div class="register">
 				<div class="row">
 					<div class="col-12 mb-3">
-						<h2 class="text-center font-title">Administradores</h2>
+						<h2 class="text-center font-title">Pacientes</h2>
 					</div>
 
 				</div>

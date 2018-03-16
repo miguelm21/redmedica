@@ -18,9 +18,19 @@ route::get('/', function () {
 route::get('home','HomeController@home')->name('home');
 route::resource('user','userController');
 route::resource('medico','medicoController');
+route::post('medico/service/store','medicoController@service_medico_store')->name('service_medico_store');
+route::post('medic/experience/store','medicoController@medico_experience_store')->name('medico_experience_store');
+route::post('medic/social_network/store','medicoController@medico_social_network_store')->name('medico_social_network_store');
+route::get('medic/{id}/consulting_room/create','consulting_roomController@consulting_room_create')->name('consulting_room_create');
+
 route::resource('patient','patientController');
 route::resource('medicalCenter','medicalCenterController');
 route::resource('photo','photoController');
+route::resource('consulting_room','consulting_roomController');
+route::resource('info_medico','info_medicoController');
+route::get('medico/{id}/info/create','info_medicoController@info_medicoCreate')->name('info_medicoCreate');
+
+
 route::get('confirm/MedicalCenter/{id}/{code}','medicalCenterController@confirmMedicalCenter')->name('confirmMedicalCenter');
 route::get('confirm/medico/{id}/{code}','medicoController@confirmMedico')->name('confirmMedico');
 

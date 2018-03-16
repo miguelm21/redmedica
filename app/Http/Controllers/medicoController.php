@@ -9,8 +9,14 @@ use App\medicalCenter;
 use App\specialty;
 use App\photo;
 use App\consulting_room;
+use App\info_medico;
 use Mail;
+use App\medico_service;
+use App\medico_experience;
+use App\social_network;
+
 use Illuminate\Http\Request;
+
 class medicoController extends Controller
 {
     /**
@@ -18,6 +24,53 @@ class medicoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function medico_social_network_store(Request $request)
+     {
+         $request->validate([
+           'name'=>'required',
+           'link'=>'required',
+         ]);
+
+         $social_network = new social_network;
+         $social_network->name = $request->name;
+         $social_network->link = $request->link;
+         $social_network->medico_id = $request->medico_id;
+         $social_network->save();
+
+         return redirect()->route('medico.edit',$request->medico_id)->with('success', 'Red Social Agregada');
+
+     }
+
+     public function medico_experience_store(Request $request)
+     {
+         $request->validate([
+           'name'=>'required',
+         ]);
+
+         $medico_experience = new medico_experience;
+         $medico_experience->name = $request->name;
+         $medico_experience->medico_id = $request->medico_id;
+         $medico_experience->save();
+
+         return redirect()->route('medico.edit',$request->medico_id)->with('success', 'Experiencia Agregada');
+
+     }
+     public function service_medico_store(Request $request)
+     {
+         $request->validate([
+           'name'=>'required',
+         ]);
+
+         $medico_service = new medico_service;
+         $medico_service->name = $request->name;
+         $medico_service->medico_id = $request->medico_id;
+         $medico_service->save();
+
+         return redirect()->route('medico.edit',$request->medico_id)->with('success', 'Servicio Agregado');
+
+     }
+
     public function index()
     {
         //
@@ -40,7 +93,7 @@ class medicoController extends Controller
       $medicalCenter = medicalCenter::orderBy('tradename','asc')->pluck('tradename','id');
       $specialties = specialty::orderBy('name','asc')->pluck('name','id');
 
-        return view('medico.create')->with('medicalCenter',$medicalCenter)->with('cities',$cities)->with('promoters', $promoters);
+      return view('medico.create')->with('medicalCenter',$medicalCenter)->with('cities',$cities)->with('promoters', $promoters);
     }
 
     /**
@@ -74,17 +127,17 @@ class medicoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           'identification'=>'required|unique:medicos',
+           //'identification'=>'required|unique:medicos',
            'name'=>'required',
            'lastName'=>'required',
            'gender'=>'required',
            'email'=>'required|unique:medicos|unique:users',
            'password'=>'required',
-           'city'=>'required',
-           'medicalCenter_id'=>'required',
-           'id_promoter'=>'nullable',
+           //'city'=>'required',
+           //'medicalCenter_id'=>'required',
+           //'id_promoter'=>'nullable',
            'phone'=>'required|numeric',
-           'facebook'=>'required',
+           //'facebook'=>'required',
 
         ]);
 
@@ -152,12 +205,19 @@ class medicoController extends Controller
      */
     public function edit($id)
     {
-      $medico = medico::find($id);
+        $medico_experience = medico_experience::where('medico_id',$id)->get();
+
+        $medico_services = medico_service::where('medico_id', $id)->get();
+        $medicalCenter = medicalCenter::orderBy('tradename','asc')->pluck('tradename','tradename');
+        $cities = city::orderBy('name','asc')->pluck('name','name');
+        $medico = medico::find($id);
         $consulting_room = consulting_room::where('medico_id',$medico->id)->get();
         $consultingIsset = consulting_room::where('medico_id',$medico->id)->count();
         $photo = photo::where('medico_id', $medico->id)->where('description', 'perfil')->first();
+        $info_medico = info_medico::where('medico_id', $medico->id)->paginate(10);
+        $social_networks = social_network::where('medico_id', $id)->get();
 
-        return view('medico.edit')->with('medico', $medico)->with('photo', $photo)->with('consulting_room', $consulting_room)->with('consultingIsset', $consultingIsset);
+        return view('medico.edit')->with('medico', $medico)->with('photo', $photo)->with('consulting_rooms', $consulting_room)->with('consultingIsset', $consultingIsset)->with('cities', $cities)->with('medicalCenter', $medicalCenter)->with('info_medico', $info_medico)->with('medico_services', $medico_services)->with('medico_experience', $medico_experience)->with('social_networks', $social_networks);
     }
 
     /**
@@ -169,7 +229,34 @@ class medicoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+      $request->validate([
+         'name'=>'required',
+         'lastName'=>'required',
+         'gender'=>'required',
+         'city'=>'required',
+         // 'email'=>'required|unique:medicos|unique:users',
+         // 'password'=>'required',
+         // 'medicalCenter_id'=>'required',
+         // 'id_promoter'=>'nullable',
+         'phone'=>'required|numeric',
+         // 'facebook'=>'required',
+         'identification'=>'required',
+      ]);
+      $medico = medico::find($id);
+
+      if($request->identification != $medico->identification){
+        $request->validate([
+           'identification'=>'required|unique',
+        ]);
+      }
+
+
+
+      $medico->fill($request->all());
+      $medico->save();
+
+      return redirect()->route('medico.edit',$id)->with('success', 'Actualizado');
     }
 
     /**

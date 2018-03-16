@@ -12,13 +12,13 @@
 					</div>
 				</div>
 						{!!Form::open(['route'=>'medico.store','method'=>'POST'])!!}
-						{{-- <div class="row mt-2">
+						<div class="row mt-2">
 							<div class="col-lg-12 col-12">
 								<div class="form-group">
 								    {!!Form::text('identification',null,['class'=>'form-control','placeholder'=>'Cedula'])!!}
 								</div>
 							</div>
-						</div> --}}
+						</div>
 						<div class="row">
 							<div class="col-lg-6 col-12">
 								<div class="form-group">
@@ -56,7 +56,7 @@
 								</div>
 						</div>
 
-						{{-- <div class="row">
+						<div class="row">
 							<div class="col-lg-6 col-12">
 								<div class="form-group">
 								   {!!Form::select('medicalCenter_id',$medicalCenter,null,['class'=>'form-control','placeholder'=>'Centro Medico'])!!}
@@ -67,18 +67,18 @@
 									   {!!Form::text('id_promoter',null,['class'=>'form-control','placeholder'=>'id del Promotor (Opcional)'])!!}
 									 </div>
 								</div>
-							</div> --}}
+							</div>
 						<div class="row">
 							<div class="col-lg-6 col-12">
 								<div class="form-group">
 								     {!!Form::text('phone',null,['class'=>'form-control','placeholder'=>'Teléfono'])!!}
 								</div>
 							</div>
-							{{-- <div class="col-lg-6 col-12">
+							<div class="col-lg-6 col-12">
 								<div class="form-group">
 									 {!!Form::text('facebook',null,['class'=>'form-control','placeholder'=>'Facebook'])!!}
 								</div>
-							</div> --}}
+							</div>
 						</div>
 
 						<div class="row">

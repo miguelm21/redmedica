@@ -19,6 +19,7 @@ class medico extends Model
       'facebook',
       'id_promoter',
       'state',
+      'showNumber',
 
     ];
 

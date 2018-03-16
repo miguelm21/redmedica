@@ -6,7 +6,7 @@
 			<div class="register">
 				<div class="row">
 					<div class="col-12 mb-5">
-						<h2 class="text-center font-title">Centros médicos</h2>
+						<h2 class="text-center font-title">Asistentes</h2>
 					</div>
 				</div>
 				<div class="row">

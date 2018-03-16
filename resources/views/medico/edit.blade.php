@@ -1,31 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-  <section class="box-register">
-    <div class="container">
-      <div class="register">
 
-        <div class="row">
-          <div class="col-12 text-right">
-            <div class="btn-group " role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-secondary">1</button>
-              <button type="button" class="btn btn-secondary">2</button>
-              <button type="button" class="btn btn-config-blue">3</button>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-12 mb-3">
-            <h5 class="text-center font-title">Ya eres miembro de la mejor red de médicos y profesionales de la salud</h5>
-          </div>
-        </div>
-            <div class="row mt-3">
-              <div class="col-6">
+	<section class="box-register">
+		<div class="container">
+			<div class="register">
+
+				<div class="row">
+					<div class="col-12 text-right">
+						<div class="btn-group " role="group" aria-label="Basic example">
+						  <button type="button" class="btn btn-secondary">1</button>
+						  <button type="button" class="btn btn-secondary">2</button>
+						  <button type="button" class="btn btn-config-blue">3</button>
+						</div>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-12 mb-3">
+						<h5 class="text-center font-title">Ya eres miembro de la mejor red de médicos y profesionales de la salud</h5>
+					</div>
+				</div>
+						<div class="row mt-3">
+							<div class="col-6">
+
+
                 @isset($photo)
                   <img src="{{asset($photo->path)}}" width="120px" height="80px" alt="">
                 @endisset
-
-
 
                 {!!Form::open(['route'=>'photo.store','method'=>'POST','files'=>true])!!}
                 {!!Form::hidden('email',$medico->email)!!}
@@ -33,537 +34,386 @@
                 {!!Form::file('image')!!}
                 {!!Form::submit('Subir')!!}
                 {!!Form::close()!!}
-              </div>
-              <div class="col-6 text-center">
-                <label for="">Barra de progreso</label>
-                <div class="progress">
-                  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%; vertical-align: center;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-            </div>
-            <hr>
-            <button name="button" onclick="enabled1()">Editar</button>
-            {!!Form::model($medico,['route'=>['medico.update',$medico],'method'=>'POST','id'=>'person'])!!}
+							</div>
+							<div class="col-6 text-center">
+								<label for="">Barra de progreso</label>
+								<div class="progress">
+								  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%; vertical-align: center;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
+						</div>
+						<hr>
+            {!!Form::model($medico,['route'=>['medico.update',$medico],'method'=>'PUT','id'=>'person'])!!}
+
             <div class="row">
               <div class="col-lg-6 col-12">
                 <div class="form-group">
-                  {!!Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombres'])!!}
+                    {!!Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])!!}
                 </div>
               </div>
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
-                    {!!Form::text('lastName',null,['class'=>'form-control','placeholder'=>'Apellidos'])!!}
+                       {!!Form::text('lastName',null,['class'=>'form-control','placeholder'=>'Apellido'])!!}
                    </div>
                 </div>
             </div>
             <div class="row">
-              <div class="col-lg-6 col-12">
-                <div class="form-group">
-                     {!!Form::text('identification',null,['class'=>'form-control','placeholder'=>'Cedula'])!!}
-                 </div>
+              <div class="col-6">
+                  <div class="form-group">
+                      {!!Form::select('gender',['Masculino','Femenino'],null,['class'=>'form-control','placeholder'=>'Sexo'])!!}
+                  </div>
               </div>
-              <div class="col-lg-6 col-12">
-                <div class="form-group">
-                     {!!Form::text('phoneOffice1',null,['class'=>'form-control','placeholder'=>'Teléfono Oficina 1'])!!}
-                 </div>
+              <div class="col-6">
+                    <div class="form-group">
+                      {!!Form::select('city',$cities,null,['class'=>'form-control','placeholder'=>'Ciudad'])!!}
+                  </div>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-6 col-12">
                 <div class="form-group">
-                      {!!Form::text('phoneOffice1',null,['class'=>'form-control','placeholder'=>'Teléfono Oficina 2'])!!}
+                    {!!Form::number('phone',null,['class'=>'form-control','placeholder'=>'Celular'])!!}
                 </div>
               </div>
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
-                      {!!Form::text('phone',null,['class'=>'form-control','placeholder'=>'Teléfono Personal'])!!}
+                     {!!Form::text('identification',null,['class'=>'form-control','placeholder'=>'cedula'])!!}
+
                    </div>
                 </div>
             </div>
-            <div class="row">
-              <div class="col-lg-6 col-12">
+
+            <div class="">
+
                 <div class="form-group">
-                    <p for="">¿Desea que su numero celular aparezca visible en formatos e información a pacientes?</p>
-                    <label for="">si</label>
-                    {{ Form::radio('showNumber', 'female') }}
-                    <label for="">no</label>
-                    {{ Form::radio('showNumber', 'female') }}
-                 </div>
-
-                   {!!Form::close()!!}
-              </div>
-              <div class="col-lg-6 col-12">
-                <div class="form-group">
-                  <button type="button" name="button">Guardar Cambios</button>
-                  <button type="button" name="button" onclick="disabled1()">Cancelar</button>
-                 </div>
-
-                   {!!Form::close()!!}
-              </div>
-            </div>
-
-
-
-                
-
-            <div class="row">
-              <div class="col-12">
-                <span>Consultorio(s)</span>
-              <hr>
-
-              </div>
-            </div>
-            @if($consultingIsset == 0)
-              No existen consultorios registrados
-            @endif
-            <a href="#" class="btn ">Agregar Consultorio</a>
-            @foreach ($consulting_room as $c)
-
-
-            <div class="box-form">
-              <div class="row">
-                <div class="col-lg-4 col-12">
                   <div class="row">
-                    <div class="col-12">
-                      <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Calle">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-12">
-                  <div class="row">
-                    <div class="col-12">
-                      <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Numero extra">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-12">
-                  <div class="row">
-                    <div class="col-12">
-                      <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Numero int">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col-lg-3 col-12">
-                  <div class="row">
-                    <div class="col-12">
-                      <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Colonia">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-12">
-                  <div class="row">
-                    <div class="col-12">
-                      <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="C.P">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-12">
-                  <div class="row">
-                    <div class="col-lg-4 col-12">
-                      <label for="" class="center-label">Ciudad</label>
-                    </div>
-                    <div class="col-lg-8 col-12">
-                      <div class="form-group">
-                          <select class="form-control" id="exampleSelect1" placeholer="Seleccione su sexo">
-                            <option>Guanare</option>
-                            <option>Barinas</option>
-                          </select>
+                      <div class="col-8" style="text-align:justify">
+                        <p for="">¿Desea que su numero celular aparezca visible en formatos e información a pacientes?</p>
                       </div>
-                    </div>
+                      <div class="col-4">
+                           {{Form::select('showNumber',['si'=>'si','no'=>'no'],null,['class'=>'form-control'])}}
+                      </div>
+                  </div>
+
+
+                </div>
+                <div class="row">
+                  <div class="col-6">
+
+                  </div>
+                  <div class="col-6">
+                    <button type="submit" name="button" class="btn btn-primary btn-block">Guardar Cambios</button>
                   </div>
                 </div>
-                <div class="col-lg-3 col-12">
+                   {!!Form::close()!!}
+          </div>
+          <hr>
+
+          <div class="row">
+            <div class="col-12">
+              <h4 class="font-title-blue">Consultorios</h4>
+            <hr>
+
+              <table class="table config-table">
+                <thead>
+                  <th>Nombre Comercial</th>
+                  <th>Tipo</th>
+                  <th>Numero Ext.</th>
+                  <th>Numero Int.</th>
+                  <th>Ciudad</th>
+                  <th>Estado</th>
+                  <th>Clave Unica</th>
+                  <th>Dirección</th>
+                </thead>
+                <tbody>
+                  @foreach ($consulting_rooms as $consulting_room)
+                    <tr>
+                      @isset($consulting_room->tradeName)
+                        <td>{{$consulting_room->tradeName}}</td>
+                      @else
+                        <td style="color:rgb(173, 173, 173)">N.P.</td>
+                      @endisset
+                      <td>{{$consulting_room->type}}</td>
+
+                      @isset($consulting_room->numberExt)
+                        <td>{{$consulting_room->numberExt}}</td>
+                      @else
+                        <td style="color:rgb(173, 173, 173)">N.P.</td>
+                      @endisset
+
+                      @isset($consulting_room->numberInt)
+                        <td>{{$consulting_room->numberInt}}</td>
+                      @else
+                        <td style="color:rgb(173, 173, 173)">N.P.</td>
+                      @endisset
+
+                      <td>{{$consulting_room->city}}</td>
+                      <td>{{$consulting_room->state}}</td>
+                      @isset($consulting_room->passwordUnique)
+                        <td>{{$consulting_room->passwordUnique}}</td>
+                      @else
+                        <td style="color:rgb(173, 173, 173)">N.P.</td>
+                      @endisset
+                        <td>{{$consulting_room->addres}}</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+                <tfoot>
+                  <td colspan="7">{{$info_medico->links()}}</td>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+					<div class="row">
+						<div class="col-12 text-right">
+							<a href="{{route('consulting_room_create',$medico->id)}}" class="btn btn-config-blue">Agregar Consultorio</a>
+						</div>
+					</div>
+          @if($consultingIsset == 0)
+
+          @endif
+								<hr>
+                <div class="box-panel-register">
+                   <div class="row mt-3">
+                     <div class="col-12 text-center">
+                       <h4 class="font-title-blue">Especialidad/Estudios Realizados</h4>
+                     <hr>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="">
+                           <table class="table table-config">
+                             <thead>
+                               <th>Tipo</th>
+                               <th>Especialidad</th>
+                               <th>Institución</th>
+                               <th>Desde</th>
+                               <th>Hasta</th>
+                               <th>Estado</th>
+                               <th>información Adicional</th>
+                             </thead>
+                             <tbody>
+                               @foreach ($info_medico as $info)
+                                 <tr>
+                                   <td>{{$info->type}}</td>
+                                   <td>{{$info->specialty}}</td>
+                                   <td>{{$info->institution}}</td>
+                                   <td>{{\Carbon\Carbon::parse($info->from)->format('m-d-Y')}}</td>
+                                   <td>{{\Carbon\Carbon::parse($info->until)->format('m-d-Y')}}</td>
+                                   <td>{{$info->state}}</td>
+                                   @isset($info->aditional)
+                                    <td>{{$info->aditional}}</td>
+                                   @else
+                                     <td style="color:rgb(173, 173, 173)">N.P.</td>
+                                   @endisset
+
+                                 </tr>
+                               @endforeach
+                             </tbody>
+                             <tfoot>
+                               <td colspan="7">{{$info_medico->links()}}</td>
+                             </tfoot>
+                           </table>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="col-12 text-right">
+                       <a href="{{route('info_medicoCreate',$medico->id)}}" class="btn btn-config-blue">Agregar Especialidad/Estudios Realizados</a>
+                     </div>
+                   </div>
+                 </div>
+
+							<div class="row mt-3">
+								<div class="col-12">
+									<h4 class="font-title-blue">Servicios otorgados</h4>
+									<hr>
+								</div>
+							</div>
+              <div class="row" style="text-align:justify">
+                <ul>
+                @foreach ($medico_services as $service)
+                  <li>{{$service->name}}</li>
+                @endforeach
+              </ul>
+                </div>
+
+							<div class="row">
+						  		<div class="col-12 text-right">
+						  			<a href="" data-toggle="modal" data-target="#modal-service2" class="btn btn-config-blue">Agregar servicio</a>
+								<hr>
+						  		</div>
+						  	</div>
+						  	</div>
+
+						  	<div class="row mt-3">
+								<div class="col-12">
+									<h4 class="font-title-blue">Experiencia en transtornos mentales</h4>
+									<hr>
+								</div>
+							</div>
+
+              <div class="row">
+                <div class="col-lg-10 col-12">
+                  <div class="form-group">
+                      {!!Form::open(['route'=>'medico_experience_store','method'=>'POST'])!!}
+                      {!!Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre del trastorno o enfermedad, en la que tengas mas experiencia.'])!!}
+                      {!!Form::hidden('medico_id',$medico->id)!!}
+                  </div>
+                </div>
+                  <div class="col-lg-2 col-12">
+                    <div class="form-group">
+                      <button type="submit" name="button" class="btn btn-primary">Agregar</button>
+                      {!!Form::close()!!}
+                     </div>
+                  </div>
+              </div>
+              <div class="row" style="text-align:justify">
+                <ul>
+                @foreach ($medico_experience as $experience)
+                    <li><p>{{$experience->name}}</p></li>
+                @endforeach
+              </ul>
+              </div>
+
+						  	<div class="row mt-3">
+								<div class="col-12">
+									<h4 class="font-title-blue">Agrega videos y fotos</h4>
+									<hr>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+								 <div class="form-group">
+								    <input type="file" name="img[]" class="file">
+								    <div class="input-group col-xs-12">
+								      <span class="input-group-addon"><i class="fas fa-images"></i></span>
+								      <input type="text" class="form-control input-lg" disabled placeholder="Upload Image">
+								      <span class="input-group-btn">
+								        <button class="browse btn btn-config-blue input-lg" type="button"> Agrega una imagen</button>
+								      </span>
+								    </div>
+								  </div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+									   <input type="file" name="img[]" class="file">
+									   <div class="input-group col-xs-12">
+									     <span class="input-group-addon"><i class="fas fa-video"></i></span>
+									     <input type="text" class="form-control input-lg" disabled placeholder="Upload Video">
+									     <span class="input-group-btn">
+									       <button class="browse btn btn-config-blue input-lg" type="button"> Agrega un video</button>
+									     </span>
+									   </div>
+									 </div>
+								</div>
+							</div>
+							<hr>
+							<div class="row mt-3">
+								<div class="col-12">
+									<h4 class="font-title-blue">Mis redes sociales</h4>
+									<hr>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12">
                   <div class="row">
                     <div class="col-lg-3 col-12">
-                      <label for="" class="center-label">Estado</label style="">
-                    </div>
-                    <div class="col-lg-9 col-12">
+                      {!!Form::open(['route'=>'medico_social_network_store','method'=>'POST'])!!}
                       <div class="form-group">
-                          <select class="form-control" id="exampleSelect1" placeholer="Seleccione su sexo">
-                            <option>Vargas</option>
-                            <option>barcelona</option>
-                          </select>
+                          {!!Form::select('name',['Facebook'=>'Facebook','Twiter'=>'Twiter','Instagram'=>'Instagram'],null,['class'=>'form-control','placeholder'=>'Red Social'])!!}
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    <div class="col-lg-7 col-12">
+                      <div class="form-group">
+                          {!!Form::text('link',null,['class'=>'form-control','placeholder'=>'Ingrese la Dirección Url del perfil de su Red Social,'])!!}
+                          {!!Form::hidden('medico_id',$medico->id)!!}
+                      </div>
 
-            @endforeach
+                    </div>
+                      <div class="col-lg-2 col-12">
+                        <div class="form-group">
+                          <button type="submit" name="button" class="btn btn-primary">Agregar</button>
+                          {!!Form::close()!!}
+                         </div>
+                      </div>
+                  </div>
+                  @foreach ($social_networks as $social)
+                    <div class="col-6">
+                      <div class="form-group" style="text-align:justify">
 
-            <div class="row mt-3">
-            <div class="col-4">
-              <label for="" class="text-center height-register3">Clave unica de estalecimiento de la salud</label>
-              <input type="example" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-            </div>
-            <div class="col-4">
-              <label for="" class="text-center height-register3">Nombre comercial del consultorio si lo tuviera</label>
-              <input type="example" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-            </div>
-            <div class="col-4 text-center height-register3">
-              <br><br>
-              <a href="" data-toggle="modal" data-target="#modal-work" class="btn btn-config-blue">Agregar otro directorio</a>
-            </div>
-            </div>
+                        <a href="{{$social->link}}" class="btn btn-primary">{{$social->name}}</a>
+                      </div>
+                    </div>
+                  @endforeach
 
-              <div class="row mt-3">
-                <div class="col-12 text-center">
-                  <button type="submit" class="btn btn-config-green">Guardar</button>
-                </div>
-              </div>
-              <br>
-             <div class="box-panel-register">
-                <div class="row mt-3">
-                  <div class="col-12 text-center">
-                    <h4 class="font-title-blue">Informacion General</h4>
-                  <hr>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-6 text-left">
-                  <ul style="text-decoration: none;">
-                    <li>Postgrado o residencia médica</li>
-                    <li>Subespecialidad</li>
-                    <li>Pregrado o carrera profesional</li>
-                  </ul>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12 text-right">
-                    <a href="" data-toggle="modal" data-target="#modal-work2" class="btn btn-config-blue">Agregar campo</a>
-                  </div>
-                </div>
-                <br>
-                <hr>
-              <div class="row mt-4">
-                <div class="col-12">
-                  <div class="form-group row">
-                    <label for="example-text-input" class="col-3 col-form-label">Nombre de la institución</label>
-                    <div class="col-8">
-                      <input class="form-control" type="text" value="" id="example-text-input">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="example-text-input" class="col-3 col-form-label">Especialidad que cursó</label>
-                    <div class="col-8">
-                      <input class="form-control" type="text" value="" id="example-text-input">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="example-text-input" class="col-3 col-form-label">Cedula profesional</label>
-                    <div class="col-8">
-                      <input class="form-control" type="text" value="" id="example-text-input">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="example-datetime-local-input" class="col-3 col-form-label">Periodo en que lo curso</label>
-                    <div class="col-4">
-                      <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
-                    </div>
-                      <label for="example-text-input" class="col-form-label">/</label>
-                    <div class="col-4">
-                      <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
-                    </div>
-                  </div>
-                <hr>
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div class="col-12">
-                  <h4 class="font-title-blue">Tipos de consultorios</h4>
-                  <hr>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <div class="custom-controls-stacked">
-                    <label class="custom-control custom-radio">
-                      <input id="radioStacked1" name="radio-stacked" type="radio" class="custom-control-input">
-                      <span class="custom-control-indicator"></span>
-                      <span class="custom-control-description">Medicina general o familiar</span>
-                    </label>
-                    <label class="custom-control custom-radio">
-                      <input id="radioStacked2" name="radio-stacked" type="radio" class="custom-control-input">
-                      <span class="custom-control-indicator"></span>
-                      <span class="custom-control-description">Consultorio de especialidades</span>
-                    </label>
-                    <label class="custom-control custom-radio">
-                      <input id="radioStacked1" name="radio-stacked" type="radio" class="custom-control-input">
-                      <span class="custom-control-indicator"></span>
-                      <span class="custom-control-description">Consultorio odontologica</span>
-                    </label>
-                    <label class="custom-control custom-radio">
-                      <input id="radioStacked2" name="radio-stacked" type="radio" class="custom-control-input">
-                      <span class="custom-control-indicator"></span>
-                      <span class="custom-control-description">Otro tipo de servicio, especifique:</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                  <div class="col-12 text-right">
-                    <a href="" data-toggle="modal" data-target="#modal-service" class="btn btn-config-blue">Especifique el típo de servicio</a>
-                  <hr>
-                  </div>
-                </div>
-              <div class="row mt-3">
-                <div class="col-12">
-                  <h4 class="font-title-blue">Servicios otorgados</h4>
-                  <hr>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-7">
-                  <div class="col-12">
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa aquí el servicio o terapia que atiendas">
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa aquí el servicio o terapia que atiendas">
-                     </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa aquí el servicio o terapia que atiendas">
-                     </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa aquí el servicio o terapia que atiendas">
-                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                  <div class="col-12 text-right">
-                    <a href="" data-toggle="modal" data-target="#modal-service2" class="btn btn-config-blue">Agregar servicio</a>
-                    <button type="submit" class="btn btn-config-green">Guardar</button>
-                <hr>
-                  </div>
-                </div>
-                </div>
-                <div class="row mt-3">
-                <div class="col-12">
-                  <h4 class="font-title-blue">Experiencia en transtornos mentales</h4>
-                  <hr>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <div class="col-12">
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa aquí el transtorno o enfermedad en la que tengas mas experiencía o por el que te busquen mas">
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa aquí el transtorno o enfermedad en la que tengas mas experiencía o por el que te busquen mas">
-                     </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa aquí el transtorno o enfermedad en la que tengas mas experiencía o por el que te busquen mas">
-                     </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa aquí el transtorno o enfermedad en la que tengas mas experiencía o por el que te busquen mas">
-                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                  <div class="col-12 text-center">
-                    <a href="" data-toggle="modal" data-target="#modal-service2" class="btn btn-config-green">Guardar</a>
-                    <hr>
-                  </div>
-                </div>
-                <div class="row mt-3">
-                <div class="col-12">
-                  <h4 class="font-title-blue">Agrega videos y fotos</h4>
-                  <hr>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                 <div class="form-group">
-                    <input type="file" name="img[]" class="file">
-                    <div class="input-group col-xs-12">
-                      <span class="input-group-addon"><i class="fas fa-images"></i></span>
-                      <input type="text" class="form-control input-lg" disabled placeholder="Upload Image">
-                      <span class="input-group-btn">
-                        <button class="browse btn btn-config-blue input-lg" type="button"> Agrega una imagen</button>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group">
-                     <input type="file" name="img[]" class="file">
-                     <div class="input-group col-xs-12">
-                       <span class="input-group-addon"><i class="fas fa-video"></i></span>
-                       <input type="text" class="form-control input-lg" disabled placeholder="Upload Video">
-                       <span class="input-group-btn">
-                         <button class="browse btn btn-config-blue input-lg" type="button"> Agrega un video</button>
-                       </span>
-                     </div>
-                   </div>
-                </div>
-              </div>
-              <hr>
-              <div class="row mt-3">
-                <div class="col-12">
-                  <h4 class="font-title-blue">Mis redes sociales</h4>
-                  <hr>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <div class="col-6">
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Facebook">
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Twitter">
-                     </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Google+">
-                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                  <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-config-green">Guardar</button>
-                <hr>
-                  </div>
-                </div>
-              <div class="row mt-3">
-                <div class="col-12">
-                  <h4 class="font-title-blue">Mis redes sociales</h4>
-                  <hr>
-                </div>
-              </div>
+								</div>
+							</div>
 
-              </div>
-            </div>
-        </form>
-      </div>
-    </div>
-  </section>
+						  <div class="row mt-4">
+								<div class="col-12">
 
-  <!-- Modal add info-directory-->
-<div class="modal fade" id="modal-work" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-          <div class="row">
-            <div class="col-12 text-center">
-              <h4>Agregar otro directorio</h4>
-            </div>
-        <div class="col-12 mt-3">
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-        </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-12">
-              <a href="" class="btn btn-block btn-config-green">Agregar</a>
-            </div>
-          </div>
-    </div>
-    </div>
-   </div>
-  </div>
+								</div>
+							</div>
 
-    <!-- Modal add info2-->
-<div class="modal fade" id="modal-work2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-          <div class="row">
-            <div class="col-12 text-center">
-              <h4>Agregar información personal</h4>
-            </div>
-        <div class="col-12 mt-3">
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Agregar campo">
-        </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-12">
-              <a href="" class="btn btn-block btn-config-green">Agregar</a>
-            </div>
-          </div>
-    </div>
-    </div>
-   </div>
-  </div>
+  						</div>
+					  </div>
+				</form>
+			</div>
+		</div>
+	</section>
 
-      <!-- Modal add service-->
-<div class="modal fade" id="modal-service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-          <div class="row">
-            <div class="col-12 text-center">
-              <h4>Agregar otro servicio</h4>
-            </div>
-        <div class="col-12 mt-3">
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-        </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-12">
-              <a href="" class="btn btn-block btn-config-green">Agregar</a>
-            </div>
-          </div>
-    </div>
-    </div>
-   </div>
-  </div>
-        <!-- Modal add service2-->
+
+    	<!-- Modal add service-->
 <div class="modal fade" id="modal-service2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-          <div class="row">
-            <div class="col-12 text-center">
-              <h4>Agregar otro servicio</h4>
-            </div>
-        <div class="col-12 mt-3">
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-        </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-12">
-              <a href="" class="btn btn-block btn-config-green">Agregar</a>
-            </div>
-          </div>
-    </div>
+	        <div class="row">
+
+	        	<div class="col-12 text-center">
+	        		<h4>Agregar Servicio o Terapia que atiendas</h4>
+	        	</div>
+
+				<div class="col-12 mt-3">
+          {!!Form::open(['route'=>'service_medico_store','method'=>'POST'])!!}
+
+           {!!Form::text('name',null,['class'=>'form-control'])!!}
+          {!!Form::hidden('medico_id',$medico->id)!!}
+
+				</div>
+
+	        </div>
+	        <div class="row mt-3">
+	        	<div class="col-12">
+              <button type="submit" name="button" class="btn btn-block btn-config-green">Agregar</button>
+              {!!Form::close()!!}
+	        	</div>
+	        </div>
+		</div>
     </div>
    </div>
   </div>
-@endsection
 
-@section('scriptJS')
-  <script type="text/javascript">
-    $('#person').find('input, textarea, button, select,radio').prop('disabled', true);
-
-  function enabled1(){
-    $('#person').find('input, textarea, button, select,radio').prop('disabled', false);
-  }
-  function disabled1(){
-    $('#person').find('input, textarea, button, select,radio').prop('disabled', true);
-  }
-
-  </script>
-
+  <!-- Modal add service-->
+<div class="modal fade" id="modal-service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+  <div class="modal-body">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h4>Agregar otro servicio</h4>
+        </div>
+    <div class="col-12 mt-3">
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+    </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12">
+          <a href="" >Agregar</a>
+        </div>
+      </div>
+</div>
+</div>
+</div>
+</div>
 @endsection

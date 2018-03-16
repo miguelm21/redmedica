@@ -50,7 +50,7 @@
                   </div>
                   <div class="row">
                     <div class="col-lg-6 col-12 mt-2">
-                      <a href="{{route('promoters.index')}}" class="btn-config-blue btn btn-block">Cancelar</a>
+                      <a href="{{route('sub_specialty.index')}}" class="btn-config-blue btn btn-block">Cancelar</a>
 
                     </div>
                     <div class="col-lg-6 col-12 mt-2">

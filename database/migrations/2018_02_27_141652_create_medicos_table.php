@@ -15,13 +15,13 @@ class CreateMedicosTable extends Migration
     {
         Schema::create('medicos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('identification');
+            $table->string('identification')->nullable();
             $table->string('name');
             $table->string('lastName');
             $table->string('gender');
             $table->string('email',60);
             $table->string('password');
-            $table->string('city');
+            $table->string('city')->nullable();
             $table->integer('medicalCenter_id')->unsigned()->nullable();
             $table->foreign('medicalCenter_id')->references('id')->on('medical_centers');
             $table->string('phone')->nullable();
@@ -29,6 +29,8 @@ class CreateMedicosTable extends Migration
             $table->string('id_promoter')->nullable();
             $table->string('showNumber')->nullable();
             $table->string('state')->nullable();
+            $table->string('phoneOffice1')->nullable();
+            $table->string('phoneOffice2')->nullable();
             $table->timestamps();
         });
     }

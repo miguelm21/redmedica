@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConsultingRoomsTable extends Migration
+class CreateInfoMedicosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateConsultingRoomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('consulting_rooms', function (Blueprint $table) {
+        Schema::create('info_medicos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tradeName')->nullable();
             $table->string('type');
-            $table->string('addres');
-            $table->string('numberExt')->nullable();
-            $table->string('numberInt')->nullable();
-            $table->string('colony')->nullable();
-            $table->string('CP')->nullable();
-            $table->string('city');
+            $table->string('institution');
+            $table->string('specialty');
+            $table->datetime('from');
+            $table->datetime('until');
             $table->string('state');
-            $table->string('passwordUnique')->nullable();
+            $table->string('aditional')->nullable();
             $table->integer('medico_id')->unsigned();
             $table->foreign('medico_id')->references('id')->on('medicos');
             $table->timestamps();
@@ -38,6 +35,6 @@ class CreateConsultingRoomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('consulting_rooms');
+        Schema::dropIfExists('info_medicos');
     }
 }
