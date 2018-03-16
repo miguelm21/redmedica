@@ -1,3 +1,5 @@
+<p align="center"><img src="http://prntscr.com/is34os"></p>
+
 # Red Medica #
 
 Repositorio para proyecto de red medica
