@@ -1,4 +1,4 @@
-<p align="center"><img src="http://prntscr.com/is34os"></p>
+<p align="center"><img src="https://www.astrapp.com/wp-content/uploads/2018/02/small_logo.png"></p>
 
 # Red Medica #
 
