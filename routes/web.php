@@ -11,21 +11,55 @@
 |
 */
 
+
 route::get('/', function () {
     return redirect()->route('home');
 });
 
+
+Route::get('loginRedirect', 'Auth\LoginController@loginRedirect')->name('loginRedirect');
+
+Route::get('events', 'eventController@index')->name('events');
+
+// Route::get('api','eventoController@api'); //ruta que nos devuelve los eventos en formato json
+// Route::get('evento','eventoController@evento')->name('evento');
+
 route::get('home','HomeController@home')->name('home');
 route::resource('user','userController');
 route::resource('medico','medicoController');
+
+route::resource('medico_diary','medico_diaryController');
+
+route::get('medico/{id}/diary/events','medico_diaryController@medico_diary_events')->name('medico_diary_events');
+
+
+Route::get('medico/{id}/diary', 'medico_diaryController@medico_diary')->name('medico_diary');
+
+route::post('medico/list/social_network','medicoController@social_network_list')->name('social_network_list');
+route::post('medico/list/services','medicoController@medico_service_list')->name('medico_service_list');
+route::post('medico/list/experience','medicoController@medico_experience_list')->name('medico_experience_list');
+
+route::post('medicoBorrar','medicoController@medicoBorrar')->name('medicoBorrar');
+route::post('medico/experience/delete','medicoController@medico_experience_delete')->name('medico_experience_delete');
 route::post('medico/service/store','medicoController@service_medico_store')->name('service_medico_store');
 route::post('medic/experience/store','medicoController@medico_experience_store')->name('medico_experience_store');
 route::post('medic/social_network/store','medicoController@medico_social_network_store')->name('medico_social_network_store');
+route::post('borrar_social','medicoController@borrar_social')->name('borrar_social');
+
+
+
+
+
+route::get('data/primordial/{id}/medico','medicoController@data_primordial_medico')->name('data_primordial_medico');
+
 route::get('medic/{id}/consulting_room/create','consulting_roomController@consulting_room_create')->name('consulting_room_create');
 
 route::resource('patient','patientController');
 route::resource('medicalCenter','medicalCenterController');
 route::resource('photo','photoController');
+route::get('medico/photo/delete/{id}','photoController@photo_delete')->name('photo_delete');
+route::post('image/medico/store','photoController@image_store')->name('image_store');
+
 route::resource('consulting_room','consulting_roomController');
 route::resource('info_medico','info_medicoController');
 route::get('medico/{id}/info/create','info_medicoController@info_medicoCreate')->name('info_medicoCreate');

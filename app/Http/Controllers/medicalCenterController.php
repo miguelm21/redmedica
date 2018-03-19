@@ -9,6 +9,7 @@ use App\promoter;
 use App\city;
 class medicalCenterController extends Controller
 {
+
     public function confirmMedicalCenter($id,$code){
       $medicalCenter = medicalCenter::find($id);
 

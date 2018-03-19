@@ -1,13 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-
+<h4>Especialidad/Estudios Realizados</h4>
 <div class="row mt-4">
   <div class="col-12">
     <div class="form-group row">
       <label for="example-text-input" class="col-3 col-form-label">Tipo de Estudio</label>
       <div class="col-8">
-        {!!Form::open(['route'=>'info_medico.store','method'=>'POST'])!!}
+        <ul class="nav flex-column text-left">
+          <li class="nav-item">
+            {!!Form::open(['route'=>'info_medico.store','method'=>'POST'])!!}
+            {{Form::radio('type','Pregrado o  Carrera Profesional')}}
+            <span for=""> Pregrado o  Carrera Profesional </span>
+          </li>
+          <li class="nav-item">
+            {{Form::radio('type','Post-Grado o Residencia Medica')}}
+            <span for="">Post-Grado o Residencia Medica</span>
+          </li>
+          <li class="nav-item">
+            {{Form::radio('type','Sub-Especialidad')}}
+            <span for="">Sub-Especialidad</span>
+          </li>
+          <li class="nav-item">
+
+              <div class="form-inline">
+                {{Form::radio('type','other')}}
+                <span for="">Otro, especifique: </span>{!!Form::text('other',null,['class'=>'form-control'])!!}
+              </div>
+
+
+         </li>
+       </ul>
+<!--         {!!Form::open(['route'=>'info_medico.store','method'=>'POST'])!!}
         <div class="m-3">
           {{Form::radio('type','Pregrado o  Carrera Profesional')}}
           <span for=""> Pregrado o  Carrera Profesional </span>
@@ -21,7 +45,7 @@
             {{Form::radio('type','other')}}
             <span for="">Otro, especifique:</span>{!!Form::text('other',null,['class'=>'form-control'])!!}
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="form-group row">
@@ -58,15 +82,20 @@
     </div>
 
     <div class="form-group row">
-      <label for="example-text-input" class="col-3 col-form-label">Información Adicional (Ocional)</label>
+      <label for="example-text-input" class="col-3 col-form-label">Información Adicional (Opcional)</label>
       <div class="col-8">
         {!!Form::text('aditional',null,['class'=>'form-control'])!!}
       </div>
         {!!Form::hidden('medico_id',$medico_id)!!}
     </div>
-    <button type="submit" name="button">Regitrar</button>
-
-    <button type="submit" name="button">Cancelar</button>
+     <div class="row my-5">
+       <div class="col-6">
+          <button type="submit" name="button" class="btn-config-blue btn btn-block">Registrar</button>
+       </div>
+      <div class="col-6">
+        <button name="button" class="btn-config-green btn btn-block">Cancelar</button>
+      </div>
+     </div>
     {!!Form::close()!!}
   </div>
 </div>

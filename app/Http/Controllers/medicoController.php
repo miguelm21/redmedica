@@ -14,7 +14,8 @@ use Mail;
 use App\medico_service;
 use App\medico_experience;
 use App\social_network;
-
+use App\Role;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class medicoController extends Controller
@@ -25,11 +26,63 @@ class medicoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+     public function data_primordial_medico($id){
+
+       $medico = medico::find($id);
+       $cities = city::all()->pluck('name','name');
+
+      return view('medico.data_primordial_medico')->with('medico', $medico)->with('cities', $cities);
+     }
+
+    public function medico_service_list(Request $request){
+
+        $medico_services = medico_service::where('medico_id', $request->medico_id)->get();
+
+        return view('medico.list_service')->with('services', $medico_services);
+    }
+
+    public function medico_experience_delete(Request $request){
+      $medico_service = medico_experience::find($request->medico_id);
+      $medico_service->delete();
+
+      return response()->json($medico_service);
+
+    }
+
+    public function medicoBorrar(Request $request){
+      $medico_service = medico_service::find($request->medico_id);
+      $medico_service->delete();
+
+      return response()->json($medico_service);
+
+    }
+
+     public function social_network_list(Request $request){
+         $social_networks = social_network::where('medico_id', $request->medico_id)->get();
+
+         return view('medico.list_social')->with('social_networks', $social_networks);
+     }
+
+     public function medico_experience_list(Request $request){
+
+         $experiences = medico_experience::where('medico_id', $request->medico_id)->get();
+
+         return view('medico.list_experience')->with('experiences', $experiences);
+     }
+
+     public function borrar_social(Request $request){
+       $social_network = social_network::find($request->id);
+       $social_network->delete();
+
+      return response()->json($request->id);
+     }
+
      public function medico_social_network_store(Request $request)
      {
+
          $request->validate([
-           'name'=>'required',
-           'link'=>'required',
+           'name'=>'required|'.Rule::unique('social_networks')->where('medico_id',$request->medico_id),
+           'link'=>'required'
          ]);
 
          $social_network = new social_network;
@@ -38,8 +91,7 @@ class medicoController extends Controller
          $social_network->medico_id = $request->medico_id;
          $social_network->save();
 
-         return redirect()->route('medico.edit',$request->medico_id)->with('success', 'Red Social Agregada');
-
+         return response()->json('ok');
      }
 
      public function medico_experience_store(Request $request)
@@ -106,15 +158,19 @@ class medicoController extends Controller
 
 
      public function confirmMedico($id,$code){
+
       $user = User::find($id);
 
       if($user->confirmation_code == $code){
           $user->confirmation_code = $code;
           $user->confirmed = 'medium';
           $user->save();
-          $medico = medico::find($user->medico_id);
+          $medico = medico::find($user->medico_id)->first();
 
-          return redirect()->route('medico.edit',$medico->id);
+          $medico->state = 'medium';
+          $medico->save();
+
+          return redirect()->route('home')->with('confirmMedico', 'confirmMedico');
 
       }
 
@@ -144,6 +200,7 @@ class medicoController extends Controller
         $medico = new medico;
         $medico->fill($request->all());
         $medico->password = bcrypt($request->password);
+        $medico->state = 'medium';
         $medico->save();
 
         $code = str_random(25);
@@ -155,6 +212,10 @@ class medicoController extends Controller
         $user->confirmation_code = $code;
         $user->role = 'medico';
         $user->save();
+
+        $role = Role::where('name','medico')->first();
+
+        $user->attachRole($role);
 
         Mail::send('mails.confirmMedico',['medico'=>$medico,'user'=>$user,'code'=>$code],function($msj){
            $msj->subject('Médicos Si');
@@ -205,19 +266,18 @@ class medicoController extends Controller
      */
     public function edit($id)
     {
-        $medico_experience = medico_experience::where('medico_id',$id)->get();
 
-        $medico_services = medico_service::where('medico_id', $id)->get();
         $medicalCenter = medicalCenter::orderBy('tradename','asc')->pluck('tradename','tradename');
         $cities = city::orderBy('name','asc')->pluck('name','name');
         $medico = medico::find($id);
         $consulting_room = consulting_room::where('medico_id',$medico->id)->get();
         $consultingIsset = consulting_room::where('medico_id',$medico->id)->count();
-        $photo = photo::where('medico_id', $medico->id)->where('description', 'perfil')->first();
+        $photo = photo::where('medico_id', $medico->id)->where('type', 'perfil')->first();
         $info_medico = info_medico::where('medico_id', $medico->id)->paginate(10);
         $social_networks = social_network::where('medico_id', $id)->get();
+        $images = photo::where('medico_id', $medico->id)->where('type','image')->get();
 
-        return view('medico.edit')->with('medico', $medico)->with('photo', $photo)->with('consulting_rooms', $consulting_room)->with('consultingIsset', $consultingIsset)->with('cities', $cities)->with('medicalCenter', $medicalCenter)->with('info_medico', $info_medico)->with('medico_services', $medico_services)->with('medico_experience', $medico_experience)->with('social_networks', $social_networks);
+        return view('medico.edit')->with('medico', $medico)->with('photo', $photo)->with('consulting_rooms', $consulting_room)->with('consultingIsset', $consultingIsset)->with('cities', $cities)->with('medicalCenter', $medicalCenter)->with('info_medico', $info_medico)->with('social_networks', $social_networks)->with('images', $images);
     }
 
     /**
@@ -235,28 +295,30 @@ class medicoController extends Controller
          'lastName'=>'required',
          'gender'=>'required',
          'city'=>'required',
-         // 'email'=>'required|unique:medicos|unique:users',
-         // 'password'=>'required',
-         // 'medicalCenter_id'=>'required',
-         // 'id_promoter'=>'nullable',
-         'phone'=>'required|numeric',
-         // 'facebook'=>'required',
+         'state'=>'required',
          'identification'=>'required',
+         //'email'=>'required|unique:medicos|unique:users',
+         //'password'=>'required',
+         //'medicalCenter_id'=>'required',
+         'id_promoter'=>'nullable',
+         'phone'=>'required|numeric',
+
+         //'facebook'=>'required',
+
       ]);
       $medico = medico::find($id);
 
-      if($request->identification != $medico->identification){
-        $request->validate([
-           'identification'=>'required|unique',
-        ]);
+      $medico->fill($request->all());
+      $medico->state('complete');
+      $medico->save();
+
+      if($request->ajax()){
+          return response()->json('ok');
+      }else{
+          return redirect()->route('medico.edit',$id)->with('successComplete', 'valusse');
       }
 
 
-
-      $medico->fill($request->all());
-      $medico->save();
-
-      return redirect()->route('medico.edit',$id)->with('success', 'Actualizado');
     }
 
     /**

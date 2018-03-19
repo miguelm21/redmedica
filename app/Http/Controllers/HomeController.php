@@ -7,10 +7,13 @@ use App\User;
 use App\medico;
 use App\medicalCenter;
 use DB;
+use Auth;
 class HomeController extends Controller
 {
     public function home(){
-      return view('home.home');
+
+      $user = user::find(Auth::user()->id);
+      return view('home.home')->with('user', $user);
     }
 
     public function tolist2(Request $request){

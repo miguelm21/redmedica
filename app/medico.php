@@ -20,6 +20,8 @@ class medico extends Model
       'id_promoter',
       'state',
       'showNumber',
+      'phoneOffice1',
+       'phoneOffice2',
 
     ];
 

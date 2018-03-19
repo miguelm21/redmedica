@@ -2,6 +2,8 @@
 
 @section('content')
 
+        {{Auth::user()->medico->phone}}
+
         @if(!isset(Auth::user()->id))
         <div class="row">
           <div class="col-lg-6 col-md-6 col-12">
@@ -122,7 +124,17 @@
 
          </div>
       </div>
+      <div class="alert alert-success" role="alert" id="alert-success-confirm" style="display:none;margin:10px; ">
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
+         <div id="text-success-confirm">
+
+             <h5>Bienvenid@</h5>
+             <p>Tu Cuenta a sido Confirmada, ya puedes iniciar Session con tus datos.</p>
+
+
+         </div>
+      </div>
       <div class="modal-header">
 
         <h5 class="modal-title" id="exampleModalLongTitle">Ingresar</h5>
@@ -241,10 +253,24 @@
 
    <input type="hidden" name="" value="{{$nada = ''}}">
    @include('home.modals')
+   @section('scriptJS')
+     @if(Session::Has('confirmMedico'))
+       <script type="text/javascript">
+         $(document).ready(function(){
+            $('#modal-login').modal('show');
+            $('#alert-success-confirm').fadeIn();
+         });
+       </script>
+
+     @endif
 @endsection
 
-@section('scriptJS')
+
+
+
    <script type="text/javascript">
+
+
    // $(document).ready(function(){
    //    tolist();
    // });
@@ -260,6 +286,7 @@
             success:function(result){
                if(result == 'true'){
                   location.reload();
+                  window.location.href = '{{route("loginRedirect")}}';
                }else{
                  $('#text-alert').html('Email o Contraseña Invalida');
                  $('#alert').fadeIn();

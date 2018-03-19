@@ -12,12 +12,45 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        // $this->call(UsersTableSeeder::class);
+      //  $this->call('AddDummyEvent');
+        //   $this->call('daysSeeder');
+        //  $this->call('eventSeeder');
+        DB::table('users')->insert([
+       'name'=>'admin',
+       'email'=>'admin@admin.com',
+       'password'=>bcrypt('1234'),
+       'role'=>'Administrador',
+       ]);
+       
+          DB::table('medicos')->insert([
+         'name'=>'med',
+         'lastName'=>'med',
+         'gender'=>'Masculino',
+         'email'=>'eavcssss@hotmail.com',
+         'password'=>bcrypt('124578'),
+         ]);
 
-        DB::table('roles')->insert([
-       'name'=>'patient',
-       'display_name'=>'Paciente',
-       'description'=>'User is allowed to manage and edit other users'
+          DB::table('roles')->insert([
+         'name'=>'patient',
+         'display_name'=>'Paciente',
+         'description'=>'User is allowed to manage and edit other users'
+         ]);
+
+         DB::table('roles')->insert([
+        'name'=>'medico',
+        'display_name'=>'Paciente',
+        'description'=>'User is allowed to manage and edit other users'
+        ]);
+
+         DB::table('roles')->insert([
+        'name'=>'admin',
+        'display_name'=>'Administrador',
+        'description'=>'User is allowed to manage and edit other users'
+        ]);
+
+        DB::table('role_user')->insert([
+       'user_id'=>1,
+       'role_id'=>3,
        ]);
 
 
@@ -102,13 +135,6 @@ class DatabaseSeeder extends Seeder
        'name'=>'Plan Platino-Plus',
        'applicable'=>'Centros Medicos',
        'price'=>0,
-       ]);
-
-        DB::table('users')->insert([
-       'name'=>'admin',
-       'email'=>'admin@admin.com',
-       'password'=>bcrypt('1234'),
-       'role'=>'Administrador',
        ]);
 
 
