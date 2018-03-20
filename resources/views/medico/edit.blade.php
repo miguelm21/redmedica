@@ -281,8 +281,6 @@
  </div>
 </div>
 
-
-
 <div id="list_service_ajax" style="text-align:justify">
 </div>
 
@@ -397,7 +395,8 @@
   <div class="col-12">
     <div class="col-lg-8 col-12 m-auto">
       <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="show-question4" name="customRadioInline1" class="custom-control-input">
+        {{-- <input type="radio" id="show-question4" name="customRadioInline1" class="custom-control-input"> --}}
+				{{Form::radio('aseguradora1')}}
         <label class="custom-control-label" for="show-question4">Solo pacientes privados</label>
       </div>
       <div class="custom-control custom-radio custom-control-inline">
@@ -405,48 +404,76 @@
         <label class="custom-control-label" for="show-question5">Pacientes por aseguradoras, convenios y privados</label>
       </div>
       <div class="card border-primary p-3 mt-3" id="panel-insurance" style="display: none;">
-        <div class="row">
-          <div class="col-6">
-           <div class="custom-control custom-radio">
-            <input type="radio" id="customRadio11" name="customRadio" class="custom-control-input">
-            <label class="custom-control-label" for="customRadio11">AXA</label>
-          </div>
-          <div class="custom-control custom-radio">
+				<div class="row">
+					<div class="col-6">
+						<div class="custom-control custom-radio">
+             <input type="radio" id="customRadio11" name="customRadio" class="custom-control-input">
+             <label class="custom-control-label" for="customRadio11">AXA</label>
+           </div>
+					</div>
+						<div class="col-6">
+
+					<div class="custom-control custom-radio">
             <input type="radio" id="customRadio12" name="customRadio" class="custom-control-input">
             <label class="custom-control-label" for="customRadio12">Met Life</label>
           </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="customRadio13" name="customRadio" class="custom-control-input">
-            <label class="custom-control-label" for="customRadio13">Seguros monterrey</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-            <label class="custom-control-label" for="customRadio2">Gnp Grupo Provincial</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="customRadio14" name="customRadio" class="custom-control-input">
-            <label class="custom-control-label" for="customRadio14">Mapfre Seguros Tepeyac</label>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="custom-control custom-radio">
+
+				</div>
+				<div class="col-6">
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio13" name="customRadio" class="custom-control-input">
+						<label class="custom-control-label" for="customRadio13">Seguros monterrey</label>
+					</div>
+
+
+		   </div>
+			 <div class="col-6">
+				 <div class="custom-control custom-radio">
+					 <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+					 <label class="custom-control-label" for="customRadio2">Gnp Grupo Provincial</label>
+				 </div>
+			</div>
+				<div class="col-6">
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio14" name="customRadio" class="custom-control-input">
+						<label class="custom-control-label" for="customRadio14">Mapfre Seguros Tepeyac</label>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="custom-control custom-radio">
            <input type="radio" id="customRadio16" name="customRadio" class="custom-control-input">
            <label class="custom-control-label" for="customRadio16">ING</label>
-         </div>
-         <div class="custom-control custom-radio">
-           <input type="radio" id="customRadio17" name="customRadio" class="custom-control-input">
-           <label class="custom-control-label" for="customRadio17">Seguros Atlas</label>
-         </div>
-         <div class="custom-control custom-radio">
-           <input type="radio" id="customRadio18" name="customRadio" class="custom-control-input">
-           <label class="custom-control-label" for="customRadio18">Alianz</label>
-         </div>
-         <div class="custom-control custom-radio">
-           <input type="radio" id="customRadio19" name="customRadio" class="custom-control-input">
-           <label class="custom-control-label" for="customRadio19">Zurich</label>
-         </div>
-       </div>
-     </div>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio17" name="customRadio" class="custom-control-input">
+						<label class="custom-control-label" for="customRadio17">Seguros Atlas</label>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio18" name="customRadio" class="custom-control-input">
+						<label class="custom-control-label" for="customRadio18">Alianz</label>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio19" name="customRadio" class="custom-control-input">
+						<label class="custom-control-label" for="customRadio19">Zurich</label>
+					</div>
+				</div>
+				@foreach ($insurance_carriers as $insurance_carrier)
+					<div class="col-6">
+						<div class="custom-control custom-radio">
+							{{Form::radio($insurance_carrier)}}<label for="">{{$insurance_carrier}}</label>
+							<label class="custom-control-label" for="customRadio19">Zurich</label>
+						</div>
+					</div>
+
+				@endforeach
+			</div>
+
      <hr>
      <div class="text-center">
        <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-insurance"><i class="fas fa-plus mr-2"></i>Agregar otro seguro</a>

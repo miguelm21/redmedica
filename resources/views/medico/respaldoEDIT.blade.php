@@ -1,3 +1,41 @@
+inverse-background
+
+de esta forma puedo crear horario ////
+[
+{
+  title  : 'event1',
+  start  : '10:00',
+  end  : '11:00',
+  color: 'orange',
+  rendering: 'background',
+  dow: [ 1, 2, 3 ],
+},
+
+]
+////////////////////////////////////////
+
+[
+{
+  title  : 'event1',
+  start  : '10:00',
+  end  : '11:00',
+  color: 'orange',
+  rendering: 'background',
+  dow: [ 1, 2, 3 ],
+},
+{
+  title  : 'event2',
+  start  : '2018-03-19',
+  end    : '2010-01-07'
+},
+{
+  title  : 'event3',
+  start  : '2010-01-09T12:30:00',
+  allDay : false // will make the time show
+}
+],
+
+
 @extends('layouts.app')
 
 @section('content')

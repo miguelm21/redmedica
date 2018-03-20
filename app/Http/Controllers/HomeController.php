@@ -11,9 +11,13 @@ use Auth;
 class HomeController extends Controller
 {
     public function home(){
+      if(auth::check()){
+        $user = user::find(Auth::user()->id);
+        return view('home.home')->with('user', $user);
+      }
 
-      $user = user::find(Auth::user()->id);
-      return view('home.home')->with('user', $user);
+      return view('home.home');
+
     }
 
     public function tolist2(Request $request){

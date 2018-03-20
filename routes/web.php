@@ -19,10 +19,9 @@ route::get('/', function () {
 
 Route::get('loginRedirect', 'Auth\LoginController@loginRedirect')->name('loginRedirect');
 
-Route::get('events', 'eventController@index')->name('events');
 
-// Route::get('api','eventoController@api'); //ruta que nos devuelve los eventos en formato json
-// Route::get('evento','eventoController@evento')->name('evento');
+
+
 
 route::get('home','HomeController@home')->name('home');
 route::resource('user','userController');
@@ -30,10 +29,18 @@ route::resource('medico','medicoController');
 
 route::resource('medico_diary','medico_diaryController');
 
+
 route::get('medico/{id}/diary/events','medico_diaryController@medico_diary_events')->name('medico_diary_events');
+route::get('medico/{id}/business/hours','medico_diaryController@medico_business_hours')->name('medico_business_hours');
 
+route::post('medico/business/hours/edit','medico_diaryController@medico_business_hours_update')->name('medico_business_hours_update');
 
-Route::get('medico/{id}/diary', 'medico_diaryController@medico_diary')->name('medico_diary');
+Route::get('medico/{id}/panel/diary', 'medico_diaryController@medico_diary')->name('medico_diary');
+Route::get('medico/{id}/panel/schedule', 'medico_diaryController@medico_schedule')->name('medico_schedule');
+
+route::post('medico/schedule/store','medico_diaryController@medico_schedule_store')->name('medico_schedule_store');
+
+Route::get('medico/{id}/diary/fullscreen', 'medico_diaryController@medico_diary_fullscreen')->name('medico_diary_fullscreen');
 
 route::post('medico/list/social_network','medicoController@social_network_list')->name('social_network_list');
 route::post('medico/list/services','medicoController@medico_service_list')->name('medico_service_list');
@@ -45,9 +52,6 @@ route::post('medico/service/store','medicoController@service_medico_store')->nam
 route::post('medic/experience/store','medicoController@medico_experience_store')->name('medico_experience_store');
 route::post('medic/social_network/store','medicoController@medico_social_network_store')->name('medico_social_network_store');
 route::post('borrar_social','medicoController@borrar_social')->name('borrar_social');
-
-
-
 
 
 route::get('data/primordial/{id}/medico','medicoController@data_primordial_medico')->name('data_primordial_medico');
@@ -63,7 +67,6 @@ route::post('image/medico/store','photoController@image_store')->name('image_sto
 route::resource('consulting_room','consulting_roomController');
 route::resource('info_medico','info_medicoController');
 route::get('medico/{id}/info/create','info_medicoController@info_medicoCreate')->name('info_medicoCreate');
-
 
 route::get('confirm/MedicalCenter/{id}/{code}','medicalCenterController@confirmMedicalCenter')->name('confirmMedicalCenter');
 route::get('confirm/medico/{id}/{code}','medicoController@confirmMedico')->name('confirmMedico');

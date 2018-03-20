@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
-        {{Auth::user()->medico->phone}}
-
+  {{-- @if(Auth::check())
+    {{Auth::user()->medico->phone}}
+  @endif --}}
         @if(!isset(Auth::user()->id))
         <div class="row">
           <div class="col-lg-6 col-md-6 col-12">
@@ -108,10 +108,6 @@
             </div>
           </div>
         </div>
-
-
-
-
 
 <!-- Modal Login-->
 <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

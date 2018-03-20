@@ -15,6 +15,7 @@ use App\medico_service;
 use App\medico_experience;
 use App\social_network;
 use App\Role;
+use App\insurance_carrier;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
@@ -266,7 +267,7 @@ class medicoController extends Controller
      */
     public function edit($id)
     {
-
+        $insurance_carriers = insurance_carrier::where('medico_id',$id)->get();
         $medicalCenter = medicalCenter::orderBy('tradename','asc')->pluck('tradename','tradename');
         $cities = city::orderBy('name','asc')->pluck('name','name');
         $medico = medico::find($id);
@@ -277,7 +278,7 @@ class medicoController extends Controller
         $social_networks = social_network::where('medico_id', $id)->get();
         $images = photo::where('medico_id', $medico->id)->where('type','image')->get();
 
-        return view('medico.edit')->with('medico', $medico)->with('photo', $photo)->with('consulting_rooms', $consulting_room)->with('consultingIsset', $consultingIsset)->with('cities', $cities)->with('medicalCenter', $medicalCenter)->with('info_medico', $info_medico)->with('social_networks', $social_networks)->with('images', $images);
+        return view('medico.edit')->with('medico', $medico)->with('photo', $photo)->with('consulting_rooms', $consulting_room)->with('consultingIsset', $consultingIsset)->with('cities', $cities)->with('medicalCenter', $medicalCenter)->with('info_medico', $info_medico)->with('social_networks', $social_networks)->with('images', $images)->with('insurance_carriers',$insurance_carriers);
     }
 
     /**
@@ -309,7 +310,7 @@ class medicoController extends Controller
       $medico = medico::find($id);
 
       $medico->fill($request->all());
-      $medico->state('complete');
+      $medico->state = 'complete';
       $medico->save();
 
       if($request->ajax()){
