@@ -11,17 +11,40 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
+        factory(App\medico::class)->times(100)->create();
       //  $this->call('AddDummyEvent');
         //   $this->call('daysSeeder');
         //  $this->call('eventSeeder');
+
+        DB::table('specialty_categories')->insert([
+       'name'=>'categoria 1',
+       ]);
+
+       DB::table('specialty_categories')->insert([
+      'name'=>'categoria 2',
+      ]);
+
+      DB::table('specialties')->insert([
+     'name'=>'especialidad 1',
+     'specialty_category_id'=>1,
+
+     ]);
+
+     DB::table('specialties')->insert([
+    'name'=>'especialidad 2',
+    'specialty_category_id'=>2,
+
+    ]);
+
+
+
         DB::table('users')->insert([
        'name'=>'admin',
        'email'=>'admin@admin.com',
        'password'=>bcrypt('1234'),
        'role'=>'Administrador',
        ]);
-       
+
           DB::table('medicos')->insert([
          'name'=>'med',
          'lastName'=>'med',
@@ -29,6 +52,23 @@ class DatabaseSeeder extends Seeder
          'email'=>'eavcssss@hotmail.com',
          'password'=>bcrypt('124578'),
          ]);
+
+         DB::table('medicos')->insert([
+        'name'=>'med2',
+        'lastName'=>'msss',
+        'gender'=>'Masculino',
+        'email'=>'eavcssssss@hotmail.com',
+        'password'=>bcrypt('124578'),
+        ]);
+
+        DB::table('medicos')->insert([
+       'name'=>'med3',
+       'lastName'=>'msssxxxss',
+       'gender'=>'Masculino',
+       'email'=>'ezzzsssss@hotmail.com',
+       'password'=>bcrypt('124578'),
+       ]);
+
 
           DB::table('roles')->insert([
          'name'=>'patient',
@@ -55,14 +95,28 @@ class DatabaseSeeder extends Seeder
 
 
         DB::table('medical_centers')->insert([
-       'tradename'=>'Otro',
+       'name'=>'Otro',
        'emailAdmin'=>'No aplica',
         'nameAdmin'=>'No aplica',
          'phone'=>'No aplica',
          'city'=>'No aplica',
        ]);
 
+       DB::table('medical_centers')->insert([
+      'name'=>'Agustin',
+      'emailAdmin'=>'Agustin',
+       'nameAdmin'=>'No aplica',
+        'phone'=>'No aplica',
+        'city'=>'No aplica',
+      ]);
 
+      DB::table('medical_centers')->insert([
+     'name'=>'Jose Gregorioies',
+     'emailAdmin'=>'Agustin',
+      'nameAdmin'=>'No aplica',
+       'phone'=>'No aplica',
+       'city'=>'No aplica',
+     ]);
 
         DB::table('plans')->insert([
        'name'=>'Plan Basico',

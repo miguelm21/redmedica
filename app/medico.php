@@ -25,6 +25,10 @@ class medico extends Model
 
     ];
 
+    public function medico_specialty(){
+       return $this->hasMany('App\medico_specialty');
+    }
+
     public function specialty(){
        return $this->belongsTo('App\specialty');
     }

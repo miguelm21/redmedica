@@ -22,6 +22,16 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
+$factory->define(App\medico::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'lastName'=>$faker->sentence(),
+        'gender'=>'masculino',
+        'email' => $faker->unique()->safeEmail,
+        'password' => bcrypt('1234'), // secret
+    ];
+});
+
 // // $factory->define(App\event::class, function (Faker $faker) {
 // //     return [
 // //         'title' => $faker->sentence(4),

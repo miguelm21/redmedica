@@ -31,6 +31,7 @@ class CreateMedicosTable extends Migration
             $table->string('showNumber')->nullable();
             $table->string('phoneOffice1')->nullable();
             $table->string('phoneOffice2')->nullable();
+            $table->string('role')->default('medico');
             $table->timestamps();
         });
     }

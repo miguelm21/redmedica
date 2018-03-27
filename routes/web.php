@@ -16,19 +16,13 @@ route::get('/', function () {
     return redirect()->route('home');
 });
 
-
 Route::get('loginRedirect', 'Auth\LoginController@loginRedirect')->name('loginRedirect');
-
-
-
-
 
 route::get('home','HomeController@home')->name('home');
 route::resource('user','userController');
 route::resource('medico','medicoController');
 
 route::resource('medico_diary','medico_diaryController');
-
 
 route::get('medico/{id}/diary/events','medico_diaryController@medico_diary_events')->name('medico_diary_events');
 route::get('medico/{id}/business/hours','medico_diaryController@medico_business_hours')->name('medico_business_hours');
@@ -53,7 +47,6 @@ route::post('medic/experience/store','medicoController@medico_experience_store')
 route::post('medic/social_network/store','medicoController@medico_social_network_store')->name('medico_social_network_store');
 route::post('borrar_social','medicoController@borrar_social')->name('borrar_social');
 
-
 route::get('data/primordial/{id}/medico','medicoController@data_primordial_medico')->name('data_primordial_medico');
 
 route::get('medic/{id}/consulting_room/create','consulting_roomController@consulting_room_create')->name('consulting_room_create');
@@ -65,8 +58,9 @@ route::get('medico/photo/delete/{id}','photoController@photo_delete')->name('pho
 route::post('image/medico/store','photoController@image_store')->name('image_store');
 
 route::resource('consulting_room','consulting_roomController');
-route::resource('info_medico','info_medicoController');
-route::get('medico/{id}/info/create','info_medicoController@info_medicoCreate')->name('info_medicoCreate');
+
+route::get('medico/{id}/info/create','medicoController@medico_specialty_create')->name('medico_specialty_create');
+route::post('medico/specialty/store','medicoController@medico_specialty_store')->name('medico_specialty_store');
 
 route::get('confirm/MedicalCenter/{id}/{code}','medicalCenterController@confirmMedicalCenter')->name('confirmMedicalCenter');
 route::get('confirm/medico/{id}/{code}','medicoController@confirmMedico')->name('confirmMedico');
@@ -79,6 +73,9 @@ route::get('confirm/MedicalCenter/{id}','medicalCenterController@successRegMedic
 route::post('resend/mail/confirmation','medicoController@resendMailMedicoConfirm')->name('resendMailMedicoConfirm');
 
 route::post('list/result','HomeController@tolist')->name('tolist');
+/////////////////////////////////////////////////////////////////////////////////borar
+route::post('list/result2','HomeController@tolist2')->name('tolist2');
+/////////////////////////////////////////////////////////////////////////////////borrar
 
 route::post('login2','Auth\LoginController@login2')->name('login2');
 

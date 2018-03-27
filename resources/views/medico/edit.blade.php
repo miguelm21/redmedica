@@ -180,8 +180,8 @@
       <tbody>
         @foreach ($consulting_rooms as $consulting_room)
         <tr>
-          @isset($consulting_room->tradeName)
-          <td>{{$consulting_room->tradeName}}</td>
+          @isset($consulting_room->name)
+          <td>{{$consulting_room->name}}</td>
           @else
           <td style="color:rgb(173, 173, 173)">N.P.</td>
           @endisset
@@ -211,7 +211,7 @@
       </tbody>
       @endforeach
       <tfoot>
-        <td colspan="12">{{$info_medico->links()}}</td>
+        <td colspan="12">{{$medico_specialty->links()}}</td>
       </tfoot>
     </table>
   </div>
@@ -245,7 +245,7 @@
        <th>información Adicional</th>
      </thead>
      <tbody>
-       @foreach ($info_medico as $info)
+       @foreach ($medico_specialty as $info)
        <tr>
          <td>{{$info->type}}</td>
          <td>{{$info->specialty}}</td>
@@ -263,7 +263,7 @@
        @endforeach
      </tbody>
      <tfoot>
-       <td colspan="12">{{$info_medico->links()}}</td>
+       <td colspan="12">{{$medico_specialty->links()}}</td>
      </tfoot>
    </table>
  </div>
@@ -271,7 +271,7 @@
 
 <div class="row">
  <div class="col-12 text-right">
-   <a href="{{route('info_medicoCreate',$medico->id)}}" class="btn btn-success">Agregar Especialidad/Estudios Realizados</a>
+   <a href="{{route('medico_specialty_create',$medico->id)}}" class="btn btn-success">Agregar Especialidad/Estudios Realizados</a>
  </div>
 </div>
 <hr>
@@ -877,9 +877,8 @@ function updateMedic(){
 
 function cerrar(){
 	$('#alert_error_update').fadeOut();
-	 $('#alert_success_update').fadeOut();
+	$('#alert_success_update').fadeOut();
 }
 </script>
-
 
 @endsection

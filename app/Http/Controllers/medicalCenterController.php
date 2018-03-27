@@ -18,7 +18,7 @@ class medicalCenterController extends Controller
           $medicalCenter->confirmed = 'true';
           $medicalCenter->save();
 
-          return redirect()->route('home')->with('success','Bienvenido: '. $medicalCenter->nameAdmin.', El Centro Medico: '.$medicalCenter->tradename.' a sido aprobado con exito, ya es posible iniciar sesión con su cuenta.');
+          return redirect()->route('home')->with('success','Bienvenido: '. $medicalCenter->nameAdmin.', El Centro Medico: '.$medicalCenter->name.' a sido aprobado con exito, ya es posible iniciar sesión con su cuenta.');
       }
 
          return redirect()->route('successRegMedicalCenter',$medicalCenter->id)->with('warning', 'No se pudo verificar la autenticacion del usuario,por favor presione el boton "Reenviar Correo de Confirmación" para intentarlo Nuevamente.');
@@ -63,7 +63,7 @@ class medicalCenterController extends Controller
       $code = str_random(25);
         $request->validate([
           'id_medicalCenter'=>'numeric',
-          'tradename'=>'required|unique:medical_centers',
+          'name'=>'required|unique:medical_centers',
           'activePlan'=>'nullable',//ARREGLAAAAAAAAAAAAAAAAAAARRRRRRRRRRRRRRRRRr
           'emailAdmin'=>'required|unique:medical_centers',
           'nameAdmin'=>'required',

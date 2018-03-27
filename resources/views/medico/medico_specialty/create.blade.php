@@ -9,7 +9,7 @@
       <div class="col-8">
         <ul class="nav flex-column text-left">
           <li class="nav-item">
-            {!!Form::open(['route'=>'info_medico.store','method'=>'POST'])!!}
+            {!!Form::open(['route'=>'medico_specialty_store','method'=>'POST'])!!}
             {{Form::radio('type','Pregrado o  Carrera Profesional')}}
             <span for=""> Pregrado o  Carrera Profesional </span>
           </li>
@@ -31,21 +31,7 @@
 
          </li>
        </ul>
-<!--         {!!Form::open(['route'=>'info_medico.store','method'=>'POST'])!!}
-        <div class="m-3">
-          {{Form::radio('type','Pregrado o  Carrera Profesional')}}
-          <span for=""> Pregrado o  Carrera Profesional </span>
-          {{Form::radio('type','Post-Grado o Residencia Medica')}}
-          <span for="">Post-Grado o Residencia Medica</span>
 
-          {{Form::radio('type','Sub-Especialidad')}}
-          <span for="">Sub-Especialidad</span>
-
-          <div class="form-inline">
-            {{Form::radio('type','other')}}
-            <span for="">Otro, especifique:</span>{!!Form::text('other',null,['class'=>'form-control'])!!}
-          </div>
-        </div> -->
       </div>
     </div>
     <div class="form-group row">

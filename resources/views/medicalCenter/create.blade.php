@@ -22,7 +22,7 @@
             </div>
             <div class="col-lg-6 col-12">
               <div class="form-group">
-                {{Form::text('tradename',null,['class'=>'form-control','placeholder'=>'Nombre del centro Medico'])}}
+                {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre del centro Medico'])}}
               </div>
 
             </div>

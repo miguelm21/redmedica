@@ -4,6 +4,7 @@
   {{-- @if(Auth::check())
     {{Auth::user()->medico->phone}}
   @endif --}}
+
         @if(!isset(Auth::user()->id))
         <div class="row">
           <div class="col-lg-6 col-md-6 col-12">
@@ -28,6 +29,7 @@
                   <div class="input-group search">
                     <span class="mr-2 white" id="filter"><i class="fas fa-filter fa-2x"></i></span>
                       <input type="text" class="form-control search" placeholder="Search for..." id="searchVar">
+
                   <button onclick="search()" type="button" class="ml-2 white" data-toggle="modal" data-target=".bd-example-modal-lg"><span id="filter"><i class="fas fa-search fa-2x"></i></span></button>
                   </div>
               </div>
@@ -248,6 +250,12 @@
 </div>
 
    <input type="hidden" name="" value="{{$nada = ''}}">
+
+
+    {{Form::hidden('paginate',null,['id'=>'paginate'])}} {{-- Valor Actual de el take y el skip para la paginacion de las busquedas--}}
+    {{Form::hidden('paginate',null,['id'=>'paginate_skip'])}}
+
+
    @include('home.modals')
    @section('scriptJS')
      @if(Session::Has('confirmMedico'))
@@ -301,24 +309,81 @@
             }
          });
       }
-   // function search(){
-   //
-   //    route = "{{route('tolist')}}";
-   //    search = $('#searchVar').val();
-   //
-   //
-   //
-   //       $.ajax({
-   //         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-   //          type:'post',
-   //          url: route,
-   //          data:{search:search},
-   //          success:function(result){
-   //             $('#listSearchAjax').empty().html(result);
-   //             console.log(result);
-   //          }
-   //       });
-   //    }
+
+//Search//Search//Search//Search//Search//Search//Search//Search//Search
+
+   function search(){
+
+      $('#paginate_skip').val(0);
+      skip = 0;
+      route = "{{route('tolist')}}";
+      var search = $('#searchVar').val();
+         $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type:'post',
+            url: route,
+            data:{search:search,skip:skip},
+            success:function(result){
+               $('#listSearchAjax').empty().html(result);
+               console.log(result);
+            },
+            error:function(error){
+               console.log(error);
+            },
+         });
+      }
+
+      function pag_next(){
+
+         skipnow = $('#paginate_skip').val();
+         skip = parseInt(skipnow) + parseInt(2);
+         $('#paginate_skip').val(skip);
+         route = "{{route('tolist')}}";
+         var search = $('#searchVar').val();
+
+            $.ajax({
+               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+               type:'post',
+               url: route,
+               data:{search:search,skip:skip},
+               success:function(result){
+                  $('#listSearchAjax').empty().html(result);
+                  console.log(result);
+               },
+               error:function(error){
+                  console.log(error);
+               },
+            });
+         }
+
+         function pag_prev(){
+
+            skipnow = $('#paginate_skip').val();
+
+            skip = parseInt(skipnow) - parseInt(2);
+            if(skip < 0){
+              $('#paginate_skip').val(0);
+            }else{
+              $('#paginate_skip').val(skip);
+            }
+
+            route = "{{route('tolist')}}";
+            var search = $('#searchVar').val();
+
+               $.ajax({
+                  headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                  type:'post',
+                  url: route,
+                  data:{search:search,skip:skip},
+                  success:function(result){
+                     $('#listSearchAjax').empty().html(result);
+                     console.log(result);
+                  },
+                  error:function(error){
+                     console.log(error);
+                  },
+               });
+            }
    </script>
 
 @endsection

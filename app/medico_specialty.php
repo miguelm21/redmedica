@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class info_medico extends Model
+class medico_specialty extends Model
 {
   protected $fillable = [
     'type',
@@ -17,5 +17,7 @@ class info_medico extends Model
     'medico_id',
   ];
 
-
+  public function medico(){
+    return $this->belongsTo('App\medico');
+}
 }

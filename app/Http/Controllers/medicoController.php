@@ -9,7 +9,7 @@ use App\medicalCenter;
 use App\specialty;
 use App\photo;
 use App\consulting_room;
-use App\info_medico;
+use App\medico_specialty;
 use Mail;
 use App\medico_service;
 use App\medico_experience;
@@ -26,7 +26,39 @@ class medicoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function medico_specialty_create($id)
+     {
+         return view('medico.medico_specialty.create')->with('medico_id',$id);
+     }
 
+     public function medico_specialty_store(Request $request){
+       $request->validate([
+         'type'=>'required',
+         'institution'=>'required',
+         'specialty'=>'required',
+         'from'=>'required',
+         'state'=>'required',
+         'until'=>'required',
+         'aditional'=>'nullable',
+       ]);
+
+       if($request->type == 'other'){
+         $request->validate([
+           'other'=>'required'
+         ]);
+
+       }
+
+       $medico_specialty = new medico_specialty;
+       $medico_specialty->fill($request->all());
+       if($request->type == 'other'){
+         $medico_specialty->type = $request->other;
+       }
+       $medico_specialty->save();
+
+       return redirect()->route('medico.edit',$request->medico_id)->with('success','Se ha Agregado una nueva Especialidad/Carrera, de forma satisfactoria.');
+
+     }
      public function data_primordial_medico($id){
 
        $medico = medico::find($id);
@@ -143,7 +175,7 @@ class medicoController extends Controller
     {
       $cities = city::orderBy('name','asc')->pluck('name','name');
       $promoters = promoter::orderBy('id_promoter','asc')->pluck('id_promoter','id_promoter');
-      $medicalCenter = medicalCenter::orderBy('tradename','asc')->pluck('tradename','id');
+      $medicalCenter = medicalCenter::orderBy('name','asc')->pluck('name','id');
       $specialties = specialty::orderBy('name','asc')->pluck('name','id');
 
       return view('medico.create')->with('medicalCenter',$medicalCenter)->with('cities',$cities)->with('promoters', $promoters);
@@ -268,17 +300,17 @@ class medicoController extends Controller
     public function edit($id)
     {
         $insurance_carriers = insurance_carrier::where('medico_id',$id)->get();
-        $medicalCenter = medicalCenter::orderBy('tradename','asc')->pluck('tradename','tradename');
+        $medicalCenter = medicalCenter::orderBy('name','asc')->pluck('name','name');
         $cities = city::orderBy('name','asc')->pluck('name','name');
         $medico = medico::find($id);
         $consulting_room = consulting_room::where('medico_id',$medico->id)->get();
         $consultingIsset = consulting_room::where('medico_id',$medico->id)->count();
         $photo = photo::where('medico_id', $medico->id)->where('type', 'perfil')->first();
-        $info_medico = info_medico::where('medico_id', $medico->id)->paginate(10);
+        $medico_specialty = medico_specialty::where('medico_id', $medico->id)->paginate(10);
         $social_networks = social_network::where('medico_id', $id)->get();
         $images = photo::where('medico_id', $medico->id)->where('type','image')->get();
 
-        return view('medico.edit')->with('medico', $medico)->with('photo', $photo)->with('consulting_rooms', $consulting_room)->with('consultingIsset', $consultingIsset)->with('cities', $cities)->with('medicalCenter', $medicalCenter)->with('info_medico', $info_medico)->with('social_networks', $social_networks)->with('images', $images)->with('insurance_carriers',$insurance_carriers);
+        return view('medico.edit')->with('medico', $medico)->with('photo', $photo)->with('consulting_rooms', $consulting_room)->with('consultingIsset', $consultingIsset)->with('cities', $cities)->with('medicalCenter', $medicalCenter)->with('medico_specialty', $medico_specialty)->with('social_networks', $social_networks)->with('images', $images)->with('insurance_carriers',$insurance_carriers);
     }
 
     /**

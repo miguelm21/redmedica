@@ -9,7 +9,7 @@ class medicalCenter extends Model
    protected $fillable = [
 
     'id_medicalCenter',
-    'tradename',
+    'name',
     'activePlan',
     'emailAdmin',
     'nameAdmin',

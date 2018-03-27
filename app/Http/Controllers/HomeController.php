@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\medico;
 use App\medicalCenter;
+use App\specialty;
+use App\medico_specialty;
 use DB;
 use Auth;
 class HomeController extends Controller
@@ -20,23 +22,70 @@ class HomeController extends Controller
 
     }
 
-    public function tolist2(Request $request){
-      $medicos = DB::table('medical_centers')
-            ->join('medicos', 'medical_centers.id', '=', 'medicalCenter_id')
-            ->select('medicos.*', 'medical_centers.tradeName', 'medicos.name')
-            ->where('medicos.name','Edwar')
-            ->get();
-      return $medicos;
-    }
-
     public function tolist(Request $request){
 
-      $medicos = medico::where('name','LIKE','%'.$request->search.'%')->get();
+      $medicos = medico::where('name','LIKE','%'.$request->search.'%')->paginate(10);
+      $medicosCount = medico::where('name','LIKE','%'.$request->search.'%')->count();
 
-      $medicalCenters = medicalCenter::where('tradename','LIKE','%'.$request->search.'%')->get();
+      $medicalCenters = medicalCenter::where('name','LIKE','%'.$request->search.'%')->paginate(10);
+      $medicalCentersCount = medicalCenter::where('name','LIKE','%'.$request->search.'%')->count();
 
-      return view('home.listSearch')->with('medicos',$medicos)->with('medicalCenters',$medicalCenters);
+      $specialties = specialty::where('name','LIKE','%'.$request->search.'%')->paginate(10);
+       $specialtyCount = specialty::where('name','LIKE','%'.$request->search.'%')->count();
+
+      return view('home.listSearch')->with('medicos', $medicos)->with('medicalCenters', $medicalCenters)->with('medicosCount', $medicosCount)->with('medicalCentersCount', $medicalCentersCount)->with('specialties', $specialties)->with('specialtyCount', $specialtyCount);
+
+      // $skip = $request->skip;
+      // $take = 2;
+      //
+      // $medicos = medico::select("id","name")->where('name','LIKE','%'.$request->search.'%')->count();
+      // $medicalCenters = medicalCenter::select("id","name")->where('name','LIKE','%'.$request->search.'%')->count();
+      // $specialty = specialty::select("id","name")->where('name','LIKE','%'.$request->search.'%')->count();
+      // $totalCount = $medicos + $medicalCenters + $specialty;
+      //
+      // $totalPag = floor($totalCount / $take);
+      //
+      // //return response()->json($totalPag);
+      //
+      //
+      // $medicos = medico::select("id","name","role")->where('name','LIKE','%'.$request->search.'%');
+      //
+      // $medicalCenters = medicalCenter::select("id","name","role")->where('name','LIKE','%'.$request->search.'%');
+      //
+      // $data = specialty::select("id","name","role")->where('name','LIKE','%'.$request->search.'%')->union($medicos)->union($medicalCenters)->skip($skip)->take($take)->get();
+      //
+      // //return response()->json($take);
+      // return view('home.listSearch')->with('data', $data)->with('take', $take);
     }
+
+
+    public function tolist2(Request $request){
+
+      $skip = $request->skip;
+      $take = 3;
+
+      //return response()->json($skip);
+
+      $medicos = medico::select("id","name")->where('name','LIKE','%'.$request->search.'%');
+
+      $medicalCenters = medicalCenter::select("id","name")->where('name','LIKE','%'.$request->search.'%');
+
+      $data = specialty::select("id","name")->where('name','LIKE','%'.$request->search.'%')->union($medicos)->union($medicalCenters)->skip($skip)->take($take)->get();
+
+
+      return view('home.listSearch')->with('data', $data)->with('take', $take);
+    }
+
+    // public function tolist(Request $request){
+    //
+    //   $medicos = medico::where('name','LIKE','%'.$request->search.'%')->get();
+    //
+    //
+    //   $medicalCenters = medicalCenter::where('name','LIKE','%'.$request->search.'%')->get();
+    //
+    //
+    //   return view('home.listSearch')->with('medicos',$medicos)->with('medicalCenters',$medicalCenters);
+    // }
 
     public function prueba(){
 
