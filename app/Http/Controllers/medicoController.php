@@ -19,6 +19,8 @@ use App\insurance_carrier;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
+
+
 class medicoController extends Controller
 {
     /**
@@ -28,7 +30,8 @@ class medicoController extends Controller
      */
      public function medico_specialty_create($id)
      {
-         return view('medico.medico_specialty.create')->with('medico_id',$id);
+        $specialty = specialty::orderBy('name','asc')->pluck('name','name');
+         return view('medico.medico_specialty.create')->with('medico_id',$id)->with('specialty', $specialty);
      }
 
      public function medico_specialty_store(Request $request){
@@ -297,6 +300,24 @@ class medicoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+     public function medico_perfil($id)
+     {
+         $insurance_carriers = insurance_carrier::where('medico_id',$id)->get();
+         $medicalCenter = medicalCenter::orderBy('name','asc')->pluck('name','name');
+         $cities = city::orderBy('name','asc')->pluck('name','name');
+         $medico = medico::find($id);
+         $consulting_room = consulting_room::where('medico_id',$medico->id)->get();
+         $consultingIsset = consulting_room::where('medico_id',$medico->id)->count();
+         $photo = photo::where('medico_id', $medico->id)->where('type', 'perfil')->first();
+         $medico_specialty = medico_specialty::where('medico_id', $medico->id)->paginate(10);
+         $social_networks = social_network::where('medico_id', $id)->get();
+         $images = photo::where('medico_id', $medico->id)->where('type','image')->get();
+
+         return view('medico.perfil')->with('medico', $medico)->with('photo', $photo)->with('consulting_rooms', $consulting_room)->with('consultingIsset', $consultingIsset)->with('cities', $cities)->with('medicalCenter', $medicalCenter)->with('medico_specialty', $medico_specialty)->with('social_networks', $social_networks)->with('images', $images)->with('insurance_carriers',$insurance_carriers);
+     }
+
     public function edit($id)
     {
         $insurance_carriers = insurance_carrier::where('medico_id',$id)->get();

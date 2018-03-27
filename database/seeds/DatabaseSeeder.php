@@ -12,8 +12,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         factory(App\medico::class)->times(100)->create();
-      //  $this->call('AddDummyEvent');
-        //   $this->call('daysSeeder');
+        $this->call('specialty_category');
+        $this->call('specialty');
         //  $this->call('eventSeeder');
 
         DB::table('specialty_categories')->insert([
@@ -25,17 +25,22 @@ class DatabaseSeeder extends Seeder
       ]);
 
       DB::table('specialties')->insert([
-     'name'=>'especialidad 1',
+     'name'=>'psicologia',
      'specialty_category_id'=>1,
 
      ]);
 
      DB::table('specialties')->insert([
-    'name'=>'especialidad 2',
+    'name'=>'pediatria',
     'specialty_category_id'=>2,
 
     ]);
 
+    DB::table('specialties')->insert([
+   'name'=>'odontologia',
+   'specialty_category_id'=>2,
+
+   ]);
 
 
         DB::table('users')->insert([

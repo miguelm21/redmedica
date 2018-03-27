@@ -43,7 +43,7 @@
     <div class="form-group row">
       <label for="example-text-input" class="col-3 col-form-label">Especialidad que cursó</label>
       <div class="col-8">
-        {!!Form::text('specialty',null,['class'=>'form-control'])!!}
+        {!!Form::select('specialty',$specialty,null,['class'=>'form-control'])!!}
 
         </div>
     </div>

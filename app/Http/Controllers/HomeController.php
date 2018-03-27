@@ -23,17 +23,35 @@ class HomeController extends Controller
     }
 
     public function tolist(Request $request){
+      // medico::where('name','LIKE','%'.$request->search.'%')->
 
-      $medicos = medico::where('name','LIKE','%'.$request->search.'%')->paginate(10);
-      $medicosCount = medico::where('name','LIKE','%'.$request->search.'%')->count();
+      $request->validate([
+        'typeSearch'=>'required'
+      ]);
 
-      $medicalCenters = medicalCenter::where('name','LIKE','%'.$request->search.'%')->paginate(10);
-      $medicalCentersCount = medicalCenter::where('name','LIKE','%'.$request->search.'%')->count();
+      $searchActive = 'Active';
 
-      $specialties = specialty::where('name','LIKE','%'.$request->search.'%')->paginate(10);
-       $specialtyCount = specialty::where('name','LIKE','%'.$request->search.'%')->count();
+      if($request->typeSearch == 'Medico'){
+        $medicos = medico::SearchMedico($request->search)->orderBy('name','asc')->paginate(9);
+        $medicosCount = medico::where('name','LIKE','%'.$request->search.'%')->count();
+        return view('home.home')->with('medicos', $medicos)->with('medicosCount', $medicosCount)->with('searchActive', $searchActive)->with('search', $request->search);
+      }
 
-      return view('home.listSearch')->with('medicos', $medicos)->with('medicalCenters', $medicalCenters)->with('medicosCount', $medicosCount)->with('medicalCentersCount', $medicalCentersCount)->with('specialties', $specialties)->with('specialtyCount', $specialtyCount);
+      if($request->typeSearch == 'Centro Medico'){
+        $medicalCenters = medicalCenter::where('name','LIKE','%'.$request->search.'%')->paginate(10);
+        $medicalCentersCount = medicalCenter::where('name','LIKE','%'.$request->search.'%')->count();
+        return view('home.home')->with('medicalCenters', $medicalCenters)->with('medicalCentersCount', $medicalCentersCount)->with('searchActive', $searchActive)->with('search', $request->search);
+      }
+
+      if($request->typeSearch == 'Especialidad'){
+        $specialties = specialty::where('name','LIKE','%'.$request->search.'%')->paginate(10);
+         $specialtyCount = specialty::where('name','LIKE','%'.$request->search.'%')->count();
+
+          return view('home.home')->with('specialties', $specialties)->with('specialtyCount', $specialtyCount)->with('searchActive', $searchActive)->with('search', $request->search);
+      }
+
+
+
 
       // $skip = $request->skip;
       // $take = 2;

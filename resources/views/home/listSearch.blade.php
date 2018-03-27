@@ -4,13 +4,39 @@
   <table class="table table-bordered">
     <thead class="bg-primary text-white">
       <tr>
-        <td>Nombre</td>
+        <td>Nombre Completo</td>
+        <td>Especialidad</td>
+        <td>Teléfonos</td>
       </tr>
     </thead>
     <tbody>
       @foreach ($medicos as $medico)
         <tr>
           <td>{{$medico->name}} {{$medico->lastName}}</td>
+          <td>
+            <ul>
+            @foreach ($medico->medico_specialty as $specialty)
+                <li>{{$specialty->specialty}}</li>
+            @endforeach
+            </ul>
+          </td>
+          <td>
+            <ul>
+              @isset($medico->phone)
+                <li>{{$medico->phone}}</li>
+              @endisset
+              @isset($medico->phone)
+                <li>{{$medico->phoneOffice1}}</li>
+
+              @endisset
+              @isset($medico->phone)
+                <li>{{$medico->phoneOffice2}}</li>
+
+              @endisset
+
+
+            </ul>
+          </td>
         </tr>
       @endforeach
     </tbody>
@@ -66,69 +92,5 @@
     </tr>
   </tfoot>
 </table>
-</div>
 @endif
-
-
 </div>
-
-
-
-
-{{--
-<div class="bg-primary">
-  <div class="row">
-  <div class="col-8">
-    <input type="text" class="form-control search" placeholder="Buscar..." id="searchVar2">
-  </div>
-  <div class="col-4">
-    <button type="button" class="btn btn-secondary" name="button">Buscar</button>
-  </div>
-</div>
-</div>
-<table class="table table-bordered text-justify">
-   <thead class="bg-primary text-white">
-      <tr>
-         <th colspan="2">
-
-       </th>
-
-      </tr>
-   </thead>
-   <tbody>
-
-     @foreach ($data as $d)
-
-       @if($d->role == "medical_center")
-       <tr>
-          <td class="table">&nbsp;&nbsp;&nbsp;{{$d->name}} </td>
-          <td>Centro Medico</td>
-       </tr>
-      @elseif($d->role == 'specialty')
-        <tr>
-           <td class="table">&nbsp;&nbsp;&nbsp;{{$d->name}}</td>
-           <td>Especialidad Medica</td>
-        </tr>
-    @elseif($d->role == 'medico')
-        <tr>
-           <td class="table">&nbsp;&nbsp;&nbsp;{{$d->name}}</td>
-           <td>Medico {{$d->medico_specialty}}</td>
-        </tr>
-        @endif
-     @endforeach
-
-   </tbody>
-   <tfoot>
-
-       <td colspan="2">
-         <ul class="pagination">
-           <li class="page-item"><button class="page-link" onclick="pag_prev()">Previous</button></li>
-           <li class="page-item"><a class="page-link" href="#">1</a></li>
-           <li class="page-item"><a class="page-link" href="#">2</a></li>
-           <li class="page-item"><a class="page-link" href="#">3</a></li>
-           <li class="page-item"><button class="page-link" onclick="pag_next()">Next</button></li>
-         </ul>
-       </td>
-
-   </tfoot>
-</table> --}}

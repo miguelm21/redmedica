@@ -16,11 +16,13 @@ route::get('/', function () {
     return redirect()->route('home');
 });
 
+
 Route::get('loginRedirect', 'Auth\LoginController@loginRedirect')->name('loginRedirect');
 
 route::get('home','HomeController@home')->name('home');
 route::resource('user','userController');
 route::resource('medico','medicoController');
+route::get('medico/{id}/perfil','medicoController@medico_perfil')->name('medico_perfil');
 
 route::resource('medico_diary','medico_diaryController');
 
@@ -72,7 +74,7 @@ route::get('confirm/MedicalCenter/{id}','medicalCenterController@successRegMedic
 
 route::post('resend/mail/confirmation','medicoController@resendMailMedicoConfirm')->name('resendMailMedicoConfirm');
 
-route::post('list/result','HomeController@tolist')->name('tolist');
+route::get('list/result/','HomeController@tolist')->name('tolist');
 /////////////////////////////////////////////////////////////////////////////////borar
 route::post('list/result2','HomeController@tolist2')->name('tolist2');
 /////////////////////////////////////////////////////////////////////////////////borrar
