@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<h3>Datos del Profesional: {{$medico->name}} {{$medico->lastName}}</h3>
+
 
 <section class="box-register">
   <div class="container">
@@ -9,7 +9,7 @@
     <div class="row">
 
   </div>
-  <div class="row mt-3">
+  <div class="row mt-3" >
    <div class="col-lg-6 col-12">
     @isset($photo)
     	<img src="{{asset($photo->path)}}" width="140px" height="100px" alt="" id="img">
@@ -21,121 +21,114 @@
 
   </div>
 </div>
-<hr>
-{!!Form::model($medico,['route'=>['medico.update',$medico],'method'=>'PUT','id'=>'person'])!!}
-<table class="table table-bordered">
-	<tbody>
-		<tr>
-			<th>Nombres:</th><td>{{$medico->name}}</td>
-			<th>Apellidos:</th><td>{{$medico->lastName}}</td>
-		</tr>
-		<tr>
-			<th>
-				Sexo:
-			</th>
-			<td>
-				{{$medico->gender}}
-			</td>
-			<th>
-				Ciudad:
-			</th>
-			<td>
-				@isset($medico->city)
-				 {{$medico->city}}
-			 @else
-				 <span style="color:rgb(166, 166, 166)">N.D.</span>
-			  @endisset</td>
-		</tr>
-		<tr>
-			<th>
-				Estado:
-			</th>
-			<td>
-				@isset($medico->state)
-				 {{$medico->state}}
-			 @else
-				 <span style="color:rgb(166, 166, 166)">N.D.</span>
-				@endisset</td>
-			</td>
-			<th>
-				Celular:
-			</th>
-			<td>
-				@isset($medico->phone)
-				 {{$medico->phone}}
-			 @else
-				 <span style="color:rgb(166, 166, 166)">N.D.</span>
-				@endisset
-			</td>
-		</tr>
 
-		<tr>
-			<th>
-				tfno. Oficina 1
-			</th>
-			<td>
-				@isset($medico->city)
-				 {{$medico->sta}}
-			 @else
-				 <span style="color:rgb(166, 166, 166)">N.D.</span>
-				@endisset</td>
-			</td>
-			<th>
-				Celular:
-			</th>
-			<td>
-				@isset($medico->city)
-				 {{$medico->phone}}
-			 @else
-				 <span style="color:rgb(166, 166, 166)">N.D.</span>
-				@endisset
-			</td>
-		</tr>
-	</tbody>
-</table>
+<div class="mt-3" >
+	<table class="table table-bordered">
+		<tbody>
+			<tr>
+				<th>Nombres:</th><td>{{$medico->name}} {{$medico->lastName}}</td>
+				<th>Cedula:</th><td>
+					@isset($medico->identification)
+					 {{$medico->identification}}
+				 @else
+					 <span style="color:rgb(166, 166, 166)">N.D.</span>
+					@endisset</td>
 
-<div class="row">
-  <div class="col-lg-6 col-12">
-    <div class="form-group">
-     <label for="">Teléfono de Oficina 1</label>
-     {!!Form::number('phoneOffice1',null,['class'=>'form-control','id'=>'phoneOffice1Medic'])!!}
-   </div>
- </div>
- <div class="col-lg-6 col-12">
-  <div class="form-group">
-    <label for="">Teléfono de Oficina 2</label>
-    {!!Form::number('phoneOffice2',null,['class'=>'form-control','id'=>'phoneOffice2Medic'])!!}
-  </div>
+			</tr>
+			<tr>
+				<th>
+					Sexo:
+				</th>
+				<td>
+					{{$medico->gender}}
+				</td>
+				<th>
+					Ciudad:
+				</th>
+				<td>
+					@isset($medico->city)
+					 {{$medico->city}}
+				 @else
+					 <span style="color:rgb(166, 166, 166)">N.D.</span>
+					@endisset</td>
+			</tr>
+			<tr>
+				<th>
+					Estado:
+				</th>
+				<td>
+					@isset($medico->state)
+					 {{$medico->state}}
+				 @else
+					 <span style="color:rgb(166, 166, 166)">N.D.</span>
+					@endisset</td>
+				</td>
+				<th>
+					Celular:
+				</th>
+				<td>
+					@isset($medico->phone)
+					 {{$medico->phone}}
+				 @else
+					 <span style="color:rgb(166, 166, 166)">N.D.</span>
+					@endisset
+				</td>
+			</tr>
+
+			<tr>
+				<th>
+					tfno. Oficina 1
+				</th>
+				<td>
+					@isset($medico->city)
+					 {{$medico->sta}}
+				 @else
+					 <span style="color:rgb(166, 166, 166)">N.D.</span>
+					@endisset</td>
+				</td>
+				<th>
+					Celular:
+				</th>
+				<td>
+					@isset($medico->city)
+					 {{$medico->phone}}
+				 @else
+					 <span style="color:rgb(166, 166, 166)">N.D.</span>
+					@endisset
+				</td>
+			</tr>
+
+			<tr>
+				<th>
+					Telf. Oficina 1
+				</th>
+				<td>
+					@isset($medico->phoneOffice1)
+					 {{$medico->phoneOffice1}}
+				 @else
+					 <span style="color:rgb(166, 166, 166)">N.D.</span>
+					@endisset</td>
+				</td>
+				<th>
+					Telf. Oficina 2
+				</th>
+				<td>
+					@isset($medico->phoneOffice2)
+					 {{$medico->phoneOffice2}}
+				 @else
+					 <span style="color:rgb(166, 166, 166)">N.D.</span>
+					@endisset
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
-</div>
-<div class="row">
-  <div class="col-lg-6 col-12">
-    <div class="form-group">
-      <label for="">Cedula</label>
-      {!!Form::text('identification',null,['class'=>'form-control','id'=>'identificationMedic'])!!}
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-12">
-    <div class="form-group">
-      <div class="row">
-        <div class="col-8">
-          <p for="">¿Desea que su numero celular aparezca visible en formatos e información a pacientes?</p>
-        </div>
-        <div class="col-4">
-         {{Form::select('showNumber',['si'=>'Si','no'=>'No'],null,['class'=>'form-control'])}}
-       </div>
-     </div>
-   </div>
- </div>
-</div>
-<div class="row">
-  <div class="col-lg-6 col-12">
-    {{-- <button type="submit" name="button" class="btn btn-primary btn-block">Guardar Cambios</button>
-    <button onclick="updateMedic()" type="button" name="button">test</button> --}}
-  </div>
-</div>
+
+
+
+
+
+
 {{--/////////////////////// ALERTS --}}
 <div id="alert_error_update" class="alert alert-warning alert-dismissible fade show" role="alert" style="display:none">
 		<button type="button" class="close" onclick="cerrar()"><span >&times;</span></button>
@@ -147,12 +140,7 @@
  <p id="text_success_service"></p>
 </div>
 
-		 <div class="row">
-			 <div class="col-6">
-				 <button onclick="updateMedic()" type="button" name="button" class="btn btn-primary btn-block">Guardar Cambios</button>
-			 </div>
-			 {!!Form::close()!!}
-	 </div>
+
 <hr>
 <hr>
 <div class="row">

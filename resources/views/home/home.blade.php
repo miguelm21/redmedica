@@ -24,8 +24,8 @@
               <div class="col-lg-12">
                 {{Form::model(Request::only(['typeSearch','search']),['route'=>'tolist','method'=>'get'])}}
                   <div class="input-group search">
-                    <span class="mr-2 white" id="filter"><i class="fas fa-filter fa-2x"></i></span>
-                      {{Form::select('typeSearch',['Centro Medico'=>'Centro Medico','Especialidad'=>'Especialidad',  'Medico'=>'Medico'],null,['placeholder'=>'Buscar Por:'])}}
+                    <span class="mr-2 white" id="filter"><i class="fas fa-filter fa-2x" data-toggle="tooltip" data-placement="top" title="Busqueda Avanzada"></i></span>
+                      {{Form::select('typeSearch',['Centro Medico'=>'Nombre del Centro Médico','Especialidad'=>'Especialidad Médica',  'Medico'=>'Nombre del Médico'],null,['placeholder'=>'Buscar Por:'])}}
                       {{Form::text('search',null,['class'=>'form-control','placeholder'=>'Ingresar termino de Busqueda'])}}
                       {{Form::hidden('city',null)}}
                       {{Form::hidden('state',null)}}
@@ -36,6 +36,8 @@
             </div>
             <div id="panel">
               <div class="box-filter">
+
+
 
                 <span class="text-left">Filtrar por:</span>
                 <div class="row">
@@ -91,7 +93,9 @@
             <div class="text-justify mt-3">
               @if(isset($medicosCount) and $medicosCount != 0)
                 <div class="card">
+
                   <div class="card-header">
+                    <a href="{{route('home')}}" class="close"><span aria-hidden="true">&times;</span></a>
                     <h4>Busqueda de Medico: {{$search}}</h4>
                   </div>
                   <div class="card-body">
@@ -111,11 +115,7 @@
                               {{$medico->name}} {{$medico->lastName}}
                             </td>
                             <td>
-                              <ul>
-                              @foreach ($medico->medico_specialty as $specialty)
-                                  <li>{{$specialty->specialty}}</li>
-                              @endforeach
-                              </ul>
+                                {{$medico->specialty}}
                             </td>
                             <td>
                               {{$medico->city}}
@@ -129,7 +129,7 @@
                     </table>
                   </div>
                   <div class="card-footer">
-                    {{$medicos->appends(Request::only(['typeSearch','search']))->links()}}
+                    {{$medicos->appends(Request::only(['typeSearch']))->links()}}
                   </div>
                 </div>
               @elseif(isset($medicosCount))
@@ -139,11 +139,64 @@
                   </div>
                 </div>
               @endif
+
+              {{-- Busqueda Medicos por Categoria --}}
+              @if(isset($medicosCount2) and $medicosCount2 != 0)
+                <div class="card">
+
+                  <div class="card-header">
+                    <a href="{{route('home')}}" class="close"><span aria-hidden="true">&times;</span></a>
+                    <h4>Busqueda de Medico Por Categoria: {{$search}}</h4>
+                  </div>
+                  <div class="card-body">
+                    <table class="table table-bordered">
+                      <thead class="bg-primary text-white">
+                        <tr>
+                          <td>Nombre Completo</td>
+                          <td>Especialidad</td>
+                          <td>Ciudad</td>
+                          <td>Acciones</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach ($medicos2 as $medico)
+                          <tr>
+                            <td>
+                              {{$medico->name}} {{$medico->lastName}}
+                            </td>
+                            <td>
+                                {{$medico->specialty}}
+                            </td>
+                            <td>
+                              {{$medico->city}}
+                            </td>
+                            <td>
+                              <a href="{{route("medico_perfil",$medico->id)}}" class="btn btn-primary">Ver Perfil</a>
+                            </td>
+                          </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="card-footer">
+                    {{$medicos2->appends(Request::only(['typeSearch']))->links()}}
+                  </div>
+                </div>
+              @elseif(isset($medicosCount2))
+                <div class="card">
+                  <div class="card-body">
+                    <h5>No se Encontraron Resultados para la Busqueda de Medico: "{{$search}}"</h5>
+                      <a href="{{route('home')}}" class="close"><span aria-hidden="true">&times;</span></a>
+                  </div>
+                </div>
+              @endif
+
               {{-- Centros Medicos --}}
               <div class="text-justify mt-3">
                   @if(isset($medicalCentersCount) and $medicalCentersCount != 0)
                   <div class="card">
                     <div class="card-header">
+                      <a href="{{route('home')}}" class="close"><span aria-hidden="true">&times;</span></a>
                       <h4>Busqueda de Centro Medico:{{$search}}</h4>
                     </div>
                     <div class="card-body">
@@ -173,7 +226,8 @@
                 @elseif(isset($medicalCentersCount))
                   <div class="card">
                     <div class="card-body">
-                      <h5>No se Encontraron Resultados para la Busqueda de Centro Medico: "{{$search}}"</h5>
+                      <h5>No se Encontraron Resultados para la Busqueda del Centro Medico: "{{$search}}"</h5>
+                        <a href="{{route('home')}}" class="close"><span aria-hidden="true">&times;</span></a>
                     </div>
                   </div>
                 @endif
@@ -183,6 +237,7 @@
                     @if(isset($specialtyCount) and $specialtyCount != 0)
                     <div class="card">
                       <div class="card-header">
+                        <a href="{{route('home')}}" class="close"><span aria-hidden="true">&times;</span></a>
                           <h4>Busqueda de Especialidad Médica: {{$search}}</h4>
                       </div>
                       <div class="card-body">
@@ -210,39 +265,57 @@
                       </div>
                     </div>
 
-                  @elseif(isset($medicalCentersCount) and $medicalCentersCount == 0)
+                  @elseif(isset($specialtyCount) and $specialtyCount == 0)
                     <div class="card">
                       <div class="card-body">
-                        <h5>No se Encontraron Resultados para la Busqueda de Centro Medico: "{{$search}}"</h5>
+                        <h5>No se Encontraron Resultados para la Busqueda de Especialidad Médica: "{{$search}}"</h5>
                       </div>
                     </div>
                   @endif
 
 
-            @if(!isset($searchActive))
+
             <div class="row my-5">
               <div class="col-6 col-lg-3">
                 <div class="box-img">
-                  <a href=""><img src="{{asset('img/botones-medicossi-01.jpg')}}" alt="" width="100%" class="img-responsive"></a>
+
+                  {{Form::model(Request::only(['typeSearch','search']),['route'=>'tolist','method'=>'get'])}}
+                    {{Form::hidden('typeSearch','Centro Medico')}}
+                    <button type="submit" class="ml-2 white"><img src="{{asset('img/botones-medicossi-01.jpg')}}" alt="" width="100%" class="img-responsive"></button>
+                    {{Form::close()}}
+
                 </div>
               </div>
               <div class="col-6 col-lg-3">
                 <div class="box-img">
-                  <a href=""><img src="{{asset('img/botones-medicossi-05.jpg')}}" alt="" width="100%" class="img-responsive"></a>
+                  {{Form::open(['route'=>'tolist','method'=>'get'])}}
+                    {{Form::hidden('typeSearch','Medicos y Especialistas')}}
+                    <button type="submit" class="ml-2 white"><img src="{{asset('img/botones-medicossi-05.jpg')}}" alt="" width="100%" class="img-responsive"></button>
+                    {{Form::close()}}
+
                 </div>
               </div>
               <div class="col-6 col-lg-3">
                 <div class="box-img">
-                  <a href=""><img src="{{asset('img/botones-medicossi-03.jpg')}}" alt="" width="100%" class="img-responsive"></a>
+                  {{Form::model(Request::only(['typeSearch','search']),['route'=>'tolist','method'=>'get'])}}
+                    {{Form::hidden('typeSearch','Dentistas')}}
+                    <button type="submit" class="ml-2 white"><img src="{{asset('img/botones-medicossi-03.jpg')}}" alt="" width="100%" class="img-responsive"></button>
+                    {{Form::close()}}
+
                 </div>
               </div>
               <div class="col-6 col-lg-3">
                 <div class="box-img">
-                  <a href=""><img src="{{asset('img/botones-medicossi-11.jpg')}}" alt="" width="100%" class="img-responsive"></a>
+                  {{Form::model(Request::only(['typeSearch','search']),['route'=>'tolist','method'=>'get'])}}
+                    {{Form::hidden('typeSearch','Terapeutas y Nutricion')}}
+                    <button type="submit" class="ml-2 white"><img src="{{asset('img/botones-medicossi-11.jpg')}}" alt="" width="100%" class="img-responsive"></button>
+                    {{Form::close()}}
+
+
                 </div>
               </div>
             </div>
-          @endif
+
 
 
           </div>
@@ -266,10 +339,10 @@
       <div class="alert alert-success" role="alert" id="alert-success-confirm" style="display:none;margin:10px; ">
          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-         <div id="text-success-confirm">
+         <div >
 
              <h5>Bienvenid@</h5>
-             <p>Tu Cuenta a sido Confirmada, ya puedes iniciar Session con tus datos.</p>
+             <p id="text-success-confirm"></p>
 
 
          </div>
@@ -403,11 +476,15 @@
        <script type="text/javascript">
          $(document).ready(function(){
             $('#modal-login').modal('show');
+
+            $('#text-success-confirm').html('Su Cuenta ha sido Confirmada con exito, ya es posible iniciar sesión con sus Credenciales');
             $('#alert-success-confirm').fadeIn();
          });
        </script>
-
      @endif
+
+
+     
 @endsection
 
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 use Auth;
 use App\medico;
 use App\User;
+use App\medicalCenter;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Request;
@@ -20,8 +22,14 @@ class LoginController extends Controller
           }else{
             return redirect()->route('medico_diary',$medico->id);
           }
-        }else{
-          return redirect()->route('home');
+        }elseif(Auth::user()->hasRole('medical_center')){
+            $medical_center = medicalCenter::find(Auth::user()->medical_center_id);
+            if($medical_center->confirmation_statuss == 'complete'){
+              return redirect()->route('medicalCenter.edit',$medical_center->id);
+            }else{
+              return redirect()->route('data_primordial_medical_center',$medical_center->id);
+            }
+
         }
 
       }

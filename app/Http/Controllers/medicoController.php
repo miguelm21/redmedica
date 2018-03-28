@@ -7,6 +7,8 @@ use App\promoter;
 use App\User;
 use App\medicalCenter;
 use App\specialty;
+use App\specialty_category;
+
 use App\photo;
 use App\consulting_room;
 use App\medico_specialty;
@@ -52,8 +54,13 @@ class medicoController extends Controller
 
        }
 
+       $specialty = specialty::where('name',$request->specialty)->first();
+
+       $specialty_category = specialty_category::find($specialty->specialty_category_id);
+
        $medico_specialty = new medico_specialty;
        $medico_specialty->fill($request->all());
+       $medico_specialty->specialty_category = $specialty_category->name;
        if($request->type == 'other'){
          $medico_specialty->type = $request->other;
        }

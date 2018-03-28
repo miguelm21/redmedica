@@ -17,7 +17,8 @@ class medicalCenter extends Model
     'city',
     'billingData',
     'meansOfRecords',
-    'id_promoter'
+    'id_promoter',
+    
    ];
 
 }

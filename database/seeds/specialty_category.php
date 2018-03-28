@@ -12,7 +12,7 @@ class specialty_category extends Seeder
     public function run()
     {
       DB::table('specialty_categories')->insert([
-        'name'=>'Medicos',
+        'name'=>'Medicos y Especialistas',
       ]);
 
       DB::table('specialty_categories')->insert([

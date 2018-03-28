@@ -55,6 +55,8 @@ route::get('medic/{id}/consulting_room/create','consulting_roomController@consul
 
 route::resource('patient','patientController');
 route::resource('medicalCenter','medicalCenterController');
+route::get('data/primordial/{id}/medical_center','medicalCenterController@data_primordial_medical_center')->name('data_primordial_medical_center');
+
 route::resource('photo','photoController');
 route::get('medico/photo/delete/{id}','photoController@photo_delete')->name('photo_delete');
 route::post('image/medico/store','photoController@image_store')->name('image_store');

@@ -31,26 +31,86 @@ class HomeController extends Controller
 
       $searchActive = 'Active';
 
+      if($request->typeSearch == 'Dentistas'){
+        $medicos2 = DB::table('medicos')
+              ->leftJoin('medico_specialties', 'medicos.id', '=', 'medico_specialties.medico_id')
+              ->select('medicos.*','medico_specialties.specialty')
+              ->where('specialty_category','Dentistas')
+              ->paginate(10);
+
+        $medicosCount2 = DB::table('medicos')
+              ->join('medico_specialties', 'medicos.id', '=', 'medico_specialties.medico_id')
+              ->select('medicos.*','medico_specialties.specialty')
+              ->where('specialty_category','Dentistas')
+              //->distinct() // el count no nota la diferencia del distinct
+              ->count();
+
+
+          return view('home.home')->with('medicos2', $medicos2)->with('medicosCount2', $medicosCount2)->with('searchActive', $searchActive)->with('search', $request->typeSearch);
+      }
+
+      if($request->typeSearch == 'Terapeutas y Nutricion'){
+        $medicos2 = DB::table('medicos')
+              ->leftJoin('medico_specialties', 'medicos.id', '=', 'medico_specialties.medico_id')
+              ->select('medicos.*','medico_specialties.specialty')
+              ->where('specialty_category','Terapeutas y Nutricion')
+              ->paginate(10);
+
+        $medicosCount2 = DB::table('medicos')
+              ->join('medico_specialties', 'medicos.id', '=', 'medico_specialties.medico_id')
+              ->select('medicos.*','medico_specialties.specialty')
+              ->where('specialty_category','Terapeutas y Nutricion')
+              //->distinct() // el count no nota la diferencia del distinct
+              ->count();
+
+
+          return view('home.home')->with('medicos2', $medicos2)->with('medicosCount2', $medicosCount2)->with('searchActive', $searchActive)->with('search', $request->typeSearch);
+      }
+
       if($request->typeSearch == 'Medico'){
-        $medicos = medico::SearchMedico($request->search)->orderBy('name','asc')->paginate(9);
-        $medicosCount = medico::where('name','LIKE','%'.$request->search.'%')->count();
+        $medicos = medico::where('name','LIKE','%'.$request->search.'%')->orWhere('lastName','LIKE','%'.$request->search.'%')->paginate(9);
+        $medicosCount = medico::where('name','LIKE','%'.$request->search.'%')->orWhere('lastName','LIKE','%'.$request->search.'%')->count();
+
         return view('home.home')->with('medicos', $medicos)->with('medicosCount', $medicosCount)->with('searchActive', $searchActive)->with('search', $request->search);
       }
 
       if($request->typeSearch == 'Centro Medico'){
-        $medicalCenters = medicalCenter::where('name','LIKE','%'.$request->search.'%')->paginate(10);
+        $medicalCenters = medicalCenter::where('name','LIKE','%'.$request->search.'%')->orderBy('name','asc')->paginate(10);
         $medicalCentersCount = medicalCenter::where('name','LIKE','%'.$request->search.'%')->count();
+        
         return view('home.home')->with('medicalCenters', $medicalCenters)->with('medicalCentersCount', $medicalCentersCount)->with('searchActive', $searchActive)->with('search', $request->search);
       }
 
       if($request->typeSearch == 'Especialidad'){
-        $specialties = specialty::where('name','LIKE','%'.$request->search.'%')->paginate(10);
+        $specialties = specialty::where('name','LIKE','%'.$request->search.'%')->orderBy('name','asc')->paginate(10);
          $specialtyCount = specialty::where('name','LIKE','%'.$request->search.'%')->count();
 
           return view('home.home')->with('specialties', $specialties)->with('specialtyCount', $specialtyCount)->with('searchActive', $searchActive)->with('search', $request->search);
       }
 
+      if($request->typeSearch == 'Medicos y Especialistas'){
 
+        $medicos2 = DB::table('medicos')
+              ->leftJoin('medico_specialties', 'medicos.id', '=', 'medico_specialties.medico_id')
+              ->select('medicos.*','medico_specialties.specialty')
+              ->where('specialty_category','Medicos y Especialistas')
+              ->paginate(10);
+
+        $medicosCount2 = DB::table('medicos')
+              ->join('medico_specialties', 'medicos.id', '=', 'medico_specialties.medico_id')
+              ->select('medicos.*','medico_specialties.specialty')
+              ->where('specialty_category','Medicos y Especialistas')
+              //->distinct() // el count no nota la diferencia del distinct
+              ->count();
+
+
+          return view('home.home')->with('medicos2', $medicos2)->with('medicosCount2', $medicosCount2)->with('searchActive', $searchActive)->with('search', $request->typeSearch);
+      }
+      // $users = DB::table('users')
+      //       ->join('contacts', 'users.id', '=', 'contacts.user_id')
+      //       ->join('orders', 'users.id', '=', 'orders.user_id')
+      //       ->select('users.*', 'contacts.phone', 'orders.price')
+      //       ->get();
 
 
       // $skip = $request->skip;

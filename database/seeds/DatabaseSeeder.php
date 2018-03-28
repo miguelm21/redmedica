@@ -93,6 +93,12 @@ class DatabaseSeeder extends Seeder
         'description'=>'User is allowed to manage and edit other users'
         ]);
 
+        DB::table('roles')->insert([
+       'name'=>'medical_center',
+       'display_name'=>'Centro Medico',
+       'description'=>'User is allowed to manage and edit other users'
+       ]);
+
         DB::table('role_user')->insert([
        'user_id'=>1,
        'role_id'=>3,
