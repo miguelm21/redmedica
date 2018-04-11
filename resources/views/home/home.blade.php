@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <p>cambio de prueba</p>
+    <p>cambio de prueba       </p>
+    <p>cambio de prueba       </p>
+    <p>cambio de prueba       </p>
+    <p>cambio de prueba       </p>
         @if(!isset(Auth::user()->id))
         <div class="row">
           <div class="col-lg-6 col-md-6 col-12">
